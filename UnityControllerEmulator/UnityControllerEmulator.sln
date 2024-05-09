@@ -3,18 +3,30 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityControllerEmulator", "UnityControllerEmulator\UnityControllerEmulator.csproj", "{70DE930F-A02F-42B3-ACC2-9D21468E0068}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Input", "Input\Input.vcxproj", "{306A0BAE-14C5-4B71-B6AE-C89710E19F73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{70DE930F-A02F-42B3-ACC2-9D21468E0068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70DE930F-A02F-42B3-ACC2-9D21468E0068}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70DE930F-A02F-42B3-ACC2-9D21468E0068}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70DE930F-A02F-42B3-ACC2-9D21468E0068}.Release|Any CPU.Build.0 = Release|Any CPU
+		{306A0BAE-14C5-4B71-B6AE-C89710E19F73}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{306A0BAE-14C5-4B71-B6AE-C89710E19F73}.Debug|Any CPU.Build.0 = Debug|x64
+		{306A0BAE-14C5-4B71-B6AE-C89710E19F73}.Debug|x64.ActiveCfg = Debug|x64
+		{306A0BAE-14C5-4B71-B6AE-C89710E19F73}.Debug|x64.Build.0 = Debug|x64
+		{306A0BAE-14C5-4B71-B6AE-C89710E19F73}.Debug|x86.ActiveCfg = Debug|Win32
+		{306A0BAE-14C5-4B71-B6AE-C89710E19F73}.Debug|x86.Build.0 = Debug|Win32
+		{306A0BAE-14C5-4B71-B6AE-C89710E19F73}.Release|Any CPU.ActiveCfg = Release|x64
+		{306A0BAE-14C5-4B71-B6AE-C89710E19F73}.Release|Any CPU.Build.0 = Release|x64
+		{306A0BAE-14C5-4B71-B6AE-C89710E19F73}.Release|x64.ActiveCfg = Release|x64
+		{306A0BAE-14C5-4B71-B6AE-C89710E19F73}.Release|x64.Build.0 = Release|x64
+		{306A0BAE-14C5-4B71-B6AE-C89710E19F73}.Release|x86.ActiveCfg = Release|Win32
+		{306A0BAE-14C5-4B71-B6AE-C89710E19F73}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
