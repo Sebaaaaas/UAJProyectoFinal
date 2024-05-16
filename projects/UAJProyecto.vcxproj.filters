@@ -9,58 +9,37 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Imgui">
+      <UniqueIdentifier>{084e6b53-8bac-46f8-b633-c2ee480c04d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\DefInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="imgui\imconfig.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imgui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imgui_impl_dx11.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imgui_impl_win32.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imgui_internal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imstb_rectpack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imstb_textedit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imstb_truetype.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\dependencies\imgui\imconfig.h">
-      <Filter>Header Files</Filter>
+      <Filter>Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\dependencies\imgui\imgui.h">
-      <Filter>Header Files</Filter>
+      <Filter>Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\dependencies\imgui\imgui_impl_dx11.h">
-      <Filter>Header Files</Filter>
+      <Filter>Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\dependencies\imgui\imgui_impl_win32.h">
-      <Filter>Header Files</Filter>
+      <Filter>Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\dependencies\imgui\imgui_internal.h">
-      <Filter>Header Files</Filter>
+      <Filter>Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\dependencies\imgui\imstb_rectpack.h">
-      <Filter>Header Files</Filter>
+      <Filter>Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\dependencies\imgui\imstb_textedit.h">
-      <Filter>Header Files</Filter>
+      <Filter>Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\dependencies\imgui\imstb_truetype.h">
-      <Filter>Header Files</Filter>
+      <Filter>Imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -71,25 +50,25 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\dependencies\imgui\imgui.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\dependencies\imgui\imgui_demo.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\dependencies\imgui\imgui_draw.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\dependencies\imgui\imgui_impl_dx11.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\dependencies\imgui\imgui_impl_win32.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\dependencies\imgui\imgui_tables.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\dependencies\imgui\imgui_widgets.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Imgui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
