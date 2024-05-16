@@ -34,6 +34,16 @@ void simulateMouse(WORD virtualKey) {
 		x = 1;
 	}
 }
+void simulateMouseClick() {
+	INPUT input;
+	ZeroMemory(&input, sizeof(INPUT));
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN; // Presiona el botón izquierdo del ratón
+	SendInput(1, &input, sizeof(INPUT));
+	Sleep(50); // Espera un breve momento antes de soltar el botón
+	input.mi.dwFlags = MOUSEEVENTF_LEFTUP; // Suelta el botón izquierdo del ratón
+	SendInput(1, &input, sizeof(INPUT));
+}
 void simulateMovement(WORD virtualKey) {
 	int x = 0;
 	while (x == 0) {
@@ -57,9 +67,11 @@ int main() {
 		ZeroMemory(&state, sizeof(XINPUT_STATE));
 		DWORD result = XInputGetState(0, &state);
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y)) {
-			simulate(0x57);
+			std::cout << "Left Thumbstick Pressed" << std::endl;
+			simulateMouseClick();
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_X)) {
+			std::cout << "X" << std::endl;
 			simulate(0x41);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)) {
@@ -80,16 +92,20 @@ int main() {
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
 			simulate(0x44);
 		}
-		if (result == ERROR_SUCCESS && (state.Gamepad.sThumbLX)) {
+		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB)) {
+			// Aquí puedes llamar a una función para simular el clic izquierdo del ratón
+			
+		}
+		/*if (result == ERROR_SUCCESS && (state.Gamepad.sThumbLX)) {
 			simulateMovement(0x44);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.sThumbLY)) {
 			simulateMovement(0x44);
-		}
+		}*/
 		else {
 			//simulate(VK_SPACE);
 		}
-
+		Sleep(20);
 	}
 	return 0;
 }
