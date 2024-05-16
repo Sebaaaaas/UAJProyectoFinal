@@ -18,29 +18,13 @@ void simulate(WORD virtualKey) {
 	}
 }
 
-void simulateMouse(WORD virtualKey) {
-	int x = 0;
-	while (x == 0) {
-		INPUT input;
-		ZeroMemory(&input, sizeof(INPUT));
-		input.type = INPUT_MOUSE;
-		input.ki.wVk = virtualKey;
-		input.ki.dwFlags = MOUSEEVENTF_MOVE;
-		SendInput(1, &input, sizeof(INPUT));
-		std::cout << "A" << std::endl;
-		Sleep(100);
-		input.ki.dwFlags = MOUSEEVENTF_MOVE;
-		SendInput(1, &input, sizeof(INPUT));
-		x = 1;
-	}
-}
 void simulateMouseClick() {
 	INPUT input;
 	ZeroMemory(&input, sizeof(INPUT));
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN; // Presiona el botón izquierdo del ratón
 	SendInput(1, &input, sizeof(INPUT));
-	Sleep(50); // Espera un breve momento antes de soltar el botón
+	//Sleep(50); // Espera un breve momento antes de soltar el botón
 	input.mi.dwFlags = MOUSEEVENTF_LEFTUP; // Suelta el botón izquierdo del ratón
 	SendInput(1, &input, sizeof(INPUT));
 }
@@ -48,27 +32,12 @@ void simulateMouseMove(short deltaX, short deltaY) {
 	INPUT input;
 	ZeroMemory(&input, sizeof(INPUT));
 	input.type = INPUT_MOUSE;
-	input.mi.dx = deltaX*0.001; // Cambio horizontal del cursor
-	input.mi.dy = -deltaY*0.001; // Cambio vertical del cursor
+	input.mi.dx = deltaX/ 3276; // Cambio horizontal del cursor
+	input.mi.dy = -deltaY/ 3276; // Cambio vertical del cursor
 	input.mi.dwFlags = MOUSEEVENTF_MOVE;
 	SendInput(1, &input, sizeof(INPUT));
 }
-void simulateMovement(WORD virtualKey) {
-	int x = 0;
-	while (x == 0) {
-		INPUT input;
-		ZeroMemory(&input, sizeof(INPUT));
-		input.type = INPUT_MOUSE;
-		input.ki.wVk = virtualKey;
-		input.ki.dwFlags = MOUSEEVENTF_MOVE;
-		SendInput(1, &input, sizeof(INPUT));
-		std::cout << "A" << std::endl;
-		Sleep(100);
-		input.ki.dwFlags = MOUSEEVENTF_MOVE;
-		SendInput(1, &input, sizeof(INPUT));
-		x = 1;
-	}
-}
+
 int main() {
 	int x = 0;
 	while (true) {
@@ -86,7 +55,7 @@ int main() {
 			simulate(0x44);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_A)) {
-			simulateMouse(0x01);
+			simulate(0x57);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP)) {
 			simulate(0x57);
