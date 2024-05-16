@@ -44,6 +44,15 @@ void simulateMouseClick() {
 	input.mi.dwFlags = MOUSEEVENTF_LEFTUP; // Suelta el botón izquierdo del ratón
 	SendInput(1, &input, sizeof(INPUT));
 }
+void simulateMouseMove(short deltaX, short deltaY) {
+	INPUT input;
+	ZeroMemory(&input, sizeof(INPUT));
+	input.type = INPUT_MOUSE;
+	input.mi.dx = deltaX*0.001; // Cambio horizontal del cursor
+	input.mi.dy = -deltaY*0.001; // Cambio vertical del cursor
+	input.mi.dwFlags = MOUSEEVENTF_MOVE;
+	SendInput(1, &input, sizeof(INPUT));
+}
 void simulateMovement(WORD virtualKey) {
 	int x = 0;
 	while (x == 0) {
@@ -67,7 +76,6 @@ int main() {
 		ZeroMemory(&state, sizeof(XINPUT_STATE));
 		DWORD result = XInputGetState(0, &state);
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y)) {
-			std::cout << "Left Thumbstick Pressed" << std::endl;
 			simulateMouseClick();
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_X)) {
@@ -92,9 +100,16 @@ int main() {
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
 			simulate(0x44);
 		}
-		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB)) {
-			// Aquí puedes llamar a una función para simular el clic izquierdo del ratón
-			
+		if (result == ERROR_SUCCESS) {
+			// Obtén los valores del joystick izquierdo
+			short thumbRX = state.Gamepad.sThumbRX;
+			short thumbRY = state.Gamepad.sThumbRY;
+
+			// Verifica si el joystick izquierdo se está moviendo
+			if (thumbRX != 0 || thumbRY != 0) {
+				// Llama a una función para simular el movimiento del ratón
+				simulateMouseMove(thumbRX, thumbRY);
+			}
 		}
 		/*if (result == ERROR_SUCCESS && (state.Gamepad.sThumbLX)) {
 			simulateMovement(0x44);
