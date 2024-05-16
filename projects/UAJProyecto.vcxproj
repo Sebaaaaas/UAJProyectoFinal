@@ -11,17 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="imgui\imgui.cpp" />
-    <ClCompile Include="imgui\imgui_demo.cpp" />
-    <ClCompile Include="imgui\imgui_draw.cpp" />
-    <ClCompile Include="imgui\imgui_impl_dx11.cpp" />
-    <ClCompile Include="imgui\imgui_impl_win32.cpp" />
-    <ClCompile Include="imgui\imgui_tables.cpp" />
-    <ClCompile Include="imgui\imgui_widgets.cpp" />
-    <ClCompile Include="mainR.cpp" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="..\dependencies\imgui\imconfig.h" />
+    <ClInclude Include="..\dependencies\imgui\imgui.h" />
+    <ClInclude Include="..\dependencies\imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="..\dependencies\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="..\dependencies\imgui\imgui_internal.h" />
+    <ClInclude Include="..\dependencies\imgui\imstb_rectpack.h" />
+    <ClInclude Include="..\dependencies\imgui\imstb_textedit.h" />
+    <ClInclude Include="..\dependencies\imgui\imstb_truetype.h" />
     <ClInclude Include="..\src\DefInput.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
@@ -31,6 +28,17 @@
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\dependencies\imgui\imgui.cpp" />
+    <ClCompile Include="..\dependencies\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\dependencies\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\dependencies\imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="..\dependencies\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="..\dependencies\imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\dependencies\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\mainR.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -69,13 +77,13 @@
     <OutDir>$(SolutionDir)exes</OutDir>
     <IntDir>$(SolutionDir)inter\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
-    <IncludePath>C:\Users\sebas\OneDrive\Desktop\UAJProyectoFinal\UAJProyecto\projects\imgui;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dependencies\imgui;$(IncludePath)</IncludePath>
     <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)exes</OutDir>
     <IntDir>$(SolutionDir)inter\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>C:\Users\sebas\OneDrive\Desktop\UAJProyectoFinal\UAJProyecto\projects\imgui;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dependencies\imgui;$(IncludePath)</IncludePath>
     <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
