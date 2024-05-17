@@ -2,19 +2,16 @@
 #include <dwmapi.h>
 #include <d3d11.h>
 
+
 #include <imgui.h>
 #include <imgui_impl_dx11.h>
 #include <imgui_impl_win32.h>
 
+#include <wrl/client.h>
+#include <wincodec.h>
+#include <vector>
+
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-void OnSize(HWND hwnd, UINT flag, int width, int height)
-{
-	// Handle resizing
-	//m_wndEdit.SetWindowPos(NULL, 0, 0, width, height, SWP_NOMOVE | SWP_NOACTIVATE | SWP_NOZORDER);
-
-	//SetWindowPos(hWnd, 0, 0, 0, width, height, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
-}
 
 LRESULT CALLBACK WindowProc(HWND window, UINT message, WPARAM w_param, LPARAM l_param) {
 	if (ImGui_ImplWin32_WndProcHandler(window, message, w_param, l_param))
@@ -35,9 +32,6 @@ LRESULT CALLBACK WindowProc(HWND window, UINT message, WPARAM w_param, LPARAM l_
 			int width = LOWORD(l_param);  // Macro to get the low-order word.
 			int height = HIWORD(l_param); // Macro to get the high-order word.
 
-			// Respond to the message:
-			OnSize(window, (UINT)w_param, width, height);
-
 		}
 			break;
 		case WM_NCLBUTTONDOWN:
@@ -53,6 +47,78 @@ LRESULT CALLBACK WindowProc(HWND window, UINT message, WPARAM w_param, LPARAM l_
 	return DefWindowProc(window, message, w_param, l_param);
 }
 
+bool LoadTextureFromFile(const wchar_t* filename, ID3D11Device* device, ID3D11DeviceContext* device_context, ID3D11ShaderResourceView** texture) {
+	Microsoft::WRL::ComPtr<IWICImagingFactory> wicFactory;
+	HRESULT hr = CoCreateInstance(CLSID_WICImagingFactory, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&wicFactory));
+	if (FAILED(hr)) {
+		return false;
+	}
+
+	Microsoft::WRL::ComPtr<IWICBitmapDecoder> decoder;
+	hr = wicFactory->CreateDecoderFromFilename(filename, nullptr, GENERIC_READ, WICDecodeMetadataCacheOnLoad, &decoder);
+	if (FAILED(hr)) {
+		return false;
+	}
+
+	Microsoft::WRL::ComPtr<IWICBitmapFrameDecode> frame;
+	hr = decoder->GetFrame(0, &frame);
+	if (FAILED(hr)) {
+		return false;
+	}
+
+	Microsoft::WRL::ComPtr<IWICFormatConverter> converter;
+	hr = wicFactory->CreateFormatConverter(&converter);
+	if (FAILED(hr)) {
+		return false;
+	}
+
+	hr = converter->Initialize(frame.Get(), GUID_WICPixelFormat32bppRGBA, WICBitmapDitherTypeNone, nullptr, 0.0, WICBitmapPaletteTypeCustom);
+	if (FAILED(hr)) {
+		return false;
+	}
+
+	UINT width, height;
+	frame->GetSize(&width, &height);
+
+	std::vector<BYTE> imageData(width * height * 4);
+	hr = converter->CopyPixels(nullptr, width * 4, static_cast<UINT>(imageData.size()), imageData.data());
+	if (FAILED(hr)) {
+		return false;
+	}
+
+	D3D11_TEXTURE2D_DESC desc = {};
+	desc.Width = width;
+	desc.Height = height;
+	desc.MipLevels = 1;
+	desc.ArraySize = 1;
+	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	desc.SampleDesc.Count = 1;
+	desc.Usage = D3D11_USAGE_DEFAULT;
+	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+
+	D3D11_SUBRESOURCE_DATA subResource = {};
+	subResource.pSysMem = imageData.data();
+	subResource.SysMemPitch = width * 4;
+
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> texture2D;
+	hr = device->CreateTexture2D(&desc, &subResource, &texture2D);
+	if (FAILED(hr)) {
+		return false;
+	}
+
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	srvDesc.Format = desc.Format;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = desc.MipLevels;
+
+	hr = device->CreateShaderResourceView(texture2D.Get(), &srvDesc, texture);
+	if (FAILED(hr)) {
+		return false;
+	}
+
+	return true;
+}
+
 INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	WNDCLASSEXW wc{};
 	wc.cbSize = sizeof(WNDCLASSEXW);
@@ -60,6 +126,8 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	wc.lpfnWndProc = WindowProc;
 	wc.hInstance = instance;
 	wc.lpszClassName = L"OVERLAY TEST";
+
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> myTexture;
 
 	RegisterClassExW(&wc);
 
@@ -157,6 +225,10 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX11_Init(device, device_context);
 
+	if (!LoadTextureFromFile(L"../dependencies/Assets/image.png", device, device_context, &myTexture)) {
+		MessageBox(NULL, L"Failed to load texture", L"Error", MB_OK);
+		return 1;
+	}
 
 	bool running = true;
 	while (running) {
@@ -180,6 +252,19 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		ImGui::NewFrame();
 
 		ImGui::GetBackgroundDrawList()->AddCircleFilled({ 500,500 }, 100.f, ImColor(1.f, 0.f,0.f));
+
+		// Mostrar la imagen cargada
+		RECT windowRect;
+		GetClientRect(window, &windowRect);
+		int windowWidth = windowRect.right - windowRect.left;
+		int windowHeight = windowRect.bottom - windowRect.top;
+		//ImGui::GetBackgroundDrawList()->AddImage((void*)myTexture.Get(), ImVec2(windowWidth, windowHeight), ImVec2(windowWidth, windowHeight));
+		ImGui::Begin("Image Window", nullptr, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+		ImVec2 windowSize = ImGui::GetWindowSize();
+		if (myTexture) {
+			ImGui::Image((void*)myTexture.Get(), windowSize); // Ajusta el tamaño de la imagen según sea necesario
+		}
+		ImGui::End();
 
 		//renderizado
 
@@ -219,3 +304,4 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 	return 0;
 }
+
