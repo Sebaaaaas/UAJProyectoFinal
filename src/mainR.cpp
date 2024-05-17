@@ -8,13 +8,39 @@
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
+void OnSize(HWND hwnd, UINT flag, int width, int height)
+{
+	// Handle resizing
+	//m_wndEdit.SetWindowPos(NULL, 0, 0, width, height, SWP_NOMOVE | SWP_NOACTIVATE | SWP_NOZORDER);
+
+	
+}
+
 LRESULT CALLBACK window_procedure(HWND window, UINT message, WPARAM w_param, LPARAM l_param) {
 	if (ImGui_ImplWin32_WndProcHandler(window, message, w_param, l_param))
 		return 0L;
 
-	if (message == WM_DESTROY) {
+	/*if (message == WM_DESTROY) {
 		PostQuitMessage(0);
 		return 0L;
+	}*/
+
+	switch (message) {
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			return 0L;
+		break;
+		case WM_SIZE:
+		{
+			int width = LOWORD(l_param);  // Macro to get the low-order word.
+			int height = HIWORD(l_param); // Macro to get the high-order word.
+
+			// Respond to the message:
+			OnSize(window, (UINT)w_param, width, height);
+		}
+		case WM_MOVE:
+
+		break;
 	}
 
 	return DefWindowProc(window, message, w_param, l_param);
@@ -31,14 +57,11 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	RegisterClassExW(&wc);
 
 	const HWND window = CreateWindowExW(
-		WS_EX_TOPMOST | WS_EX_TRANSPARENT | WS_EX_LAYERED, //cómo es el formato de la ventana que vamos a crear(encima de todo, transparente...)
+		WS_EX_TOPMOST  | WS_EX_TRANSPARENT | WS_EX_LAYERED, //cómo es el formato de la ventana que vamos a crear(encima de todo...)
 		wc.lpszClassName,
 		L"OVERLAY TEST",
-		WS_POPUP,
-		0,
-		0,
-		1920, //getSystemMetrics para coger tam ventana si queremos tam independiente
-		1080,
+		WS_OVERLAPPEDWINDOW, 
+		CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
 		nullptr,
 		nullptr,
 		wc.hInstance,
@@ -132,7 +155,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	while (running) {
 		MSG msg;
 		while (PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE)) {
-			TranslateMessage(&msg);
+			TranslateMessage(&msg); //relacionado con input de teclado
 			DispatchMessage(&msg);
 
 			if (msg.message == WM_QUIT) {
