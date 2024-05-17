@@ -2,7 +2,6 @@
 #include <dwmapi.h>
 #include <d3d11.h>
 
-
 #include <imgui.h>
 #include <imgui_impl_dx11.h>
 #include <imgui_impl_win32.h>
@@ -10,6 +9,7 @@
 #include <wrl/client.h>
 #include <wincodec.h>
 #include <vector>
+#include <iostream>
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -258,12 +258,17 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		GetClientRect(window, &windowRect);
 		int windowWidth = windowRect.right - windowRect.left;
 		int windowHeight = windowRect.bottom - windowRect.top;
+
+		ImGui::ShowDemoWindow();
 		//ImGui::GetBackgroundDrawList()->AddImage((void*)myTexture.Get(), ImVec2(windowWidth, windowHeight), ImVec2(windowWidth, windowHeight));
 		ImGui::Begin("Image Window", nullptr, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
-		ImVec2 windowSize = ImGui::GetWindowSize();
-		if (myTexture) {
-			ImGui::Image((void*)myTexture.Get(), windowSize); // Ajusta el tamaño de la imagen según sea necesario
-		}
+		//ImGui::Button("henlo");
+		//if (ImGui::MenuItem("New")) {}
+		//ImVec2 windowSize = ImGui::GetWindowSize();
+		//if (myTexture) {
+		//	ImGui::Image((void*)myTexture.Get(), windowSize); // Ajusta el tamaño de la imagen según sea necesario
+		//}
+
 		ImGui::End();
 
 		//renderizado
