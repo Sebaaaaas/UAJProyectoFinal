@@ -100,12 +100,30 @@ int main() {
 				simulate(0x53);
 			}
 		}
-		/*if (result == ERROR_SUCCESS && (state.Gamepad.sThumbLX)) {
-			simulateMovement(0x44);
+		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER)) { //Pulsar LB 
+			simulate(0x45);
 		}
-		if (result == ERROR_SUCCESS && (state.Gamepad.sThumbLY)) {
-			simulateMovement(0x44);
-		}*/
+		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB)) { //Pulsar joystick izquierdo
+			simulate(0x41);
+		}
+		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER)) { //Pulsar RB 
+			simulate(0x09);
+		}
+		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB)) { //Pulsar joystick derecho
+			simulate(0x41);
+		}
+		if (result == ERROR_SUCCESS && (state.Gamepad.bLeftTrigger)) { //Pulsar LT 
+			if(state.Gamepad.bLeftTrigger > 75)
+				simulate(0x45);
+		}
+		if (result == ERROR_SUCCESS && (state.Gamepad.bRightTrigger)) { //Pulsar RT
+			if (state.Gamepad.bRightTrigger > 75)
+				simulate(0x09);
+		}
+
+		
+
+		
 		else {
 			//simulate(VK_SPACE);
 		}
