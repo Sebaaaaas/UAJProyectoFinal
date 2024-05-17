@@ -13,14 +13,14 @@ void OnSize(HWND hwnd, UINT flag, int width, int height)
 	// Handle resizing
 	//m_wndEdit.SetWindowPos(NULL, 0, 0, width, height, SWP_NOMOVE | SWP_NOACTIVATE | SWP_NOZORDER);
 
-	
+	//SetWindowPos(hWnd, 0, 0, 0, width, height, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
 }
 
-LRESULT CALLBACK window_procedure(HWND window, UINT message, WPARAM w_param, LPARAM l_param) {
+LRESULT CALLBACK WindowProc(HWND window, UINT message, WPARAM w_param, LPARAM l_param) {
 	if (ImGui_ImplWin32_WndProcHandler(window, message, w_param, l_param))
+	/*if (message == WM_DESTROY) {
 		return 0L;
 
-	/*if (message == WM_DESTROY) {
 		PostQuitMessage(0);
 		return 0L;
 	}*/
@@ -30,16 +30,23 @@ LRESULT CALLBACK window_procedure(HWND window, UINT message, WPARAM w_param, LPA
 			PostQuitMessage(0);
 			return 0L;
 		break;
-		case WM_SIZE:
-		{
+		case WM_SIZE: {
+
 			int width = LOWORD(l_param);  // Macro to get the low-order word.
 			int height = HIWORD(l_param); // Macro to get the high-order word.
 
 			// Respond to the message:
 			OnSize(window, (UINT)w_param, width, height);
-		}
-		case WM_MOVE:
 
+		}
+			break;
+		case WM_NCLBUTTONDOWN:
+			PostQuitMessage(0);
+			break;
+		case WM_MOVE:
+			SetWindowPos(window, 0, 0, 0, 516, 589, SWP_FRAMECHANGED | WS_VISIBLE);
+			break;
+			
 		break;
 	}
 
@@ -50,14 +57,14 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	WNDCLASSEXW wc{};
 	wc.cbSize = sizeof(WNDCLASSEXW);
 	wc.style = CS_HREDRAW | CS_VREDRAW;
-	wc.lpfnWndProc = window_procedure;
+	wc.lpfnWndProc = WindowProc;
 	wc.hInstance = instance;
 	wc.lpszClassName = L"OVERLAY TEST";
 
 	RegisterClassExW(&wc);
 
 	const HWND window = CreateWindowExW(
-		WS_EX_TOPMOST  | WS_EX_TRANSPARENT | WS_EX_LAYERED, //cómo es el formato de la ventana que vamos a crear(encima de todo...)
+		0, //cómo es el formato de la ventana que vamos a crear(encima de todo...)
 		wc.lpszClassName,
 		L"OVERLAY TEST",
 		WS_OVERLAPPEDWINDOW, 
