@@ -61,7 +61,7 @@ int main() {
 			simulate(0x57);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN)) {
-			simulate(0x44);
+			simulate(0x53);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)) {
 			simulate(0x41);
@@ -78,6 +78,26 @@ int main() {
 			if (thumbRX != 0 || thumbRY != 0) {
 				// Llama a una función para simular el movimiento del ratón
 				simulateMouseMove(thumbRX, thumbRY);
+			}
+		}
+		if (result == ERROR_SUCCESS) {
+			// Obtén los valores del joystick izquierdo
+			short thumbLX = state.Gamepad.sThumbLX;
+			short thumbLY = state.Gamepad.sThumbLY;
+
+			// Verifica si el joystick izquierdo se está moviendo
+			if (thumbLX > 0) {
+				// Llama a una función para simular el movimiento del ratón
+				simulate(0x44);
+			}
+			else if (thumbLX < 0) {
+				simulate(0x41);
+			}
+			if (thumbLY > 0) {
+				simulate(0x57);
+			}
+			else if (thumbLY < 0) {
+				simulate(0x53);
 			}
 		}
 		/*if (result == ERROR_SUCCESS && (state.Gamepad.sThumbLX)) {
