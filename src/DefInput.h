@@ -1,6 +1,12 @@
 #pragma once
 
 enum Keyboard {
+	KEY_MLCLICK = 0x01, //click izquierdo del raton
+	KEY_MRCLICK = 0x02, //click derecho del raton
+	KEY_MMIDDLEBUTTON = 0x04, //click en la rueda del raton
+	KEY_MX1BUTTON = 0x05, //Boton X1 del raton (estos botones son los que estan al lado del raton) 
+	KEY_MX2BUTTON = 0x06, //Boton X2 del raton
+
 	KEY_0 = 0x30,
 	KEY_1 = 0x31,
 	KEY_2 = 0x32,
