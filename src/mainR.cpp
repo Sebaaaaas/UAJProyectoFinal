@@ -244,26 +244,30 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		ImGui::NewFrame();
 
-		ImGui::GetBackgroundDrawList()->AddCircleFilled({ 500,500 }, 100.f, ImColor(1.f, 0.f,0.f));
-
 		// Mostrar la imagen cargada
 		RECT windowRect;
 		GetClientRect(window, &windowRect);
 		int windowWidth = windowRect.right - windowRect.left;
 		int windowHeight = windowRect.bottom - windowRect.top;
 
-		ImGui::ShowDemoWindow();
 		//ImGui::GetBackgroundDrawList()->AddImage((void*)myTexture.Get(), ImVec2(windowWidth, windowHeight), ImVec2(windowWidth, windowHeight));
-		ImGui::Begin("Image Window", nullptr, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+		ImGui::Begin("Image Window", nullptr, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
 		//ImGui::Button("henlo");
+		ImGui::SetNextWindowPos(ImVec2(200, 200));
 		ImGui::Text("dfsdfsdf");
 		//if (ImGui::MenuItem("New")) {}
-		ImVec2 windowSize = ImGui::GetWindowSize();
+		ImVec2 windowSize = ImGui::GetWindowSize(); windowSize.x /= 2; windowSize.y /= 2;
 		if (myTexture) {
 			ImGui::Image((void*)myTexture.Get(), windowSize); // Ajusta el tamaño de la imagen según sea necesario
 		}
 
 		ImGui::End();
+
+		ImGui::ShowDemoWindow();
+		//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 		//renderizado
 
