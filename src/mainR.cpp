@@ -1,4 +1,4 @@
-#include <Windows.h>
+﻿#include <Windows.h>
 #include <dwmapi.h>
 #include <d3d11.h>
 
@@ -125,7 +125,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	RegisterClassExW(&wc);
 
 	const HWND window = CreateWindowExW(
-		0, //c�mo es el formato de la ventana que vamos a crear(encima de todo...)
+		0, //cómo es el formato de la ventana que vamos a crear(encima de todo...)
 		wc.lpszClassName,
 		L"OVERLAY TEST",
 		WS_OVERLAPPEDWINDOW, 
@@ -223,6 +223,10 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		return 1;
 	}
 
+	bool waitForInput = false;
+	ImGuiKey detectedKey = ImGuiKey_None;
+	std::string buttonLabel = "Click Me";
+
 	bool running = true;
 	while (running) {
 		MSG msg;
@@ -254,13 +258,40 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		ImGui::Begin("Image Window", NULL, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus);
 
+		//ImGui::TextColored(ImVec4(0, 0, 0, 1), "Testing text");
 		ImGui::GetBackgroundDrawList()->AddImage((void*)myTexture.Get(), ImVec2(0, 0), ImVec2(windowWidth, windowHeight));
-		ImGui::TextColored(ImVec4(0, 0, 0, 1), "Testing text");
-		ImGui::TextColored(ImVec4(1, 0, 0, 1), "COVERING THE WHOLE SCREEN AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUGH!");
 		static char str0[128] = "Hello, world!";
 		ImGui::InputText("input text", str0, IM_ARRAYSIZE(str0));
 		
-		//if (ImGui::MenuItem("New")) {}
+		// Posicion del boton
+		ImGui::SetCursorPosX((windowWidth - 100) * 0.5f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight - 50) * 0.5f); // Centrar verticalmente
+
+		// Color del boton
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
+		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+
+		// boton input >>>>>>>>>>>>>>>>>
+		if (ImGui::Button((buttonLabel.c_str()))) {
+			// Activar la espera del siguiente input
+			waitForInput = true;
+			detectedKey = ImGuiKey_None;
+			buttonLabel = "Press any key...";
+		}
+
+		// Mostrar el texto y detectar el siguiente input si est� esperando
+		if (waitForInput) {
+			// Detectar el input del teclado
+			for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
+				if (ImGui::IsKeyDown(key)) {
+					detectedKey = key;
+					waitForInput = false;
+					buttonLabel = std::string(ImGui::GetKeyName(detectedKey));
+					break;
+				}
+			}
+		}
+		//>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		ImVec2 windowSize = ImGui::GetWindowSize(); //windowSize.x *= 2; windowSize.y *= 2;
 
 		ImGui::End();
