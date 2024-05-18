@@ -250,18 +250,18 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		int windowWidth = windowRect.right - windowRect.left;
 		int windowHeight = windowRect.bottom - windowRect.top;
 
-		//ImGui::GetBackgroundDrawList()->AddImage((void*)myTexture.Get(), ImVec2(windowWidth, windowHeight), ImVec2(windowWidth, windowHeight));
-
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-		ImGui::Begin("Image Window", NULL, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus);
-		//ImGui::Button("henlo");
-		ImGui::Text("dfsdfsdf");
+		ImGui::Begin("Image Window", NULL, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus);
+
+		ImGui::GetBackgroundDrawList()->AddImage((void*)myTexture.Get(), ImVec2(0, 0), ImVec2(windowWidth, windowHeight));
+		ImGui::TextColored(ImVec4(0, 0, 0, 1), "Testing text");
+		ImGui::TextColored(ImVec4(1, 0, 0, 1), "COVERING THE WHOLE SCREEN AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUGH!");
+		static char str0[128] = "Hello, world!";
+		ImGui::InputText("input text", str0, IM_ARRAYSIZE(str0));
+		
 		//if (ImGui::MenuItem("New")) {}
 		ImVec2 windowSize = ImGui::GetWindowSize(); //windowSize.x *= 2; windowSize.y *= 2;
-		if (myTexture) {
-			ImGui::Image((void*)myTexture.Get(), windowSize); // Ajusta el tamaño de la imagen según sea necesario
-		}
 
 		ImGui::End();
 
