@@ -14,34 +14,27 @@
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 LRESULT CALLBACK WindowProc(HWND window, UINT message, WPARAM w_param, LPARAM l_param) {
-	if (ImGui_ImplWin32_WndProcHandler(window, message, w_param, l_param))
-	/*if (message == WM_DESTROY) {
-		return 0L;
-
+	
+	if (message == WM_CLOSE) {
 		PostQuitMessage(0);
 		return 0L;
-	}*/
+	}
+	if (ImGui_ImplWin32_WndProcHandler(window, message, w_param, l_param)) {
 
-	switch (message) {
-		case WM_DESTROY:
+		/*if (message == WM_DESTROY) {
+			return 0L;
+
 			PostQuitMessage(0);
 			return 0L;
-		break;
-		case WM_SIZE: {
+		}*/
 
-			int width = LOWORD(l_param);  // Macro to get the low-order word.
-			int height = HIWORD(l_param); // Macro to get the high-order word.
+		//switch (message) {
+		//	case WM_CLOSE: //si cerramos ventana salimos de la aplicacion
+		//		PostQuitMessage(0);
+		//		return 0L;
+		//	break;
+		//}
 
-		}
-			break;
-		case WM_NCLBUTTONDOWN:
-			PostQuitMessage(0);
-			break;
-		case WM_MOVE:
-			SetWindowPos(window, 0, 0, 0, 516, 589, SWP_FRAMECHANGED | WS_VISIBLE);
-			break;
-			
-		break;
 	}
 
 	return DefWindowProc(window, message, w_param, l_param);
@@ -263,11 +256,12 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		//ImGui::GetBackgroundDrawList()->AddImage((void*)myTexture.Get(), ImVec2(windowWidth, windowHeight), ImVec2(windowWidth, windowHeight));
 		ImGui::Begin("Image Window", nullptr, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 		//ImGui::Button("henlo");
+		ImGui::Text("dfsdfsdf");
 		//if (ImGui::MenuItem("New")) {}
-		//ImVec2 windowSize = ImGui::GetWindowSize();
-		//if (myTexture) {
-		//	ImGui::Image((void*)myTexture.Get(), windowSize); // Ajusta el tamaño de la imagen según sea necesario
-		//}
+		ImVec2 windowSize = ImGui::GetWindowSize();
+		if (myTexture) {
+			ImGui::Image((void*)myTexture.Get(), windowSize); // Ajusta el tamaño de la imagen según sea necesario
+		}
 
 		ImGui::End();
 
