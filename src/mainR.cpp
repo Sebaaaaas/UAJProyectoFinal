@@ -270,7 +270,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		// Color del boton
 		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
 		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
-
+		
 		// boton input >>>>>>>>>>>>>>>>>
 		if (ImGui::Button((buttonLabel.c_str()))) {
 			// Activar la espera del siguiente input
@@ -294,9 +294,13 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		ImVec2 windowSize = ImGui::GetWindowSize(); //windowSize.x *= 2; windowSize.y *= 2;
 
+		ImGui::PopStyleColor(2); //esto es para quitar los push que se han hecho con PushStyleColor
+
 		ImGui::End();
 
+
 		ImGui::ShowDemoWindow();
+
 		//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 		//renderizado
@@ -309,7 +313,9 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
+
 		swap_chain->Present(1U, 0U);
+
 	}
 
 	ImGui_ImplDX11_Shutdown();
