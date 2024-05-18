@@ -129,7 +129,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		wc.lpszClassName,
 		L"OVERLAY TEST",
 		WS_OVERLAPPEDWINDOW, 
-		CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+		0, 0, 700, 420,
 		nullptr,
 		nullptr,
 		wc.hInstance,
@@ -254,12 +254,11 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-		ImGui::Begin("Image Window", nullptr, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
+		ImGui::Begin("Image Window", NULL, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus);
 		//ImGui::Button("henlo");
-		ImGui::SetNextWindowPos(ImVec2(200, 200));
 		ImGui::Text("dfsdfsdf");
 		//if (ImGui::MenuItem("New")) {}
-		ImVec2 windowSize = ImGui::GetWindowSize(); windowSize.x /= 2; windowSize.y /= 2;
+		ImVec2 windowSize = ImGui::GetWindowSize(); //windowSize.x *= 2; windowSize.y *= 2;
 		if (myTexture) {
 			ImGui::Image((void*)myTexture.Get(), windowSize); // Ajusta el tamaño de la imagen según sea necesario
 		}
