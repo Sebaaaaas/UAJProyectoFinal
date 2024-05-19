@@ -419,8 +419,24 @@ int ConversorInput(ImGuiKey key) {
 		return 3;
 		break;
 
+	case ImGuiKey_Equal:  //es el +
+		return 0xBB;
+		break;
+
+	case ImGuiKey_Minus:
+		return 0xBD;
+		break;
+
+	case ImGuiKey_Period:
+		return 0xBE;
+		break;
+
+	case ImGuiKey_Comma:
+		return 0xBC;
+		break;
+
 	default:
-		return 0x01;
+		return 0;
 	}
 
 }
