@@ -40,7 +40,7 @@ void simulateMouseMove(short deltaX, short deltaY) {
 }
 
 int main() {
-	Sleep(5000);
+	Sleep(300);
 	LPCWSTR name = L"SharedMemory";
 	const size_t numElems = 1;  // Número de enteros en el array
 	const size_t size = numElems * sizeof(int);
