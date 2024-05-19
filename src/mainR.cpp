@@ -218,7 +218,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX11_Init(device, device_context);
 
-	if (!LoadTextureFromFile(L"Assets/image.png", device, device_context, &myTexture)) {
+	if (!LoadTextureFromFile(L"../exes/Assets/image.png", device, device_context, &myTexture)) {
 		MessageBox(NULL, L"Failed to load texture", L"Error", MB_OK);
 		return 1;
 	}
