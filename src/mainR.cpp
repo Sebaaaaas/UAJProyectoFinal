@@ -344,3 +344,320 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	return 0;
 }
 
+int ConversorInput(ImGuiKey key) {
+	
+	switch (key) {
+	case ImGuiKey_Space:
+		return 0x20;
+		break;
+
+	case ImGuiKey_LeftArrow:
+		return 0x25;
+		break;
+
+	case ImGuiKey_UpArrow:
+		return 0x26;
+		break;
+
+	case ImGuiKey_RightArrow:
+		return 0x27;
+		break;
+
+	case ImGuiKey_DownArrow:
+		return 0x28;
+		break;
+
+	case ImGuiKey_0:
+		return 0x30;
+		break;
+
+	case ImGuiKey_1:
+		return 0x31;
+		break;
+
+	case ImGuiKey_2:
+		return 0x32;
+		break;
+
+	case ImGuiKey_3:
+		return 0x33;
+		break;
+
+	case ImGuiKey_4:
+		return 0x34;
+		break;
+
+	case ImGuiKey_5:
+		return 0x35;
+		break;
+
+	case ImGuiKey_6:
+		return 0x36;
+		break;
+
+	case ImGuiKey_7:
+		return 0x37;
+		break;
+
+	case ImGuiKey_8:
+		return 0x38;
+		break;
+
+	case ImGuiKey_9:
+		return 0x39;
+		break;
+
+	case ImGuiKey_A:
+		return 0x41;
+		break;
+
+	case ImGuiKey_B:
+		return 0x42;
+		break;
+
+	case ImGuiKey_C:
+		return 0x43;
+		break;
+
+	case ImGuiKey_D:
+		return 0x44;
+		break;
+
+	case ImGuiKey_E:
+		return 0x45;
+		break;
+
+	case ImGuiKey_F:
+		return 0x46;
+		break;
+
+	case ImGuiKey_G:
+		return 0x47;
+		break;
+
+	case ImGuiKey_H:
+		return 0x48;
+		break;
+
+	case ImGuiKey_I:
+		return 0x49;
+		break;
+
+	case ImGuiKey_J:
+		return 0x4A;
+		break;
+
+	case ImGuiKey_K:
+		return 0x4B;
+		break;
+
+	case ImGuiKey_L:
+		return 0x4C;
+		break;
+
+	case ImGuiKey_M:
+		return 0x4D;
+		break;
+
+	case ImGuiKey_N:
+		return 0x4E;
+		break;
+
+	case ImGuiKey_O:
+		return 0x4F;
+		break;
+
+	case ImGuiKey_P:
+		return 0x50;
+		break;
+
+	case ImGuiKey_Q:
+		return 0x51;
+		break;
+
+	case ImGuiKey_R:
+		return 0x52;
+		break;
+
+	case ImGuiKey_S:
+		return 0x53;
+		break;
+
+	case ImGuiKey_T:
+		return 0x54;
+		break;
+
+	case ImGuiKey_U:
+		return 0x55;
+		break;
+
+	case ImGuiKey_V:
+		return 0x56;
+		break;
+
+	case ImGuiKey_W:
+		return 0x57;
+		break;
+
+	case ImGuiKey_X:
+		return 0x58;
+		break;
+
+	case ImGuiKey_Y:
+		return 0x59;
+		break;
+
+	case ImGuiKey_Z:
+		return 0x5A;
+		break;
+
+	case ImGuiKey_F1:
+		return 0x70;
+		break;
+
+	case ImGuiKey_F2:
+		return 0x71;
+		break;
+
+	case ImGuiKey_F3:
+		return 0x72;
+		break;
+
+	case ImGuiKey_F4:
+		return 0x73;
+		break;
+
+	case ImGuiKey_F5:
+		return 0x74;
+		break;
+
+	case ImGuiKey_F6:
+		return 0x75;
+		break;
+
+	case ImGuiKey_F7:
+		return 0x76;
+		break;
+
+	case ImGuiKey_F8:
+		return 0x77;
+		break;
+
+	case ImGuiKey_F9:
+		return 0x78;
+		break;
+
+	case ImGuiKey_F10:
+		return 0x79;
+		break;
+
+	case ImGuiKey_F11:
+		return 0x7A;
+		break;
+
+	case ImGuiKey_F12:
+		return 0x7B;
+		break;
+
+	case ImGuiKey_F13:
+		return 0x7C;
+		break;
+
+	case ImGuiKey_F14:
+		return 0x7D;
+		break;
+
+	case ImGuiKey_F15:
+		return 0x7E;
+		break;
+
+	case ImGuiKey_F16:
+		return 0x7F;
+		break;
+
+	case ImGuiKey_F17:
+		return 0x80;
+		break;
+
+	case ImGuiKey_F18:
+		return 0x81;
+		break;
+
+	case ImGuiKey_F19:
+		return 0x82;
+		break;
+
+	case ImGuiKey_F20:
+		return 0x83;
+		break;
+
+	case ImGuiKey_F21:
+		return 0x84;
+		break;
+
+	case ImGuiKey_F22:
+		return 0x85;
+		break;
+
+	case ImGuiKey_F23:
+		return 0x86;
+		break;
+
+	case ImGuiKey_F24:
+		return 0x87;
+		break;
+
+	case ImGuiKey_LeftShift:
+		return 0x10;
+		break;
+
+	case ImGuiKey_RightShift:
+		return 0x10;
+		break;
+
+	case ImGuiKey_LeftCtrl:
+		return 0x11;
+		break;
+
+	case ImGuiKey_RightCtrl:
+		return 0x11;
+		break;
+
+	case ImGuiKey_LeftAlt:
+		return 0x12;
+		break;
+
+	case ImGuiKey_Tab:
+		return 0x09;
+		break;
+
+	case ImGuiKey_Enter:
+		return 0x0D;
+		break;
+
+	case ImGuiKey_Backspace:
+		return 0x08;
+		break;
+
+	case ImGuiKey_MouseLeft:
+		return 1;
+		break;
+
+	case ImGuiKey_MouseRight:
+		return 2;
+		break;
+
+	case ImGuiKey_MouseMiddle:
+		return 3;
+		break;
+
+
+
+
+
+
+	default:
+		return 0x01;
+	}
+
+}
