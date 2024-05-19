@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UAJProyecto", "projects\UAJProyecto.vcxproj", "{2412CE63-EB3A-444F-8386-0B1621EF189A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Input", "Input\Input.vcxproj", "{4E76956F-8E27-471C-BDA1-3FD1AA20F190}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2412CE63-EB3A-444F-8386-0B1621EF189A} = {2412CE63-EB3A-444F-8386-0B1621EF189A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

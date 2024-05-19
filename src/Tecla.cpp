@@ -14,3 +14,8 @@ void Tecla::setTecla(int pos, WORD code)
 WORD Tecla::getTecla(int pos) {
 	return teclasCode[pos];
 }
+
+int Tecla::getTam()
+{
+	return teclasCode.size();
+}

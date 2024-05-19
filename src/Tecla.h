@@ -11,4 +11,5 @@ public:
 	~Tecla();
 	void setTecla(int pos,WORD code);
 	WORD getTecla(int pos);
+	int getTam();
 };

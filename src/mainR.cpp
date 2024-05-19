@@ -10,6 +10,8 @@
 #include <wincodec.h>
 #include <vector>
 #include <iostream>
+#include <array>
+
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -557,6 +559,48 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	ImGuiKey detectedKey = ImGuiKey_None;
 	std::string buttonLabel = "Click Me";
 
+	//Parte Mem.Compartida
+	std::array<int, 1>t;
+	int numElems = 1;
+	LPCWSTR name = L"SharedMemory"; 
+	const size_t size = numElems*sizeof(int);
+	// Intentar abrir un archivo de memoria compartida existente
+	HANDLE hMapFile = OpenFileMapping(
+		FILE_MAP_ALL_ACCESS,   // Permisos de lectura y escritura
+		FALSE,                 // Manejo no heredable
+		name);                 // Nombre del archivo de memoria compartida
+ 
+	if (hMapFile == NULL) {
+		// Crear un archivo de memoria compartida
+		hMapFile = CreateFileMappingW(
+			INVALID_HANDLE_VALUE,    // Usa la memoria de paginación del sistema
+			NULL,                    // Seguridad por defecto
+			PAGE_READWRITE,          // Permisos de lectura y escritura
+			0,                       // Tamaño máximo de archivo (parte alta de 32 bits)
+			size,                    // Tamaño máximo de archivo (parte baja de 32 bits)
+			name);                   // Nombre del archivo de memoria compartida
+
+		if (hMapFile == NULL) {
+			std::cerr << "Could not create file mapping object (" << GetLastError() << ").\n";
+			return 1;
+		}
+	}
+	
+	// Mapear una vista del archivo de memoria compartida
+	LPVOID pBuf = MapViewOfFile(
+		hMapFile,                // Manejador del archivo de memoria compartida
+		FILE_MAP_ALL_ACCESS,     // Permisos de lectura y escritura
+		0,
+		0,
+		size);
+
+	if (pBuf == NULL) {
+		std::cerr << "Could not map view of file (" << GetLastError() << ").\n";
+		CloseHandle(hMapFile);
+		return 1;
+	}
+
+
 	bool running = true;
 	while (running) {
 		MSG msg;
@@ -622,6 +666,8 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInput = false;
 					buttonLabel = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
+					t[0] = si;
+					memcpy(pBuf, &t, size);
 					break;
 				}
 			}
@@ -652,7 +698,10 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		swap_chain->Present(1U, 0U);
 
 	}
-
+	
+	// Limpieza
+	UnmapViewOfFile(pBuf);
+	CloseHandle(hMapFile);
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 

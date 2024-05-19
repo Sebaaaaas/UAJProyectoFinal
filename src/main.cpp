@@ -40,9 +40,45 @@ void simulateMouseMove(short deltaX, short deltaY) {
 }
 
 int main() {
-	int x = 0;
+	Sleep(5000);
+	LPCWSTR name = L"SharedMemory";
+	const size_t numElems = 1;  // Número de enteros en el array
+	const size_t size = numElems * sizeof(int);
+
+	// Abre un archivo de memoria compartida existente
+	
+	HANDLE hMapFile = OpenFileMapping(
+		FILE_MAP_ALL_ACCESS,   // Permisos de lectura y escritura
+		FALSE,                 // Manejo no heredable
+		name);                 // Nombre del archivo de memoria compartida
+
+	if (hMapFile == NULL) {
+		std::cerr << "Could not open file mapping object (" << GetLastError() << ").\n";
+		return 1;
+	}
+
+	// Mapear una vista del archivo de memoria compartida
+	LPVOID pBuf = MapViewOfFile(
+		hMapFile,             // Manejador del archivo de memoria compartida
+		FILE_MAP_ALL_ACCESS,  // Permisos de lectura y escritura
+		0,
+		0,
+		size);
+
+	if (pBuf == NULL) {
+		std::cerr << "Could not map view of file (" << GetLastError() << ").\n";
+		CloseHandle(hMapFile);
+		return 1;
+	}
+
+	// Leer el array de la memoria compartida
+	int* t = static_cast<int*>(pBuf);
+	std::cout << "Array read from shared memory: ";
+	std::cout << t[0] << std::endl;
+
 	InputMapper* mapper = new InputMapper();
 	while (true) {
+		std::cout << t[0] << std::endl;
 		XINPUT_STATE state;
 		ZeroMemory(&state, sizeof(XINPUT_STATE));
 		DWORD result = XInputGetState(0, &state);
@@ -131,5 +167,8 @@ int main() {
 		}
 		Sleep(20);
 	}
+	// Limpieza
+    UnmapViewOfFile(pBuf);
+    CloseHandle(hMapFile);
 	return 0;
 }
