@@ -20,6 +20,7 @@
     <ClInclude Include="..\dependencies\imgui\imstb_textedit.h" />
     <ClInclude Include="..\dependencies\imgui\imstb_truetype.h" />
     <ClInclude Include="..\src\DefInput.h" />
+    <ClInclude Include="..\src\Tecla.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\dependencies\imgui\imgui.cpp" />
@@ -29,8 +30,8 @@
     <ClCompile Include="..\dependencies\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\dependencies\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\dependencies\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\mainR.cpp" />
+    <ClCompile Include="..\src\Tecla.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
