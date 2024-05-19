@@ -447,7 +447,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = WindowProc;
 	wc.hInstance = instance;
-	wc.lpszClassName = L"OVERLAY TEST";
+	wc.lpszClassName = L"Control emulator";
 
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> myTexture;
 
@@ -456,18 +456,19 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	const HWND window = CreateWindowExW(
 		0, //cómo es el formato de la ventana que vamos a crear(encima de todo...)
 		wc.lpszClassName,
-		L"OVERLAY TEST",
+		L"Control emulator",
 		WS_OVERLAPPEDWINDOW, 
-		0, 0, 700, 420,
+		CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
 		nullptr,
 		nullptr,
 		wc.hInstance,
 		nullptr
 	);
 	
+	
 	SetLayeredWindowAttributes(window, RGB(0, 0, 0), BYTE(255), LWA_ALPHA); //queremos poder ver contenidos de ventana
 
-	{
+	/*{
 		RECT client_area{};
 		GetClientRect(window, &client_area);
 
@@ -486,7 +487,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		DwmExtendFrameIntoClientArea(window, &margins);
 
-	}
+	}*/
 
 	DXGI_SWAP_CHAIN_DESC sd{};
 	sd.BufferDesc.RefreshRate.Numerator = 60U;
@@ -576,25 +577,29 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		ImGui_ImplWin32_NewFrame();
 
 		ImGui::NewFrame();
-
-		// Mostrar la imagen cargada
+		
 		RECT windowRect;
 		GetClientRect(window, &windowRect);
 		int windowWidth = windowRect.right - windowRect.left;
 		int windowHeight = windowRect.bottom - windowRect.top;
 
+		ImGui::SetNextWindowPos(ImVec2(0.f, 0.f));
+		ImGui::SetNextWindowSize(ImVec2(windowWidth, windowHeight));
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-		ImGui::Begin("Image Window", NULL, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus);
+		if (!ImGui::Begin("Controls", NULL, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus)) {
+			ImGui::End();
+			return 1;
+		}
 
-		//ImGui::TextColored(ImVec4(0, 0, 0, 1), "Testing text");
 		ImGui::GetBackgroundDrawList()->AddImage((void*)myTexture.Get(), ImVec2(0, 0), ImVec2(windowWidth, windowHeight));
+
 		static char str0[128] = "Hello, world!";
 		ImGui::InputText("input text", str0, IM_ARRAYSIZE(str0));
 		
 		// Posicion del boton
-		ImGui::SetCursorPosX((windowWidth - 100) * 0.5f); // Centrar horizontalmente
-		ImGui::SetCursorPosY((windowHeight - 50) * 0.5f); // Centrar verticalmente
+		ImGui::SetCursorPosX((windowWidth) * 0.5f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.5f); // Centrar verticalmente
 
 		// Color del boton
 		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
