@@ -1,6 +1,6 @@
 #pragma once
 
-enum Keyboard {
+enum KeyboardKey {
 	KEY_MLCLICK = 0x01, //click izquierdo del raton
 	KEY_MRCLICK = 0x02, //click derecho del raton
 	KEY_MMIDDLEBUTTON = 0x04, //click en la rueda del raton
@@ -109,6 +109,8 @@ enum Keyboard {
 	KEY_PLUS = 0xBB,
 	KEY_COMMA = 0xBC,
 	KEY_MINUS = 0xBD,
-	KEY_PERIOD = 0xBE
+	KEY_PERIOD = 0xBE,
+
+	NONE = 0 // valor por defecto
 
 };

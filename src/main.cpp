@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Windows.h>
 #include <xinput.h>
+#include "InputMapper.h"
 void simulate(WORD virtualKey) {
 	int x = 0;
 	while (x == 0) {
@@ -40,6 +41,7 @@ void simulateMouseMove(short deltaX, short deltaY) {
 
 int main() {
 	int x = 0;
+	InputMapper* mapper = new InputMapper();
 	while (true) {
 		XINPUT_STATE state;
 		ZeroMemory(&state, sizeof(XINPUT_STATE));
@@ -70,7 +72,7 @@ int main() {
 			simulate(0x44);
 		}
 		if (result == ERROR_SUCCESS) {
-			// Obtén los valores del joystick izquierdo
+			// Obtén los valores del joystick derecho
 			short thumbRX = state.Gamepad.sThumbRX;
 			short thumbRY = state.Gamepad.sThumbRY;
 
