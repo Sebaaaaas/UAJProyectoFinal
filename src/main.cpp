@@ -3,8 +3,7 @@
 #include <xinput.h>
 #include "InputMapper.h"
 void simulate(WORD virtualKey) {
-	int x = 0;
-	while (x == 0) {
+	
 		INPUT input;
 		ZeroMemory(&input, sizeof(INPUT));
 		input.type = INPUT_KEYBOARD;
@@ -15,8 +14,7 @@ void simulate(WORD virtualKey) {
 		Sleep(100);
 		input.ki.dwFlags = KEYEVENTF_KEYUP;
 		SendInput(1, &input, sizeof(INPUT));
-		x = 1;
-	}
+	
 }
 
 void simulateMouseClick() {
@@ -76,9 +74,9 @@ int main() {
 	std::cout << "Array read from shared memory: ";
 	std::cout << t[0] << std::endl;
 
-	InputMapper* mapper = new InputMapper();
+	//InputMapper* mapper = new InputMapper();
 	while (true) {
-		std::cout << t[0] << std::endl;
+
 		XINPUT_STATE state;
 		ZeroMemory(&state, sizeof(XINPUT_STATE));
 		DWORD result = XInputGetState(0, &state);
@@ -87,7 +85,8 @@ int main() {
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_X)) {
 			std::cout << "X" << std::endl;
-			simulate(0x41);
+			std::cout << "Esta tecla esta cambiada en el interfaz: " + t[0];
+			simulate(t[0]);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)) {
 			simulate(0x44);
