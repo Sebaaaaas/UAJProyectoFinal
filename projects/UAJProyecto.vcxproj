@@ -33,7 +33,7 @@
     <ClCompile Include="..\dependencies\imgui\imgui_widgets.cpp" />
     <ClCompile Include="..\src\InputMapper.cpp" />
     <ClCompile Include="..\src\InputSimulator.cpp" />
-    <ClCompile Include="..\src\mainR.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
