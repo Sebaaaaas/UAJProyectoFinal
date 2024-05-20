@@ -609,6 +609,10 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	std::string buttonLabelSLC = "SELECT";
 	bool waitForInputSLC = false;
 
+	bool checkL = false;
+	bool checkR = false;
+
+
 	//Parte Mem.Compartida
 	std::array<int, 14>t;
 	int numElems = 14;
@@ -679,7 +683,6 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		ImGui::SetNextWindowPos(ImVec2(0.f, 0.f));
 		ImGui::SetNextWindowSize(ImVec2(windowWidth, windowHeight));
-
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 		//panel de botones
@@ -1158,10 +1161,54 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 			}
 		}
 
-		//resetear el color de los botones
-		ImGui::PopStyleColor(2); //esto es para quitar los push que se han hecho con PushStyleColor
+		//checkbox de los joysticks
+		 
+		ImGui::PushStyleColor(ImGuiCol_CheckMark, ImVec4(0.3f, 0.3f, 0.3f, 1.0f));
+		ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImVec4(0.7f, 0.7f, 0.7f, 1.0f));
+		ImGui::PushStyleColor(ImGuiCol_FrameBgActive, ImVec4(0.5f, 0.5f, 0.5f, 1.0f));
+		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+		ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+
+		//Left CheckBox 
+		ImGui::SetCursorPosX((windowWidth) * 0.35f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
+
+		if (ImGui::Checkbox("", &checkL)) {
+			if (checkL) {
+				// Código a ejecutar cuando la checkbox está marcada
+			}
+			else {
+				// Código a ejecutar cuando la checkbox no está marcada
+			}
+		}
+		
+		//Right CheckBox
+		ImGui::SetCursorPosX((windowWidth) * 0.58f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
+
+		if (ImGui::Checkbox("", &checkR)) {
+			if (checkR) {
+				// Código a ejecutar cuando la checkbox está marcada
+			}
+			else {
+				// Código a ejecutar cuando la checkbox no está marcada
+			}
+		}
+
+		//comentario de explicacion
+		ImGui::SetCursorPosX((windowWidth) * 0.4f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.95f); // Centrar verticalmente 
+		ImGui::Text("click ckeckbox to capture mouse movement");
+
+		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		ImVec2 windowSize = ImGui::GetWindowSize(); //windowSize.x *= 2; windowSize.y *= 2;
+
+		ImGui::PopStyleColor(7); //esto es para quitar los push que se han hecho con PushStyleColor
 
 		ImGui::End();
+
+
+		//ImGui::ShowDemoWindow();
 
 		//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
