@@ -43,17 +43,30 @@ void InputSimulator::update()
 	if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
 		simulateKey(mapper->getKey(DpadRight));
 	}
-	if (result == ERROR_SUCCESS) {
+	if (result == ERROR_SUCCESS && movRight) {
 		// Obtén los valores del joystick derecho
 		short thumbRX = state.Gamepad.sThumbRX;
 		short thumbRY = state.Gamepad.sThumbRY;
 
-		// Verifica si el joystick izquierdo se está moviendo
+		// Verifica si el joystick derecho se está moviendo
 		if (thumbRX != 0 || thumbRY != 0) {
 			// Llama a una función para simular el movimiento del ratón
 			simulateMouseMove(thumbRX, thumbRY);
 		}
 	}
+	if (result == ERROR_SUCCESS && movLeft) {
+		// Obtén los valores del joystick izquierdo
+		short thumbLX = state.Gamepad.sThumbLX;
+		short thumbLY = state.Gamepad.sThumbLY;
+
+		// Verifica si el joystick izquierdo se está moviendo
+		if (thumbLX != 0 || thumbLY != 0) {
+			// Llama a una función para simular el movimiento del ratón
+			simulateMouseMove(thumbLX, thumbLY);
+		}
+	}
+
+
 	if (result == ERROR_SUCCESS) {
 		// Obtén los valores del joystick izquierdo
 		short thumbLX = state.Gamepad.sThumbLX;
@@ -120,7 +133,7 @@ void InputSimulator::simulateKey(KeyboardKey key)
 	input.ki.wVk = key;
 	input.ki.dwFlags = 0;
 	SendInput(1, &input, sizeof(INPUT));
-	Sleep(100);
+	Sleep(50);
 	input.ki.dwFlags = KEYEVENTF_KEYUP;
 	SendInput(1, &input, sizeof(INPUT));
 }
@@ -158,4 +171,10 @@ void InputSimulator::simulateMouseMove(short deltaX, short deltaY)
 	SendInput(1, &input, sizeof(INPUT));
 }
 
+void InputSimulator::setLeftMovement(bool leftMov) {
+	movLeft = leftMov;
+}
 
+void InputSimulator::setRightMovement(bool rightMov) {
+	movRight = rightMov;
+}

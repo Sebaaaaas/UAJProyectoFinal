@@ -1063,9 +1063,11 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		if (ImGui::Checkbox("a", &checkL)) {
 			if (checkL) {
 				// Código a ejecutar cuando la checkbox está marcada
+				simulator->setLeftMovement(checkL);
 			}
 			else {
 				// Código a ejecutar cuando la checkbox no está marcada
+				simulator->setLeftMovement(checkL);
 			}
 		}
 		
@@ -1076,9 +1078,11 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		if (ImGui::Checkbox("b", &checkR)) {
 			if (checkR) {
 				// Código a ejecutar cuando la checkbox está marcada
+				simulator->setRightMovement(checkR);
 			}
 			else {
 				// Código a ejecutar cuando la checkbox no está marcada
+				simulator->setRightMovement(checkR);
 			}
 		}
 
