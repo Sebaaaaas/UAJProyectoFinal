@@ -1294,12 +1294,16 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImVec4(0.7f, 0.7f, 0.7f, 1.0f));
 		ImGui::PushStyleColor(ImGuiCol_FrameBgActive, ImVec4(0.5f, 0.5f, 0.5f, 1.0f));
 		ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
 
 		//Left CheckBox 
-		ImGui::SetCursorPosX((windowWidth) * 0.30f); // Centrar horizontalmente
+		ImGui::SetCursorPosX((windowWidth) * 0.23f); // Centrar horizontalmente
 		ImGui::SetCursorPosY((windowHeight) * 0.88f); // Centrar verticalmente 
 
-		if (ImGui::Checkbox("a", &checkL)) {
+		ImGui::Text("Left CheckBox");
+		ImGui::SameLine();
+
+		if (ImGui::Checkbox("##LeftCheckbox", &checkL)) {
 			if (checkL) {
 				// Código a ejecutar cuando la checkbox está marcada
 				simulator->setLeftMovement(checkL);
@@ -1311,10 +1315,14 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		}
 		
 		////Right CheckBox
-		ImGui::SetCursorPosX((windowWidth) * 0.53f); // Centrar horizontalmente
+		ImGui::SetCursorPosX((windowWidth) * 0.46f); // Centrar horizontalmente
 		ImGui::SetCursorPosY((windowHeight) * 0.88f); // Centrar verticalmente 
 
-		if (ImGui::Checkbox("b", &checkR)) {
+
+		ImGui::Text("Right CheckBox");
+		ImGui::SameLine();
+
+		if (ImGui::Checkbox("##RightCheckbox", &checkR)) {
 			if (checkR) {
 				// Código a ejecutar cuando la checkbox está marcada
 				simulator->setRightMovement(checkR);
@@ -1326,10 +1334,9 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		}
 
 		//comentario de explicacion
-		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
-		ImGui::SetCursorPosX((windowWidth) * 0.37f); // Centrar horizontalmente
+		ImGui::SetCursorPosX((windowWidth) * 0.3f); // Centrar horizontalmente
 		ImGui::SetCursorPosY((windowHeight) * 0.95f); // Centrar verticalmente 
-		ImGui::Text("click ckeckbox to capture mouse movement");
+		ImGui::Text("click one ckeckbox to capture mouse movement with joystick");
 
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		ImVec2 windowSize = ImGui::GetWindowSize(); //windowSize.x *= 2; windowSize.y *= 2;
