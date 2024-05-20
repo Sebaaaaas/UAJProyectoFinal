@@ -73,9 +73,9 @@ void simulateMouseMove(short deltaX, short deltaY) {
 }
 
 int main() {
-	Sleep(300);
+	Sleep(1000);
 	LPCWSTR name = L"SharedMemory";
-	const size_t numElems = 14;  // Número de enteros en el array
+	const size_t numElems = 16;  // Número de enteros en el array
 	const size_t size = numElems * sizeof(int);
 
 	// Abre un archivo de memoria compartida existente
@@ -194,6 +194,12 @@ int main() {
 				simulate(t[2]);
 		}
 
+		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_START)) { //Pulsar joystick derecho
+			simulate(t[15]);
+		}
+		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK)) { //Pulsar joystick derecho
+			simulate(t[14]);
+		}
 		
 
 		

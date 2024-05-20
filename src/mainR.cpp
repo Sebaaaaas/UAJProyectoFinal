@@ -614,8 +614,8 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 
 	//Parte Mem.Compartida
-	std::array<int, 14>t;
-	int numElems = 14;
+	std::array<int, 16>t;
+	int numElems = 16;
 	LPCWSTR name = L"SharedMemory"; 
 	const size_t size = numElems*sizeof(int);
 	// Intentar abrir un archivo de memoria compartida existente
