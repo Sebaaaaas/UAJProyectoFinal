@@ -414,7 +414,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		0, //cómo es el formato de la ventana que vamos a crear(encima de todo...)
 		wc.lpszClassName,
 		L"Control emulator",
-		WS_OVERLAPPEDWINDOW, 
+		WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX, 
 		CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
 		nullptr,
 		nullptr,
