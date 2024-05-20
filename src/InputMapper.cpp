@@ -1,5 +1,4 @@
 #include "InputMapper.h"
-#include <iostream>
 
 InputMapper::InputMapper()
 {
