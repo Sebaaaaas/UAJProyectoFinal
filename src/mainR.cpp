@@ -603,6 +603,12 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	std::string buttonLabelR = "RIGHT";
 	bool waitForInputR = false;
 
+	std::string buttonLabelSTR = "START";
+	bool waitForInputSTR = false;
+
+	std::string buttonLabelSLC = "SELECT";
+	bool waitForInputSLC = false;
+
 	//Parte Mem.Compartida
 	std::array<int, 14>t;
 	int numElems = 14;
@@ -750,7 +756,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		//boton RT
 		// Posicion del boton
-		ImGui::SetCursorPosX((windowWidth) * 0.9f); // Centrar horizontalmente
+		ImGui::SetCursorPosX((windowWidth) * 0.89f); // Centrar horizontalmente
 		ImGui::SetCursorPosY((windowHeight) * 0.15f); // Centrar verticalmente 
 
 		// boton input >>>>>>>>>>>>>>>>>
@@ -779,7 +785,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		//boton RB
 		// Posicion del boton
-		ImGui::SetCursorPosX((windowWidth) * 0.9f); // Centrar horizontalmente
+		ImGui::SetCursorPosX((windowWidth) * 0.89f); // Centrar horizontalmente
 		ImGui::SetCursorPosY((windowHeight) * 0.26f); // Centrar verticalmente 
 
 		// boton input >>>>>>>>>>>>>>>>>
@@ -982,8 +988,8 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		//boton UP
 		// Posicion del boton
-		ImGui::SetCursorPosX((windowWidth) * 0.5f); // Centrar horizontalmente
-		ImGui::SetCursorPosY((windowHeight) * 0.86f); // Centrar verticalmente 
+		ImGui::SetCursorPosX((windowWidth) * 0.1f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.55f); // Centrar verticalmente 
 
 		// boton input >>>>>>>>>>>>>>>>>
 		if (ImGui::Button((buttonLabelU.c_str()))) {
@@ -1011,8 +1017,8 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		//boton DOWN
 		// Posicion del boton
-		ImGui::SetCursorPosX((windowWidth) * 0.5); // Centrar horizontalmente
-		ImGui::SetCursorPosY((windowHeight) * 0.90f); // Centrar verticalmente 
+		ImGui::SetCursorPosX((windowWidth) * 0.1f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.65f); // Centrar verticalmente 
 
 		// boton input >>>>>>>>>>>>>>>>>
 		if (ImGui::Button((buttonLabelD.c_str()))) {
@@ -1040,8 +1046,8 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		//boton LEFT
 		// Posicion del boton
-		ImGui::SetCursorPosX((windowWidth) * 0.5f); // Centrar horizontalmente
-		ImGui::SetCursorPosY((windowHeight) * 0.94f); // Centrar verticalmente 
+		ImGui::SetCursorPosX((windowWidth) * 0.1f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.60f); // Centrar verticalmente 
 
 		// boton input >>>>>>>>>>>>>>>>>
 		if (ImGui::Button((buttonLabelL.c_str()))) {
@@ -1069,8 +1075,8 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		//boton RIGHT
 		// Posicion del boton
-		ImGui::SetCursorPosX((windowWidth) * 0.5f); // Centrar horizontalmente
-		ImGui::SetCursorPosY((windowHeight) * 0.98f); // Centrar verticalmente 
+		ImGui::SetCursorPosX((windowWidth) * 0.1f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.70f); // Centrar verticalmente 
 
 		// boton input >>>>>>>>>>>>>>>>>
 		if (ImGui::Button((buttonLabelR.c_str()))) {
@@ -1088,6 +1094,63 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputR = false;
 					buttonLabelR = std::string(ImGui::GetKeyName(detectedKey));
+					int si = ConversorInput(key);
+					t[13] = si;
+					memcpy(pBuf, &t, size);
+					break;
+				}
+			}
+		}
+
+		//boton SELECT
+		// Posicion del boton
+		ImGui::SetCursorPosX((windowWidth) * 0.4f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.1f); // Centrar verticalmente 
+
+		// boton input >>>>>>>>>>>>>>>>>
+		if (ImGui::Button((buttonLabelSLC.c_str()))) {
+			// Activar la espera del siguiente input
+			waitForInputSLC = true;
+			detectedKey = ImGuiKey_None;
+			buttonLabelSLC = "Press any key...";
+		}
+
+		// Mostrar el texto y detectar el siguiente input si est� esperando
+		if (waitForInputSLC) {
+			// Detectar el input del teclado
+			for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
+				if (ImGui::IsKeyDown(key)) {
+					detectedKey = key;
+					waitForInputSLC = false;
+					buttonLabelSLC = std::string(ImGui::GetKeyName(detectedKey));
+					int si = ConversorInput(key);
+					t[12] = si;
+					memcpy(pBuf, &t, size);
+					break;
+				}
+			}
+		}
+		//boton START
+		// Posicion del boton
+		ImGui::SetCursorPosX((windowWidth) * 0.58f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.1f); // Centrar verticalmente 
+
+		// boton input >>>>>>>>>>>>>>>>>
+		if (ImGui::Button((buttonLabelSTR.c_str()))) {
+			// Activar la espera del siguiente input
+			waitForInputSTR = true;
+			detectedKey = ImGuiKey_None;
+			buttonLabelSTR = "Press any key...";
+		}
+
+		// Mostrar el texto y detectar el siguiente input si est� esperando
+		if (waitForInputSTR) {
+			// Detectar el input del teclado
+			for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
+				if (ImGui::IsKeyDown(key)) {
+					detectedKey = key;
+					waitForInputSTR = false;
+					buttonLabelSTR = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
 					t[13] = si;
 					memcpy(pBuf, &t, size);
