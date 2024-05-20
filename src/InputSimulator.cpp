@@ -87,6 +87,28 @@ void InputSimulator::update()
 			simulateKey(mapper->getKey(LeftJoystickDown));
 		}
 	}
+
+	if (result == ERROR_SUCCESS) {
+		// Obtén los valores del joystick izquierdo
+		short thumbRX = state.Gamepad.sThumbRX;
+		short thumbRY = state.Gamepad.sThumbRY;
+
+		// Verifica si el joystick izquierdo se está moviendo
+		if (thumbRX > 0) {
+			// Llama a una función para simular el movimiento del ratón
+			simulateKey(mapper->getKey(RightJoystickRight));
+		}
+		else if (thumbRX < 0) {
+			simulateKey(mapper->getKey(RightJoystickLeft));
+		}
+		if (thumbRY > 0) {
+			simulateKey(mapper->getKey(RightJoystickUp));
+		}
+		else if (thumbRY < 0) {
+			simulateKey(mapper->getKey(RightJoystickDown));
+		}
+	}
+
 	if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER)) { //Pulsar LB 
 		simulateKey(mapper->getKey(LB));
 	}
