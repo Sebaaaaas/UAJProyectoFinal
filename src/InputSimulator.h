@@ -12,7 +12,7 @@ public:
 	void setMapper(InputMapper* mapper);
 private:
 	void simulateKey(KeyboardKey key);
-	void simulateMouseKey(KeyboardKey key);
+	bool simulateMouseKey(KeyboardKey key);
 	void simulateMouseMove(short deltaX, short deltaY);
 
 	InputMapper* mapper;

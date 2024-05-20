@@ -108,7 +108,6 @@ void InputSimulator::update()
 	else {
 		//simulate(VK_SPACE);
 	}
-	Sleep(20);
 }
 
 void InputSimulator::setMapper(InputMapper* mapper)
@@ -119,6 +118,8 @@ void InputSimulator::setMapper(InputMapper* mapper)
 void InputSimulator::simulateKey(KeyboardKey key)
 {
 	if (key == NONE)return;
+
+	if (simulateMouseKey(key))return;
 
 	INPUT input;
 	ZeroMemory(&input, sizeof(INPUT));
@@ -131,9 +132,9 @@ void InputSimulator::simulateKey(KeyboardKey key)
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void InputSimulator::simulateMouseKey(KeyboardKey key)
+bool InputSimulator::simulateMouseKey(KeyboardKey key)
 {
-	if (key == NONE || (key != KEY_MLCLICK && key != KEY_MRCLICK && key != KEY_MMIDDLEBUTTON))return;
+	if (key == NONE || (key != KEY_MLCLICK && key != KEY_MRCLICK && key != KEY_MMIDDLEBUTTON))return false;
 
 	INPUT input;
 	ZeroMemory(&input, sizeof(INPUT));
@@ -150,6 +151,7 @@ void InputSimulator::simulateMouseKey(KeyboardKey key)
 	else input.mi.dwFlags = MOUSEEVENTF_MIDDLEUP; // Suelta el botón central del ratón
 
 	SendInput(1, &input, sizeof(INPUT));
+	return true;
 }
 
 void InputSimulator::simulateMouseMove(short deltaX, short deltaY)

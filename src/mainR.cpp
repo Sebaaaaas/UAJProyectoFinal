@@ -1114,6 +1114,8 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		// Llamamos al update del simulador para que simule las teclas que sean necesarias
 		simulator->update();
+
+		Sleep(20);
 	}
 	
 	// Limpieza
