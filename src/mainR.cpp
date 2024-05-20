@@ -1060,27 +1060,27 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		ImGui::SetCursorPosX((windowWidth) * 0.35f); // Centrar horizontalmente
 		ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
 
-		//if (ImGui::Checkbox("", &checkL)) {
-		//	if (checkL) {
-		//		// Código a ejecutar cuando la checkbox está marcada
-		//	}
-		//	else {
-		//		// Código a ejecutar cuando la checkbox no está marcada
-		//	}
-		//}
-		//
+		if (ImGui::Checkbox("a", &checkL)) {
+			if (checkL) {
+				// Código a ejecutar cuando la checkbox está marcada
+			}
+			else {
+				// Código a ejecutar cuando la checkbox no está marcada
+			}
+		}
+		
 		////Right CheckBox
-		//ImGui::SetCursorPosX((windowWidth) * 0.58f); // Centrar horizontalmente
-		//ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
+		ImGui::SetCursorPosX((windowWidth) * 0.58f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
 
-		//if (ImGui::Checkbox(" ", &checkR)) {
-		//	if (checkR) {
-		//		// Código a ejecutar cuando la checkbox está marcada
-		//	}
-		//	else {
-		//		// Código a ejecutar cuando la checkbox no está marcada
-		//	}
-		//}
+		if (ImGui::Checkbox("b", &checkR)) {
+			if (checkR) {
+				// Código a ejecutar cuando la checkbox está marcada
+			}
+			else {
+				// Código a ejecutar cuando la checkbox no está marcada
+			}
+		}
 
 		//comentario de explicacion
 		ImGui::SetCursorPosX((windowWidth) * 0.4f); // Centrar horizontalmente
