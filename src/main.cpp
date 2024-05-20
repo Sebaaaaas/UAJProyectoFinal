@@ -2,8 +2,53 @@
 #include <Windows.h>
 #include <xinput.h>
 #include "InputMapper.h"
+
+
+void simulateMouseLeftClick() {
+	INPUT input;
+	ZeroMemory(&input, sizeof(INPUT));
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN; // Presiona el botón izquierdo del ratón
+	SendInput(1, &input, sizeof(INPUT));
+	//Sleep(50); // Espera un breve momento antes de soltar el botón
+	input.mi.dwFlags = MOUSEEVENTF_LEFTUP; // Suelta el botón izquierdo del ratón
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void simulateMouseRightClick() {
+	INPUT input;
+	ZeroMemory(&input, sizeof(INPUT));
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN; // Presiona el botón derecho del ratón
+	SendInput(1, &input, sizeof(INPUT));
+	//Sleep(50); // Espera un breve momento antes de soltar el botón
+	input.mi.dwFlags = MOUSEEVENTF_RIGHTUP; // Suelta el botón derecho del ratón
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void simulateMouseMiddleClick() {
+	INPUT input;
+	ZeroMemory(&input, sizeof(INPUT));
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_MIDDLEDOWN; // Presiona el botón central del ratón
+	SendInput(1, &input, sizeof(INPUT));
+	//Sleep(50); // Espera un breve momento antes de soltar el botón
+	input.mi.dwFlags = MOUSEEVENTF_MIDDLEUP; // Suelta el botón central del ratón
+	SendInput(1, &input, sizeof(INPUT));
+}
+
 void simulate(WORD virtualKey) {
-	
+	if (virtualKey == 1) {
+		simulateMouseLeftClick();
+	}
+	else if (virtualKey == 2) {
+		simulateMouseRightClick();
+	}
+	else if (virtualKey == 3) {
+		simulateMouseMiddleClick();
+	}
+	else {
+
 		INPUT input;
 		ZeroMemory(&input, sizeof(INPUT));
 		input.type = INPUT_KEYBOARD;
@@ -14,19 +59,9 @@ void simulate(WORD virtualKey) {
 		Sleep(100);
 		input.ki.dwFlags = KEYEVENTF_KEYUP;
 		SendInput(1, &input, sizeof(INPUT));
-	
+	}
 }
 
-void simulateMouseClick() {
-	INPUT input;
-	ZeroMemory(&input, sizeof(INPUT));
-	input.type = INPUT_MOUSE;
-	input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN; // Presiona el botón izquierdo del ratón
-	SendInput(1, &input, sizeof(INPUT));
-	//Sleep(50); // Espera un breve momento antes de soltar el botón
-	input.mi.dwFlags = MOUSEEVENTF_LEFTUP; // Suelta el botón izquierdo del ratón
-	SendInput(1, &input, sizeof(INPUT));
-}
 void simulateMouseMove(short deltaX, short deltaY) {
 	INPUT input;
 	ZeroMemory(&input, sizeof(INPUT));
