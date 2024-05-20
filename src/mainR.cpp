@@ -1124,7 +1124,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputSLC = false;
 					buttonLabelSLC = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[12] = si;
+					t[14] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
@@ -1152,7 +1152,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputSTR = false;
 					buttonLabelSTR = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[13] = si;
+					t[15] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
