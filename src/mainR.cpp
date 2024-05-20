@@ -604,8 +604,8 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	bool waitForInputR = false;
 
 	//Parte Mem.Compartida
-	std::array<int, 1>t;
-	int numElems = 1;
+	std::array<int, 14>t;
+	int numElems = 14;
 	LPCWSTR name = L"SharedMemory"; 
 	const size_t size = numElems*sizeof(int);
 	// Intentar abrir un archivo de memoria compartida existente
@@ -741,7 +741,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputLB = false;
 					buttonLabelLB = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[0] = si;
+					t[1] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
@@ -770,7 +770,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputRT = false;
 					buttonLabelRT = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[0] = si;
+					t[2] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
@@ -799,7 +799,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputRB = false;
 					buttonLabelRB = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[0] = si;
+					t[3] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
@@ -828,7 +828,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputY = false;
 					buttonLabelY = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[0] = si;
+					t[4] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
@@ -857,7 +857,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputX = false;
 					buttonLabelX = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[0] = si;
+					t[5] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
@@ -886,7 +886,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputA = false;
 					buttonLabelA = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[0] = si;
+					t[6] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
@@ -915,7 +915,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputB = false;
 					buttonLabelB = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[0] = si;
+					t[7] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
@@ -944,7 +944,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputRS = false;
 					buttonLabelRS = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[0] = si;
+					t[8] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
@@ -973,7 +973,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputLS = false;
 					buttonLabelLS = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[0] = si;
+					t[9] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
@@ -1002,7 +1002,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputU = false;
 					buttonLabelU = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[0] = si;
+					t[10] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
@@ -1031,7 +1031,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputD = false;
 					buttonLabelD = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[0] = si;
+					t[11] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
@@ -1060,7 +1060,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputL = false;
 					buttonLabelL = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[0] = si;
+					t[12] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}
@@ -1089,7 +1089,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputR = false;
 					buttonLabelR = std::string(ImGui::GetKeyName(detectedKey));
 					int si = ConversorInput(key);
-					t[0] = si;
+					t[13] = si;
 					memcpy(pBuf, &t, size);
 					break;
 				}

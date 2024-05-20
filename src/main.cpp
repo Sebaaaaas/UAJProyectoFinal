@@ -40,7 +40,7 @@ void simulateMouseMove(short deltaX, short deltaY) {
 int main() {
 	Sleep(300);
 	LPCWSTR name = L"SharedMemory";
-	const size_t numElems = 1;  // Número de enteros en el array
+	const size_t numElems = 14;  // Número de enteros en el array
 	const size_t size = numElems * sizeof(int);
 
 	// Abre un archivo de memoria compartida existente
@@ -81,30 +81,31 @@ int main() {
 		ZeroMemory(&state, sizeof(XINPUT_STATE));
 		DWORD result = XInputGetState(0, &state);
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y)) {
-			simulateMouseClick();
+			//simulateMouseClick();
+			simulate(t[4]);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_X)) {
 			std::cout << "X" << std::endl;
 			std::cout << "Esta tecla esta cambiada en el interfaz: " + t[0];
-			simulate(t[0]);
+			simulate(t[5]);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)) {
-			simulate(0x44);
+			simulate(t[7]);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_A)) {
-			simulate(0x57);
+			simulate(t[6]);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP)) {
-			simulate(0x57);
+			simulate(t[10]);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN)) {
-			simulate(0x53);
+			simulate(t[11]);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)) {
-			simulate(0x41);
+			simulate(t[12]);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
-			simulate(0x44);
+			simulate(t[13]);
 		}
 		if (result == ERROR_SUCCESS) {
 			// Obtén los valores del joystick derecho
@@ -138,24 +139,24 @@ int main() {
 			}
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER)) { //Pulsar LB 
-			simulate(0x45);
+			simulate(t[1]);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB)) { //Pulsar joystick izquierdo
-			simulate(0x41);
+			simulate(t[9]);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER)) { //Pulsar RB 
-			simulate(0x09);
+			simulate(t[3]);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB)) { //Pulsar joystick derecho
-			simulate(0x41);
+			simulate(t[8]);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.bLeftTrigger)) { //Pulsar LT 
 			if(state.Gamepad.bLeftTrigger > 75)
-				simulate(0x45);
+				simulate(t[0]);
 		}
 		if (result == ERROR_SUCCESS && (state.Gamepad.bRightTrigger)) { //Pulsar RT
 			if (state.Gamepad.bRightTrigger > 75)
-				simulate(0x09);
+				simulate(t[2]);
 		}
 
 		
