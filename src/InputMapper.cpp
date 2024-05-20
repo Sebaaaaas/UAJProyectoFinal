@@ -61,9 +61,9 @@ void InputMapper::setButton(ControllerLayout button, KeyboardKey key)
 		contrSettings->leftJoystick_up = key;
 		usedKeys.push_back({ key,LeftJoystickUp });
 		break;
-	case LetfJoystickDown:
+	case LeftJoystickDown:
 		contrSettings->leftJoystick_down = key;
-		usedKeys.push_back({ key,LetfJoystickDown });
+		usedKeys.push_back({ key,LeftJoystickDown });
 		break;
 	case RightJoystickLeft:
 		contrSettings->rightJoystick_left = key;
@@ -156,7 +156,7 @@ void InputMapper::resetButton(ControllerLayout button)
 	case LeftJoystickUp:
 		contrSettings->leftJoystick_up = NONE;
 		break;
-	case LetfJoystickDown:
+	case LeftJoystickDown:
 		contrSettings->leftJoystick_down = NONE;
 		break;
 	case RightJoystickLeft:
@@ -198,6 +198,89 @@ void InputMapper::resetButton(ControllerLayout button)
 	default:
 		break;
 	}
+}
+
+KeyboardKey InputMapper::getKey(ControllerLayout button)
+{
+	if (contrSettings == nullptr)return NONE;
+	switch (button)
+	{
+	case ButtonA:
+		return contrSettings->buttonA;
+		break;
+	case ButtonB:
+		return contrSettings->buttonB;
+		break;
+	case ButtonX:
+		return contrSettings->buttonX;
+		break;
+	case ButtonY:
+		return contrSettings->buttonY;
+		break;
+	case DpadUp:
+		return contrSettings->dpadUp;
+		break;
+	case DpadDown:
+		return contrSettings->dpadDown;
+		break;
+	case DpadRight:
+		return contrSettings->dpadRight;
+		break;
+	case DpadLeft:
+		return contrSettings->dpadLeft;
+		break;
+	case LeftJoystickLeft:
+		return contrSettings->leftJoystick_left;
+		break;
+	case LeftJoystickRight:
+		return contrSettings->leftJoystick_right;
+		break;
+	case LeftJoystickUp:
+		return contrSettings->leftJoystick_up;
+		break;
+	case LeftJoystickDown:
+		return contrSettings->leftJoystick_down;
+		break;
+	case RightJoystickLeft:
+		return contrSettings->rightJoystick_left;
+		break;
+	case RightJoystickRight:
+		return contrSettings->rightJoystick_right;
+		break;
+	case RightJoystickUp:
+		return contrSettings->rightJoystick_up;
+		break;
+	case RightJoystickDown:
+		return contrSettings->rightJoystick_down;
+		break;
+	case LeftJoystickButton:
+		return contrSettings->leftJoystickButton;
+		break;
+	case RightJoystickButton:
+		return contrSettings->rightJoystickButton;
+		break;
+	case LB:
+		return contrSettings->LB;
+		break;
+	case RB:
+		return contrSettings->RB;
+		break;
+	case LT:
+		return contrSettings->LT;
+		break;
+	case RT:
+		return contrSettings->RT;
+		break;
+	case ViewButton:
+		return contrSettings->viewButton;
+		break;
+	case MenuButton:
+		return contrSettings->menuButton;
+		break;
+	default:
+		break;
+	}
+	return NONE;
 }
 
 void InputMapper::checkKeyIsFree(KeyboardKey key)

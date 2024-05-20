@@ -14,7 +14,7 @@ enum ControllerLayout {
 	// Inclinar hacia arriba el joystick izquierdo
 	LeftJoystickUp, 
 	// Inclinar hacia abajo el joystick izquierdo
-	LetfJoystickDown,
+	LeftJoystickDown,
 	// Inclinar a la izquierda el joystick derecho
 	RightJoystickLeft,
 	// Inclinar a la derecha el joystick derecho
@@ -79,6 +79,7 @@ public:
 	~InputMapper();
 	void setButton(ControllerLayout button, KeyboardKey key);
 	void resetButton(ControllerLayout button);
+	KeyboardKey getKey(ControllerLayout button);
 private:
 	ControllerSettings* contrSettings;
 	std::vector<std::pair<KeyboardKey, ControllerLayout>>usedKeys;

@@ -19,6 +19,9 @@
     <ClInclude Include="..\dependencies\imgui\imstb_rectpack.h" />
     <ClInclude Include="..\dependencies\imgui\imstb_textedit.h" />
     <ClInclude Include="..\dependencies\imgui\imstb_truetype.h" />
+    <ClInclude Include="..\src\DefInput.h" />
+    <ClInclude Include="..\src\InputMapper.h" />
+    <ClInclude Include="..\src\InputSimulator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\dependencies\imgui\imgui.cpp" />
@@ -28,6 +31,8 @@
     <ClCompile Include="..\dependencies\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\dependencies\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\dependencies\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\src\InputMapper.cpp" />
+    <ClCompile Include="..\src\InputSimulator.cpp" />
     <ClCompile Include="..\src\mainR.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

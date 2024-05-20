@@ -23,6 +23,8 @@
     <ClCompile Include="..\dependencies\imgui\imgui_widgets.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\InputMapper.cpp" />
+    <ClCompile Include="..\src\InputSimulator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\dependencies\imgui\imconfig.h">
@@ -49,6 +51,9 @@
     <ClInclude Include="..\dependencies\imgui\imstb_truetype.h">
       <Filter>Imgui</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\DefInput.h" />
+    <ClInclude Include="..\src\InputMapper.h" />
+    <ClInclude Include="..\src\InputSimulator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Imgui">

@@ -11,6 +11,9 @@
 #include <vector>
 #include <iostream>
 #include <array>
+#include "DefInput.h"
+#include "InputMapper.h"
+#include "InputSimulator.h"
 
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -114,331 +117,283 @@ bool LoadTextureFromFile(const wchar_t* filename, ID3D11Device* device, ID3D11De
 	return true;
 }
 
-int ConversorInput(ImGuiKey key) {
+KeyboardKey convertInput(ImGuiKey key) {
 
 	switch (key) {
 	case ImGuiKey_Space:
-		return 0x20;
+		return KEY_SPACE;
 		break;
 
 	case ImGuiKey_LeftArrow:
-		return 0x25;
+		return KEY_LEFTARROW;
 		break;
 
 	case ImGuiKey_UpArrow:
-		return 0x26;
+		return KEY_UPARROW;
 		break;
 
 	case ImGuiKey_RightArrow:
-		return 0x27;
+		return KEY_RIGHTARROW;
 		break;
 
 	case ImGuiKey_DownArrow:
-		return 0x28;
+		return KEY_DOWNARROW;
 		break;
 
 	case ImGuiKey_0:
-		return 0x30;
+		return KEY_0;
 		break;
 
 	case ImGuiKey_1:
-		return 0x31;
+		return KEY_1;
 		break;
 
 	case ImGuiKey_2:
-		return 0x32;
+		return KEY_2;
 		break;
 
 	case ImGuiKey_3:
-		return 0x33;
+		return KEY_3;
 		break;
 
 	case ImGuiKey_4:
-		return 0x34;
+		return KEY_4;
 		break;
 
 	case ImGuiKey_5:
-		return 0x35;
+		return KEY_5;
 		break;
 
 	case ImGuiKey_6:
-		return 0x36;
+		return KEY_6;
 		break;
 
 	case ImGuiKey_7:
-		return 0x37;
+		return KEY_7;
 		break;
 
 	case ImGuiKey_8:
-		return 0x38;
+		return KEY_8;
 		break;
 
 	case ImGuiKey_9:
-		return 0x39;
+		return KEY_9;
 		break;
 
 	case ImGuiKey_A:
-		return 0x41;
+		return KEY_A;
 		break;
 
 	case ImGuiKey_B:
-		return 0x42;
+		return KEY_B;
 		break;
 
 	case ImGuiKey_C:
-		return 0x43;
+		return KEY_C;
 		break;
 
 	case ImGuiKey_D:
-		return 0x44;
+		return KEY_D;
 		break;
 
 	case ImGuiKey_E:
-		return 0x45;
+		return KEY_E;
 		break;
 
 	case ImGuiKey_F:
-		return 0x46;
+		return KEY_F;
 		break;
 
 	case ImGuiKey_G:
-		return 0x47;
+		return KEY_G;
 		break;
 
 	case ImGuiKey_H:
-		return 0x48;
+		return KEY_H;
 		break;
 
 	case ImGuiKey_I:
-		return 0x49;
+		return KEY_I;
 		break;
 
 	case ImGuiKey_J:
-		return 0x4A;
+		return KEY_J;
 		break;
 
 	case ImGuiKey_K:
-		return 0x4B;
+		return KEY_K;
 		break;
 
 	case ImGuiKey_L:
-		return 0x4C;
+		return KEY_L;
 		break;
 
 	case ImGuiKey_M:
-		return 0x4D;
+		return KEY_M;
 		break;
 
 	case ImGuiKey_N:
-		return 0x4E;
+		return KEY_N;
 		break;
 
 	case ImGuiKey_O:
-		return 0x4F;
+		return KEY_O;
 		break;
 
 	case ImGuiKey_P:
-		return 0x50;
+		return KEY_P;
 		break;
 
 	case ImGuiKey_Q:
-		return 0x51;
+		return KEY_Q;
 		break;
 
 	case ImGuiKey_R:
-		return 0x52;
+		return KEY_R;
 		break;
 
 	case ImGuiKey_S:
-		return 0x53;
+		return KEY_S;
 		break;
 
 	case ImGuiKey_T:
-		return 0x54;
+		return KEY_T;
 		break;
 
 	case ImGuiKey_U:
-		return 0x55;
+		return KEY_U;
 		break;
 
 	case ImGuiKey_V:
-		return 0x56;
+		return KEY_V;
 		break;
 
 	case ImGuiKey_W:
-		return 0x57;
+		return KEY_W;
 		break;
 
 	case ImGuiKey_X:
-		return 0x58;
+		return KEY_X;
 		break;
 
 	case ImGuiKey_Y:
-		return 0x59;
+		return KEY_Y;
 		break;
 
 	case ImGuiKey_Z:
-		return 0x5A;
+		return KEY_Z;
 		break;
 
 	case ImGuiKey_F1:
-		return 0x70;
+		return KEY_F1;
 		break;
 
 	case ImGuiKey_F2:
-		return 0x71;
+		return KEY_F2;
 		break;
 
 	case ImGuiKey_F3:
-		return 0x72;
+		return KEY_F3;
 		break;
 
 	case ImGuiKey_F4:
-		return 0x73;
+		return KEY_F4;
 		break;
 
 	case ImGuiKey_F5:
-		return 0x74;
+		return KEY_F5;
 		break;
 
 	case ImGuiKey_F6:
-		return 0x75;
+		return KEY_F6;
 		break;
 
 	case ImGuiKey_F7:
-		return 0x76;
+		return KEY_F7;
 		break;
 
 	case ImGuiKey_F8:
-		return 0x77;
+		return KEY_F8;
 		break;
 
 	case ImGuiKey_F9:
-		return 0x78;
+		return KEY_F9;
 		break;
 
 	case ImGuiKey_F10:
-		return 0x79;
+		return KEY_F10;
 		break;
 
 	case ImGuiKey_F11:
-		return 0x7A;
+		return KEY_F11;
 		break;
 
 	case ImGuiKey_F12:
-		return 0x7B;
-		break;
-
-	case ImGuiKey_F13:
-		return 0x7C;
-		break;
-
-	case ImGuiKey_F14:
-		return 0x7D;
-		break;
-
-	case ImGuiKey_F15:
-		return 0x7E;
-		break;
-
-	case ImGuiKey_F16:
-		return 0x7F;
-		break;
-
-	case ImGuiKey_F17:
-		return 0x80;
-		break;
-
-	case ImGuiKey_F18:
-		return 0x81;
-		break;
-
-	case ImGuiKey_F19:
-		return 0x82;
-		break;
-
-	case ImGuiKey_F20:
-		return 0x83;
-		break;
-
-	case ImGuiKey_F21:
-		return 0x84;
-		break;
-
-	case ImGuiKey_F22:
-		return 0x85;
-		break;
-
-	case ImGuiKey_F23:
-		return 0x86;
-		break;
-
-	case ImGuiKey_F24:
-		return 0x87;
+		return KEY_F12;
 		break;
 
 	case ImGuiKey_LeftShift:
-		return 0x10;
+		return KEY_SHIFT;
 		break;
 
 	case ImGuiKey_RightShift:
-		return 0x10;
+		return KEY_RSHIFT;
 		break;
 
 	case ImGuiKey_LeftCtrl:
-		return 0x11;
+		return KEY_CONTROL;
 		break;
 
 	case ImGuiKey_RightCtrl:
-		return 0x11;
+		return KEY_RCONTROL;
 		break;
 
 	case ImGuiKey_LeftAlt:
-		return 0x12;
+		return KEY_ALT;
 		break;
 
 	case ImGuiKey_Tab:
-		return 0x09;
+		return KEY_TAB;
 		break;
 
 	case ImGuiKey_Enter:
-		return 0x0D;
+		return KEY_ENTER;
 		break;
 
 	case ImGuiKey_Backspace:
-		return 0x08;
+		return KEY_BACKSPACE;
 		break;
 
 	case ImGuiKey_MouseLeft:
-		return 1;
+		return KEY_MLCLICK;
 		break;
 
 	case ImGuiKey_MouseRight:
-		return 2;
+		return KEY_MRCLICK;
 		break;
 
 	case ImGuiKey_MouseMiddle:
-		return 3;
+		return KEY_MMIDDLEBUTTON;
 		break;
 
 	case ImGuiKey_Equal:  //es el +
-		return 0xBB;
+		return KEY_PLUS;
 		break;
 
 	case ImGuiKey_Minus:
-		return 0xBD;
+		return KEY_MINUS;
 		break;
 
 	case ImGuiKey_Period:
-		return 0xBE;
+		return KEY_PERIOD;
 		break;
 
 	case ImGuiKey_Comma:
-		return 0xBC;
+		return KEY_COMMA;
 		break;
 
 	default:
-		return 0;
+		return NONE;
 	}
 
 }
@@ -613,47 +568,11 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	bool checkR = false;
 
 
-	//Parte Mem.Compartida
-	std::array<int, 16>t;
-	int numElems = 16;
-	LPCWSTR name = L"SharedMemory"; 
-	const size_t size = numElems*sizeof(int);
-	// Intentar abrir un archivo de memoria compartida existente
-	HANDLE hMapFile = OpenFileMapping(
-		FILE_MAP_ALL_ACCESS,   // Permisos de lectura y escritura
-		FALSE,                 // Manejo no heredable
-		name);                 // Nombre del archivo de memoria compartida
- 
-	if (hMapFile == NULL) {
-		// Crear un archivo de memoria compartida
-		hMapFile = CreateFileMappingW(
-			INVALID_HANDLE_VALUE,    // Usa la memoria de paginación del sistema
-			NULL,                    // Seguridad por defecto
-			PAGE_READWRITE,          // Permisos de lectura y escritura
-			0,                       // Tamaño máximo de archivo (parte alta de 32 bits)
-			size,                    // Tamaño máximo de archivo (parte baja de 32 bits)
-			name);                   // Nombre del archivo de memoria compartida
 
-		if (hMapFile == NULL) {
-			std::cerr << "Could not create file mapping object (" << GetLastError() << ").\n";
-			return 1;
-		}
-	}
-	
-	// Mapear una vista del archivo de memoria compartida
-	LPVOID pBuf = MapViewOfFile(
-		hMapFile,                // Manejador del archivo de memoria compartida
-		FILE_MAP_ALL_ACCESS,     // Permisos de lectura y escritura
-		0,
-		0,
-		size);
-
-	if (pBuf == NULL) {
-		std::cerr << "Could not map view of file (" << GetLastError() << ").\n";
-		CloseHandle(hMapFile);
-		return 1;
-	}
-
+	// Creacion de simulador y mapeador
+	InputMapper* mapper = new InputMapper();
+	InputSimulator* simulator = new InputSimulator();
+	simulator->setMapper(mapper);
 
 	bool running = true;
 	while (running) {
@@ -719,9 +638,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputLT = false;
 					buttonLabelLT = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[0] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(LT, convertInput(key));
 					break;
 				}
 			}
@@ -748,9 +665,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputLB = false;
 					buttonLabelLB = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[1] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(LB, convertInput(key));
 					break;
 				}
 			}
@@ -777,9 +692,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputRT = false;
 					buttonLabelRT = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[2] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(RT, convertInput(key));
 					break;
 				}
 			}
@@ -806,9 +719,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputRB = false;
 					buttonLabelRB = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[3] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(RB, convertInput(key));
 					break;
 				}
 			}
@@ -835,9 +746,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputY = false;
 					buttonLabelY = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[4] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(ButtonY, convertInput(key));
 					break;
 				}
 			}
@@ -864,9 +773,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputX = false;
 					buttonLabelX = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[5] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(ButtonX, convertInput(key));
 					break;
 				}
 			}
@@ -893,9 +800,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputA = false;
 					buttonLabelA = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[6] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(ButtonA, convertInput(key));
 					break;
 				}
 			}
@@ -922,9 +827,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputB = false;
 					buttonLabelB = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[7] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(ButtonB, convertInput(key));
 					break;
 				}
 			}
@@ -951,9 +854,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputRS = false;
 					buttonLabelRS = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[8] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(RightJoystickButton, convertInput(key));
 					break;
 				}
 			}
@@ -980,9 +881,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputLS = false;
 					buttonLabelLS = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[9] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(LeftJoystickButton, convertInput(key));
 					break;
 				}
 			}
@@ -1009,9 +908,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputU = false;
 					buttonLabelU = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[10] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(DpadUp, convertInput(key));
 					break;
 				}
 			}
@@ -1038,9 +935,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputD = false;
 					buttonLabelD = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[11] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(DpadDown, convertInput(key));
 					break;
 				}
 			}
@@ -1067,9 +962,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputL = false;
 					buttonLabelL = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[12] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(DpadLeft, convertInput(key));
 					break;
 				}
 			}
@@ -1096,9 +989,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputR = false;
 					buttonLabelR = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[13] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(DpadRight, convertInput(key));
 					break;
 				}
 			}
@@ -1125,9 +1016,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputSLC = false;
 					buttonLabelSLC = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[14] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(ViewButton, convertInput(key));
 					break;
 				}
 			}
@@ -1153,9 +1042,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputSTR = false;
 					buttonLabelSTR = std::string(ImGui::GetKeyName(detectedKey));
-					int si = ConversorInput(key);
-					t[15] = si;
-					memcpy(pBuf, &t, size);
+					mapper->setButton(MenuButton, convertInput(key));
 					break;
 				}
 			}
@@ -1173,27 +1060,27 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		ImGui::SetCursorPosX((windowWidth) * 0.35f); // Centrar horizontalmente
 		ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
 
-		if (ImGui::Checkbox("", &checkL)) {
-			if (checkL) {
-				// Código a ejecutar cuando la checkbox está marcada
-			}
-			else {
-				// Código a ejecutar cuando la checkbox no está marcada
-			}
-		}
-		
-		//Right CheckBox
-		ImGui::SetCursorPosX((windowWidth) * 0.58f); // Centrar horizontalmente
-		ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
+		//if (ImGui::Checkbox("", &checkL)) {
+		//	if (checkL) {
+		//		// Código a ejecutar cuando la checkbox está marcada
+		//	}
+		//	else {
+		//		// Código a ejecutar cuando la checkbox no está marcada
+		//	}
+		//}
+		//
+		////Right CheckBox
+		//ImGui::SetCursorPosX((windowWidth) * 0.58f); // Centrar horizontalmente
+		//ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
 
-		if (ImGui::Checkbox(" ", &checkR)) {
-			if (checkR) {
-				// Código a ejecutar cuando la checkbox está marcada
-			}
-			else {
-				// Código a ejecutar cuando la checkbox no está marcada
-			}
-		}
+		//if (ImGui::Checkbox(" ", &checkR)) {
+		//	if (checkR) {
+		//		// Código a ejecutar cuando la checkbox está marcada
+		//	}
+		//	else {
+		//		// Código a ejecutar cuando la checkbox no está marcada
+		//	}
+		//}
 
 		//comentario de explicacion
 		ImGui::SetCursorPosX((windowWidth) * 0.4f); // Centrar horizontalmente
@@ -1225,11 +1112,11 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		swap_chain->Present(1U, 0U);
 
+		// Llamamos al update del simulador para que simule las teclas que sean necesarias
+		simulator->update();
 	}
 	
 	// Limpieza
-	UnmapViewOfFile(pBuf);
-	CloseHandle(hMapFile);
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 
@@ -1252,6 +1139,12 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 	DestroyWindow(window);
 	UnregisterClassW(wc.lpszClassName, wc.hInstance);
+
+	delete mapper;
+	mapper = nullptr;
+
+	delete simulator;
+	simulator = nullptr;
 
 	return 0;
 }
