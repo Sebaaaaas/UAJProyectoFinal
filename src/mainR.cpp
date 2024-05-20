@@ -564,6 +564,30 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	std::string buttonLabelSLC = "SELECT";
 	bool waitForInputSLC = false;
 
+	std::string buttonLabelLSU = "LSUP";
+	bool waitForInputLSU = false;
+
+	std::string buttonLabelLSD = "LSDOWN";
+	bool waitForInputLSD = false;
+
+	std::string buttonLabelLSL = "LSLE";
+	bool waitForInputLSL = false;
+
+	std::string buttonLabelLSR = "LSRI";
+	bool waitForInputLSR = false;
+
+	std::string buttonLabelRSU = "RSUP";
+	bool waitForInputRSU = false;
+
+	std::string buttonLabelRSD = "RSDOWN";
+	bool waitForInputRSD = false;
+
+	std::string buttonLabelRSL = "RSLE";
+	bool waitForInputRSL = false;
+
+	std::string buttonLabelRSR = "RSRI";
+	bool waitForInputRSR = false;
+
 	bool checkL = false;
 	bool checkR = false;
 
@@ -835,7 +859,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		//boton RS
 		// Posicion del boton
-		ImGui::SetCursorPosX((windowWidth) * 0.63f); // Centrar horizontalmente
+		ImGui::SetCursorPosX((windowWidth) * 0.66f); // Centrar horizontalmente
 		ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
 
 		// boton input >>>>>>>>>>>>>>>>>
@@ -860,9 +884,117 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 			}
 		}
 
+		//boton RSU
+		// Posicion del boton
+		ImGui::SetCursorPosX((windowWidth) * 0.58f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.76f); // Centrar verticalmente 
+
+		// boton input >>>>>>>>>>>>>>>>>
+		if (ImGui::Button((buttonLabelRSU.c_str()))) {
+			// Activar la espera del siguiente input
+			waitForInputRSU = true;
+			detectedKey = ImGuiKey_None;
+			buttonLabelRSU = "Press any key...";
+		}
+
+		// Mostrar el texto y detectar el siguiente input si est� esperando
+		if (waitForInputRSU) {
+			// Detectar el input del teclado
+			for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
+				if (ImGui::IsKeyDown(key)) {
+					detectedKey = key;
+					waitForInputRSU = false;
+					buttonLabelRSU = std::string(ImGui::GetKeyName(detectedKey));
+					mapper->setButton(RightJoystickUp, convertInput(key));
+					break;
+				}
+			}
+		}
+
+		//boton RSD
+		// Posicion del boton
+		ImGui::SetCursorPosX((windowWidth) * 0.58f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
+
+		// boton input >>>>>>>>>>>>>>>>>
+		if (ImGui::Button((buttonLabelRSD.c_str()))) {
+			// Activar la espera del siguiente input
+			waitForInputRSD = true;
+			detectedKey = ImGuiKey_None;
+			buttonLabelRSD = "Press any key...";
+		}
+
+		// Mostrar el texto y detectar el siguiente input si est� esperando
+		if (waitForInputRSD) {
+			// Detectar el input del teclado
+			for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
+				if (ImGui::IsKeyDown(key)) {
+					detectedKey = key;
+					waitForInputRSD = false;
+					buttonLabelRSD = std::string(ImGui::GetKeyName(detectedKey));
+					mapper->setButton(RightJoystickDown, convertInput(key));
+					break;
+				}
+			}
+		}
+
+		//boton RSL
+		// Posicion del boton
+		ImGui::SetCursorPosX((windowWidth) * 0.535f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.82f); // Centrar verticalmente 
+
+		// boton input >>>>>>>>>>>>>>>>>
+		if (ImGui::Button((buttonLabelRSL.c_str()))) {
+			// Activar la espera del siguiente input
+			waitForInputRSL = true;
+			detectedKey = ImGuiKey_None;
+			buttonLabelRSL = "Press any key...";
+		}
+
+		// Mostrar el texto y detectar el siguiente input si est� esperando
+		if (waitForInputRSL) {
+			// Detectar el input del teclado
+			for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
+				if (ImGui::IsKeyDown(key)) {
+					detectedKey = key;
+					waitForInputRSL = false;
+					buttonLabelRSL = std::string(ImGui::GetKeyName(detectedKey));
+					mapper->setButton(RightJoystickLeft, convertInput(key));
+					break;
+				}
+			}
+		}
+
+		//boton RSR
+		// Posicion del boton
+		ImGui::SetCursorPosX((windowWidth) * 0.615f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.82f); // Centrar verticalmente 
+
+		// boton input >>>>>>>>>>>>>>>>>
+		if (ImGui::Button((buttonLabelRSR.c_str()))) {
+			// Activar la espera del siguiente input
+			waitForInputRSR = true;
+			detectedKey = ImGuiKey_None;
+			buttonLabelRSR = "Press any key...";
+		}
+
+		// Mostrar el texto y detectar el siguiente input si est� esperando
+		if (waitForInputRSR) {
+			// Detectar el input del teclado
+			for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
+				if (ImGui::IsKeyDown(key)) {
+					detectedKey = key;
+					waitForInputRSR = false;
+					buttonLabelRSR = std::string(ImGui::GetKeyName(detectedKey));
+					mapper->setButton(RightJoystickRight, convertInput(key));
+					break;
+				}
+			}
+		}
+
 		//boton LS
 		// Posicion del boton
-		ImGui::SetCursorPosX((windowWidth) * 0.39f); // Centrar horizontalmente
+		ImGui::SetCursorPosX((windowWidth) * 0.42f); // Centrar horizontalmente
 		ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
 
 		// boton input >>>>>>>>>>>>>>>>>
@@ -882,6 +1014,114 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					waitForInputLS = false;
 					buttonLabelLS = std::string(ImGui::GetKeyName(detectedKey));
 					mapper->setButton(LeftJoystickButton, convertInput(key));
+					break;
+				}
+			}
+		}
+
+		//boton LSU
+		// Posicion del boton
+		ImGui::SetCursorPosX((windowWidth) * 0.35f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.76f); // Centrar verticalmente 
+
+		// boton input >>>>>>>>>>>>>>>>>
+		if (ImGui::Button((buttonLabelLSU.c_str()))) {
+			// Activar la espera del siguiente input
+			waitForInputRSU = true;
+			detectedKey = ImGuiKey_None;
+			buttonLabelRSU = "Press any key...";
+		}
+
+		// Mostrar el texto y detectar el siguiente input si est� esperando
+		if (waitForInputLSU) {
+			// Detectar el input del teclado
+			for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
+				if (ImGui::IsKeyDown(key)) {
+					detectedKey = key;
+					waitForInputLSU = false;
+					buttonLabelLSU = std::string(ImGui::GetKeyName(detectedKey));
+					mapper->setButton(LeftJoystickUp, convertInput(key));
+					break;
+				}
+			}
+		}
+
+		//boton LSD
+		// Posicion del boton
+		ImGui::SetCursorPosX((windowWidth) * 0.35f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
+
+		// boton input >>>>>>>>>>>>>>>>>
+		if (ImGui::Button((buttonLabelLSD.c_str()))) {
+			// Activar la espera del siguiente input
+			waitForInputLSD = true;
+			detectedKey = ImGuiKey_None;
+			buttonLabelLSD = "Press any key...";
+		}
+
+		// Mostrar el texto y detectar el siguiente input si est� esperando
+		if (waitForInputLSD) {
+			// Detectar el input del teclado
+			for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
+				if (ImGui::IsKeyDown(key)) {
+					detectedKey = key;
+					waitForInputLSD = false;
+					buttonLabelLSD = std::string(ImGui::GetKeyName(detectedKey));
+					mapper->setButton(LeftJoystickDown, convertInput(key));
+					break;
+				}
+			}
+		}
+
+		//boton LSL
+		// Posicion del boton
+		ImGui::SetCursorPosX((windowWidth) * 0.30f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.82f); // Centrar verticalmente 
+
+		// boton input >>>>>>>>>>>>>>>>>
+		if (ImGui::Button((buttonLabelLSL.c_str()))) {
+			// Activar la espera del siguiente input
+			waitForInputLSL = true;
+			detectedKey = ImGuiKey_None;
+			buttonLabelLSL = "Press any key...";
+		}
+
+		// Mostrar el texto y detectar el siguiente input si est� esperando
+		if (waitForInputLSL) {
+			// Detectar el input del teclado
+			for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
+				if (ImGui::IsKeyDown(key)) {
+					detectedKey = key;
+					waitForInputLSL = false;
+					buttonLabelLSL = std::string(ImGui::GetKeyName(detectedKey));
+					mapper->setButton(LeftJoystickLeft, convertInput(key));
+					break;
+				}
+			}
+		}
+
+		//boton LSR
+		// Posicion del boton
+		ImGui::SetCursorPosX((windowWidth) * 0.374f); // Centrar horizontalmente
+		ImGui::SetCursorPosY((windowHeight) * 0.82f); // Centrar verticalmente 
+
+		// boton input >>>>>>>>>>>>>>>>>
+		if (ImGui::Button((buttonLabelLSR.c_str()))) {
+			// Activar la espera del siguiente input
+			waitForInputLSR = true;
+			detectedKey = ImGuiKey_None;
+			buttonLabelLSR = "Press any key...";
+		}
+
+		// Mostrar el texto y detectar el siguiente input si est� esperando
+		if (waitForInputLSR) {
+			// Detectar el input del teclado
+			for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
+				if (ImGui::IsKeyDown(key)) {
+					detectedKey = key;
+					waitForInputLSR = false;
+					buttonLabelLSR = std::string(ImGui::GetKeyName(detectedKey));
+					mapper->setButton(LeftJoystickRight, convertInput(key));
 					break;
 				}
 			}
@@ -1057,7 +1297,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
 
 		//Left CheckBox 
-		ImGui::SetCursorPosX((windowWidth) * 0.35f); // Centrar horizontalmente
+		ImGui::SetCursorPosX((windowWidth) * 0.30f); // Centrar horizontalmente
 		ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
 
 		if (ImGui::Checkbox("a", &checkL)) {
@@ -1072,7 +1312,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		}
 		
 		////Right CheckBox
-		ImGui::SetCursorPosX((windowWidth) * 0.58f); // Centrar horizontalmente
+		ImGui::SetCursorPosX((windowWidth) * 0.53f); // Centrar horizontalmente
 		ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
 
 		if (ImGui::Checkbox("b", &checkR)) {
