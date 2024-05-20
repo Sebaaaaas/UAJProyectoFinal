@@ -1186,7 +1186,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		ImGui::SetCursorPosX((windowWidth) * 0.58f); // Centrar horizontalmente
 		ImGui::SetCursorPosY((windowHeight) * 0.9f); // Centrar verticalmente 
 
-		if (ImGui::Checkbox("", &checkR)) {
+		if (ImGui::Checkbox(" ", &checkR)) {
 			if (checkR) {
 				// Código a ejecutar cuando la checkbox está marcada
 			}
