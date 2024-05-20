@@ -1142,11 +1142,11 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	DestroyWindow(window);
 	UnregisterClassW(wc.lpszClassName, wc.hInstance);
 
-	delete mapper;
-	mapper = nullptr;
-
 	delete simulator;
 	simulator = nullptr;
+
+	delete mapper;
+	mapper = nullptr;
 
 	return 0;
 }

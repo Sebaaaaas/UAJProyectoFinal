@@ -1,6 +1,5 @@
 #include "InputSimulator.h"
 #include "InputMapper.h"
-#include <iostream>
 #include <Windows.h>
 #include <xinput.h>
 
@@ -101,12 +100,6 @@ void InputSimulator::update()
 	}
 	if (result == ERROR_SUCCESS && (state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK)) { //Pulsar joystick derecho
 		simulateKey(mapper->getKey(ViewButton));
-	}
-
-
-
-	else {
-		//simulate(VK_SPACE);
 	}
 }
 
