@@ -14,6 +14,7 @@
 #include "DefInput.h"
 #include "InputMapper.h"
 #include "InputSimulator.h"
+#include "Converter.h"
 
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -117,286 +118,7 @@ bool LoadTextureFromFile(const wchar_t* filename, ID3D11Device* device, ID3D11De
 	return true;
 }
 
-KeyboardKey convertInput(ImGuiKey key) {
 
-	switch (key) {
-	case ImGuiKey_Space:
-		return KEY_SPACE;
-		break;
-
-	case ImGuiKey_LeftArrow:
-		return KEY_LEFTARROW;
-		break;
-
-	case ImGuiKey_UpArrow:
-		return KEY_UPARROW;
-		break;
-
-	case ImGuiKey_RightArrow:
-		return KEY_RIGHTARROW;
-		break;
-
-	case ImGuiKey_DownArrow:
-		return KEY_DOWNARROW;
-		break;
-
-	case ImGuiKey_0:
-		return KEY_0;
-		break;
-
-	case ImGuiKey_1:
-		return KEY_1;
-		break;
-
-	case ImGuiKey_2:
-		return KEY_2;
-		break;
-
-	case ImGuiKey_3:
-		return KEY_3;
-		break;
-
-	case ImGuiKey_4:
-		return KEY_4;
-		break;
-
-	case ImGuiKey_5:
-		return KEY_5;
-		break;
-
-	case ImGuiKey_6:
-		return KEY_6;
-		break;
-
-	case ImGuiKey_7:
-		return KEY_7;
-		break;
-
-	case ImGuiKey_8:
-		return KEY_8;
-		break;
-
-	case ImGuiKey_9:
-		return KEY_9;
-		break;
-
-	case ImGuiKey_A:
-		return KEY_A;
-		break;
-
-	case ImGuiKey_B:
-		return KEY_B;
-		break;
-
-	case ImGuiKey_C:
-		return KEY_C;
-		break;
-
-	case ImGuiKey_D:
-		return KEY_D;
-		break;
-
-	case ImGuiKey_E:
-		return KEY_E;
-		break;
-
-	case ImGuiKey_F:
-		return KEY_F;
-		break;
-
-	case ImGuiKey_G:
-		return KEY_G;
-		break;
-
-	case ImGuiKey_H:
-		return KEY_H;
-		break;
-
-	case ImGuiKey_I:
-		return KEY_I;
-		break;
-
-	case ImGuiKey_J:
-		return KEY_J;
-		break;
-
-	case ImGuiKey_K:
-		return KEY_K;
-		break;
-
-	case ImGuiKey_L:
-		return KEY_L;
-		break;
-
-	case ImGuiKey_M:
-		return KEY_M;
-		break;
-
-	case ImGuiKey_N:
-		return KEY_N;
-		break;
-
-	case ImGuiKey_O:
-		return KEY_O;
-		break;
-
-	case ImGuiKey_P:
-		return KEY_P;
-		break;
-
-	case ImGuiKey_Q:
-		return KEY_Q;
-		break;
-
-	case ImGuiKey_R:
-		return KEY_R;
-		break;
-
-	case ImGuiKey_S:
-		return KEY_S;
-		break;
-
-	case ImGuiKey_T:
-		return KEY_T;
-		break;
-
-	case ImGuiKey_U:
-		return KEY_U;
-		break;
-
-	case ImGuiKey_V:
-		return KEY_V;
-		break;
-
-	case ImGuiKey_W:
-		return KEY_W;
-		break;
-
-	case ImGuiKey_X:
-		return KEY_X;
-		break;
-
-	case ImGuiKey_Y:
-		return KEY_Y;
-		break;
-
-	case ImGuiKey_Z:
-		return KEY_Z;
-		break;
-
-	case ImGuiKey_F1:
-		return KEY_F1;
-		break;
-
-	case ImGuiKey_F2:
-		return KEY_F2;
-		break;
-
-	case ImGuiKey_F3:
-		return KEY_F3;
-		break;
-
-	case ImGuiKey_F4:
-		return KEY_F4;
-		break;
-
-	case ImGuiKey_F5:
-		return KEY_F5;
-		break;
-
-	case ImGuiKey_F6:
-		return KEY_F6;
-		break;
-
-	case ImGuiKey_F7:
-		return KEY_F7;
-		break;
-
-	case ImGuiKey_F8:
-		return KEY_F8;
-		break;
-
-	case ImGuiKey_F9:
-		return KEY_F9;
-		break;
-
-	case ImGuiKey_F10:
-		return KEY_F10;
-		break;
-
-	case ImGuiKey_F11:
-		return KEY_F11;
-		break;
-
-	case ImGuiKey_F12:
-		return KEY_F12;
-		break;
-
-	case ImGuiKey_LeftShift:
-		return KEY_SHIFT;
-		break;
-
-	case ImGuiKey_RightShift:
-		return KEY_RSHIFT;
-		break;
-
-	case ImGuiKey_LeftCtrl:
-		return KEY_CONTROL;
-		break;
-
-	case ImGuiKey_RightCtrl:
-		return KEY_RCONTROL;
-		break;
-
-	case ImGuiKey_LeftAlt:
-		return KEY_ALT;
-		break;
-
-	case ImGuiKey_Tab:
-		return KEY_TAB;
-		break;
-
-	case ImGuiKey_Enter:
-		return KEY_ENTER;
-		break;
-
-	case ImGuiKey_Backspace:
-		return KEY_BACKSPACE;
-		break;
-
-	case ImGuiKey_MouseLeft:
-		return KEY_MLCLICK;
-		break;
-
-	case ImGuiKey_MouseRight:
-		return KEY_MRCLICK;
-		break;
-
-	case ImGuiKey_MouseMiddle:
-		return KEY_MMIDDLEBUTTON;
-		break;
-
-	case ImGuiKey_Equal:  //es el +
-		return KEY_PLUS;
-		break;
-
-	case ImGuiKey_Minus:
-		return KEY_MINUS;
-		break;
-
-	case ImGuiKey_Period:
-		return KEY_PERIOD;
-		break;
-
-	case ImGuiKey_Comma:
-		return KEY_COMMA;
-		break;
-
-	default:
-		return NONE;
-	}
-
-}
 
 INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	WNDCLASSEXW wc{};
@@ -592,6 +314,8 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	bool checkR = false;
 
 
+	//Conversor
+	Converter* conv = new Converter();
 
 	// Creacion de simulador y mapeador
 	InputMapper* mapper = new InputMapper();
@@ -662,7 +386,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputLT = false;
 					buttonLabelLT = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(LT, convertInput(key));
+					mapper->setButton(LT, conv->convertInput(key));
 					break;
 				}
 			}
@@ -689,7 +413,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputLB = false;
 					buttonLabelLB = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(LB, convertInput(key));
+					mapper->setButton(LB, conv->convertInput(key));
 					break;
 				}
 			}
@@ -716,7 +440,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputRT = false;
 					buttonLabelRT = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(RT, convertInput(key));
+					mapper->setButton(RT, conv->convertInput(key));
 					break;
 				}
 			}
@@ -743,7 +467,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputRB = false;
 					buttonLabelRB = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(RB, convertInput(key));
+					mapper->setButton(RB, conv->convertInput(key));
 					break;
 				}
 			}
@@ -770,7 +494,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputY = false;
 					buttonLabelY = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(ButtonY, convertInput(key));
+					mapper->setButton(ButtonY, conv->convertInput(key));
 					break;
 				}
 			}
@@ -797,7 +521,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputX = false;
 					buttonLabelX = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(ButtonX, convertInput(key));
+					mapper->setButton(ButtonX, conv->convertInput(key));
 					break;
 				}
 			}
@@ -824,7 +548,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputA = false;
 					buttonLabelA = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(ButtonA, convertInput(key));
+					mapper->setButton(ButtonA, conv->convertInput(key));
 					break;
 				}
 			}
@@ -851,7 +575,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputB = false;
 					buttonLabelB = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(ButtonB, convertInput(key));
+					mapper->setButton(ButtonB, conv->convertInput(key));
 					break;
 				}
 			}
@@ -878,7 +602,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputRS = false;
 					buttonLabelRS = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(RightJoystickButton, convertInput(key));
+					mapper->setButton(RightJoystickButton, conv->convertInput(key));
 					break;
 				}
 			}
@@ -905,7 +629,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputRSU = false;
 					buttonLabelRSU = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(RightJoystickUp, convertInput(key));
+					mapper->setButton(RightJoystickUp, conv->convertInput(key));
 					break;
 				}
 			}
@@ -932,7 +656,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputRSD = false;
 					buttonLabelRSD = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(RightJoystickDown, convertInput(key));
+					mapper->setButton(RightJoystickDown, conv->convertInput(key));
 					break;
 				}
 			}
@@ -959,7 +683,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputRSL = false;
 					buttonLabelRSL = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(RightJoystickLeft, convertInput(key));
+					mapper->setButton(RightJoystickLeft, conv->convertInput(key));
 					break;
 				}
 			}
@@ -986,7 +710,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputRSR = false;
 					buttonLabelRSR = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(RightJoystickRight, convertInput(key));
+					mapper->setButton(RightJoystickRight, conv->convertInput(key));
 					break;
 				}
 			}
@@ -1013,7 +737,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputLS = false;
 					buttonLabelLS = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(LeftJoystickButton, convertInput(key));
+					mapper->setButton(LeftJoystickButton, conv->convertInput(key));
 					break;
 				}
 			}
@@ -1040,7 +764,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputLSU = false;
 					buttonLabelLSU = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(LeftJoystickUp, convertInput(key));
+					mapper->setButton(LeftJoystickUp, conv->convertInput(key));
 					break;
 				}
 			}
@@ -1067,7 +791,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputLSD = false;
 					buttonLabelLSD = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(LeftJoystickDown, convertInput(key));
+					mapper->setButton(LeftJoystickDown, conv->convertInput(key));
 					break;
 				}
 			}
@@ -1094,7 +818,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputLSL = false;
 					buttonLabelLSL = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(LeftJoystickLeft, convertInput(key));
+					mapper->setButton(LeftJoystickLeft, conv->convertInput(key));
 					break;
 				}
 			}
@@ -1121,7 +845,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputLSR = false;
 					buttonLabelLSR = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(LeftJoystickRight, convertInput(key));
+					mapper->setButton(LeftJoystickRight, conv->convertInput(key));
 					break;
 				}
 			}
@@ -1148,7 +872,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputU = false;
 					buttonLabelU = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(DpadUp, convertInput(key));
+					mapper->setButton(DpadUp, conv->convertInput(key));
 					break;
 				}
 			}
@@ -1175,7 +899,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputD = false;
 					buttonLabelD = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(DpadDown, convertInput(key));
+					mapper->setButton(DpadDown, conv->convertInput(key));
 					break;
 				}
 			}
@@ -1202,7 +926,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputL = false;
 					buttonLabelL = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(DpadLeft, convertInput(key));
+					mapper->setButton(DpadLeft, conv->convertInput(key));
 					break;
 				}
 			}
@@ -1229,7 +953,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputR = false;
 					buttonLabelR = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(DpadRight, convertInput(key));
+					mapper->setButton(DpadRight, conv->convertInput(key));
 					break;
 				}
 			}
@@ -1256,7 +980,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputSLC = false;
 					buttonLabelSLC = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(ViewButton, convertInput(key));
+					mapper->setButton(ViewButton, conv->convertInput(key));
 					break;
 				}
 			}
@@ -1282,7 +1006,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					detectedKey = key;
 					waitForInputSTR = false;
 					buttonLabelSTR = std::string(ImGui::GetKeyName(detectedKey));
-					mapper->setButton(MenuButton, convertInput(key));
+					mapper->setButton(MenuButton, conv->convertInput(key));
 					break;
 				}
 			}
@@ -1401,4 +1125,3 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 	return 0;
 }
-
