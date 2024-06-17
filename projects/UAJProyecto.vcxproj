@@ -19,6 +19,7 @@
     <ClInclude Include="..\dependencies\imgui\imstb_rectpack.h" />
     <ClInclude Include="..\dependencies\imgui\imstb_textedit.h" />
     <ClInclude Include="..\dependencies\imgui\imstb_truetype.h" />
+    <ClInclude Include="..\src\Button.h" />
     <ClInclude Include="..\src\Converter.h" />
     <ClInclude Include="..\src\DefInput.h" />
     <ClInclude Include="..\src\InputMapper.h" />
@@ -32,6 +33,7 @@
     <ClCompile Include="..\dependencies\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\dependencies\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\dependencies\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\src\Button.cpp" />
     <ClCompile Include="..\src\Converter.cpp" />
     <ClCompile Include="..\src\InputMapper.cpp" />
     <ClCompile Include="..\src\InputSimulator.cpp" />

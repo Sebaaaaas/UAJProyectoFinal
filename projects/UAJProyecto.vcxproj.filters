@@ -25,6 +25,8 @@
     <ClCompile Include="..\src\InputMapper.cpp" />
     <ClCompile Include="..\src\InputSimulator.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\Converter.cpp" />
+    <ClCompile Include="..\src\Button.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\dependencies\imgui\imconfig.h">
@@ -54,6 +56,8 @@
     <ClInclude Include="..\src\DefInput.h" />
     <ClInclude Include="..\src\InputMapper.h" />
     <ClInclude Include="..\src\InputSimulator.h" />
+    <ClInclude Include="..\src\Converter.h" />
+    <ClInclude Include="..\src\Button.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Imgui">
