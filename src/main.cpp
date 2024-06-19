@@ -16,6 +16,7 @@
 #include "InputSimulator.h"
 #include "Converter.h"
 #include "Button.h"
+#include "CheckBox.h"
 
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -271,11 +272,13 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	buttons.push_back(new Button("B: RSL", (windowWidth) * 0.537f, (windowHeight) * 0.82f, RightJoystickLeft)); //Left direction right joystick
 	buttons.push_back(new Button("B: RSR", (windowWidth) * 0.615f, (windowHeight) * 0.82f, RightJoystickRight)); //Right direction right joystick
 
-
+	//Checkbox
+	std::vector<CheckBox*> joycheckboxes;
+	joycheckboxes.push_back(new CheckBox((windowWidth) * 0.23f, (windowHeight) * 0.88f)); //checkbox izquierdo
+	joycheckboxes.push_back(new CheckBox((windowWidth) * 0.46f, (windowHeight) * 0.88f)); //checkbox derecho
 
 	bool checkL = false;
 	bool checkR = false;
-
 
 	//Conversor
 	Converter* conv = new Converter();
@@ -364,43 +367,33 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
 		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
 
-		//Left CheckBox 
-		ImGui::SetCursorPosX((windowWidth) * 0.23f); // Centrar horizontalmente
-		ImGui::SetCursorPosY((windowHeight) * 0.88f); // Centrar verticalmente 
+		for (int c = 0; c < joycheckboxes.size(); c++) {
+			ImGui::SetCursorPosX(joycheckboxes[c]->GetX()); // Centrar horizontalmente
+			ImGui::SetCursorPosY(joycheckboxes[c]->GetY()); // Centrar verticalmente 
+			if (c == 0) {
+				ImGui::Text("LeftCheckbox");
+				ImGui::SameLine();
 
-		ImGui::Text("Left CheckBox");
-		ImGui::SameLine();
+				if (ImGui::Checkbox("##LeftCheckbox", &checkL)) {
 
-		if (ImGui::Checkbox("##LeftCheckbox", &checkL)) {
-			if (checkL) {
-				// Código a ejecutar cuando la checkbox está marcada
-				simulator->setLeftMovement(checkL);
+					simulator->setLeftMovement(checkL);
+
+				}
 			}
-			else {
-				// Código a ejecutar cuando la checkbox no está marcada
-				simulator->setLeftMovement(checkL);
+			if (c == 1) {
+				ImGui::Text("RightCheckbox");
+				ImGui::SameLine();
+
+
+				if (ImGui::Checkbox("##RightCheckbox", &checkR)) {
+
+					simulator->setRightMovement(checkR);
+
+				}
 			}
+
 		}
 		
-		////Right CheckBox
-		ImGui::SetCursorPosX((windowWidth) * 0.46f); // Centrar horizontalmente
-		ImGui::SetCursorPosY((windowHeight) * 0.88f); // Centrar verticalmente 
-
-
-		ImGui::Text("Right CheckBox");
-		ImGui::SameLine();
-
-		if (ImGui::Checkbox("##RightCheckbox", &checkR)) {
-			if (checkR) {
-				// Código a ejecutar cuando la checkbox está marcada
-				simulator->setRightMovement(checkR);
-			}
-			else {
-				// Código a ejecutar cuando la checkbox no está marcada
-				simulator->setRightMovement(checkR);
-			}
-		}
-
 		//comentario de explicacion
 		ImGui::SetCursorPosX((windowWidth) * 0.3f); // Centrar horizontalmente
 		ImGui::SetCursorPosY((windowHeight) * 0.95f); // Centrar verticalmente 
@@ -428,7 +421,6 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-
 		swap_chain->Present(1U, 0U);
 
 		// Llamamos al update del simulador para que simule las teclas que sean necesarias
@@ -443,7 +435,6 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 	ImGui::DestroyContext();
 
-
 	if (swap_chain)
 		swap_chain->Release();
 
@@ -455,8 +446,6 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 	if (render_target_view)
 		render_target_view->Release();
-
-
 
 	DestroyWindow(window);
 	UnregisterClassW(wc.lpszClassName, wc.hInstance);

@@ -54,41 +54,8 @@ void InputSimulator::update()
 			simulateMouseMove(thumbRX, thumbRY);
 		}
 	}
-	if (result == ERROR_SUCCESS && movLeft) {
-		// Obtén los valores del joystick izquierdo
-		short thumbLX = state.Gamepad.sThumbLX;
-		short thumbLY = state.Gamepad.sThumbLY;
 
-		// Verifica si el joystick izquierdo se está moviendo
-		if (thumbLX != 0 || thumbLY != 0) {
-			// Llama a una función para simular el movimiento del ratón
-			simulateMouseMove(thumbLX, thumbLY);
-		}
-	}
-
-
-	if (result == ERROR_SUCCESS) {
-		// Obtén los valores del joystick izquierdo
-		short thumbLX = state.Gamepad.sThumbLX;
-		short thumbLY = state.Gamepad.sThumbLY;
-
-		// Verifica si el joystick izquierdo se está moviendo
-		if (thumbLX > 0) {
-			// Llama a una función para simular el movimiento del ratón
-			simulateKey(mapper->getKey(LeftJoystickRight));
-		}
-		else if (thumbLX < 0) {
-			simulateKey(mapper->getKey(LeftJoystickLeft));
-		}
-		if (thumbLY > 0) {
-			simulateKey(mapper->getKey(LeftJoystickUp));
-		}
-		else if (thumbLY < 0) {
-			simulateKey(mapper->getKey(LeftJoystickDown));
-		}
-	}
-
-	if (result == ERROR_SUCCESS) {
+	else if (result == ERROR_SUCCESS) {
 		// Obtén los valores del joystick izquierdo
 		short thumbRX = state.Gamepad.sThumbRX;
 		short thumbRY = state.Gamepad.sThumbRY;
@@ -106,6 +73,40 @@ void InputSimulator::update()
 		}
 		else if (thumbRY < 0) {
 			simulateKey(mapper->getKey(RightJoystickDown));
+		}
+	}
+
+	if (result == ERROR_SUCCESS && movLeft) {
+		// Obtén los valores del joystick izquierdo
+		short thumbLX = state.Gamepad.sThumbLX;
+		short thumbLY = state.Gamepad.sThumbLY;
+
+		// Verifica si el joystick izquierdo se está moviendo
+		if (thumbLX != 0 || thumbLY != 0) {
+			// Llama a una función para simular el movimiento del ratón
+			simulateMouseMove(thumbLX, thumbLY);
+		}
+	}
+
+
+	else if (result == ERROR_SUCCESS) {
+		// Obtén los valores del joystick izquierdo
+		short thumbLX = state.Gamepad.sThumbLX;
+		short thumbLY = state.Gamepad.sThumbLY;
+
+		// Verifica si el joystick izquierdo se está moviendo
+		if (thumbLX > 0) {
+			// Llama a una función para simular el movimiento del ratón
+			simulateKey(mapper->getKey(LeftJoystickRight));
+		}
+		else if (thumbLX < 0) {
+			simulateKey(mapper->getKey(LeftJoystickLeft));
+		}
+		if (thumbLY > 0) {
+			simulateKey(mapper->getKey(LeftJoystickUp));
+		}
+		else if (thumbLY < 0) {
+			simulateKey(mapper->getKey(LeftJoystickDown));
 		}
 	}
 
