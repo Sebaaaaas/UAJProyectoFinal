@@ -1,4 +1,6 @@
 #include "InputMapper.h"
+#include <string>
+
 
 InputMapper::InputMapper()
 {
@@ -282,6 +284,147 @@ KeyboardKey InputMapper::getKey(ControllerLayout button)
 	return NONE;
 }
 
+void InputMapper::saveControls(bool checkL,bool checkR)
+{
+	std:: ofstream outFile("controles.txt");
+	if (!outFile.is_open()) {
+		std::cout << "Error al abrir el archivo para escribir" << std::endl;
+		return;
+	}
+	// Botones
+	outFile << "ButtonA : " << contrSettings->buttonA << std::endl;
+	outFile << "ButtonB : " << contrSettings->buttonB << std::endl;
+	outFile << "ButtonX : " << contrSettings->buttonX << std::endl;
+	outFile << "ButtonY : " << contrSettings->buttonY << std::endl;
+
+	// Dpad
+	outFile << "dPadUp : " << contrSettings->dpadUp << std::endl;
+	outFile << "dPadDown : " << contrSettings->dpadDown << std::endl;	
+	outFile << "dPadRight : " << contrSettings->dpadRight << std::endl;
+	outFile << "dPadLeft : " << contrSettings->dpadLeft << std::endl;
+
+	// Joysticks
+	outFile << "leftJoystick_left : " << contrSettings->leftJoystick_left << std::endl; 
+	outFile << "leftJoystick_right : " << contrSettings->leftJoystick_right << std::endl;
+	outFile << "leftJoystick_up : " << contrSettings->leftJoystick_up << std::endl;
+	outFile << "leftJoystick_down : " << contrSettings->leftJoystick_down << std::endl;
+
+	outFile << "rightJoystick_left : " << contrSettings->rightJoystick_left << std::endl;
+	outFile << "rightJoystick_right : " << contrSettings->rightJoystick_right << std::endl;
+	outFile << "rightJoystick_up : " << contrSettings->rightJoystick_up << std::endl;
+	outFile << "rightJoystick_down : " << contrSettings->rightJoystick_down << std::endl;
+
+	outFile << "leftJoystickButton : " << contrSettings->leftJoystickButton << std::endl;
+	outFile << "rightJoystickButton : " << contrSettings->rightJoystickButton << std::endl;
+
+	// Gatillos
+	outFile << "LB : " << contrSettings->LB << std::endl;
+	outFile << "RB : " << contrSettings->RB << std::endl;
+	outFile << "LT : " << contrSettings->LT << std::endl;
+	outFile << "RT : " << contrSettings->RT << std::endl;
+
+	// Botones especiales
+	outFile << "viewButton : " << contrSettings->viewButton << std::endl;
+	outFile << "menuButton : " << contrSettings->menuButton << std::endl;
+
+	outFile << "checkL : " << checkL << std::endl;
+	outFile << "checkR : " << checkR << std::endl;
+	outFile.close();
+}
+
+void InputMapper::loadControls(bool& checkL_, bool& checkR_)
+{
+	std::ifstream inFile("controles.txt");
+	if (!inFile.is_open()) {
+		std::cout << "Error al abrir el archivo para leer" << std::endl;
+		
+	}
+	else {
+		std::string word;
+		while (inFile >> word) {
+			if (word == "ButtonA") {
+				processLoad(inFile, word, ButtonA, checkL_, checkR_);
+			}
+			else if (word == "ButtonB") {
+				processLoad(inFile, word, ButtonB, checkL_, checkR_);
+			}
+			else if (word == "ButtonX") {
+				processLoad(inFile, word, ButtonX, checkL_, checkR_);
+			}
+			else if (word == "ButtonY") {
+				processLoad(inFile, word, ButtonY, checkL_, checkR_);
+			}
+			else if (word == "dPadUp") {
+				processLoad(inFile, word, DpadUp, checkL_, checkR_);
+			}
+			else if (word == "dPadDown") {
+				processLoad(inFile, word, DpadDown, checkL_, checkR_);
+			}
+			else if (word == "dPadRight") {
+				processLoad(inFile, word, DpadRight, checkL_, checkR_);
+			}
+			else if (word == "dPadLeft") {
+				processLoad(inFile, word, DpadLeft, checkL_, checkR_);
+			}
+			else if (word == "leftJoystick_left") {
+				processLoad(inFile, word, LeftJoystickLeft, checkL_, checkR_);
+			}
+			else if (word == "leftJoystick_right") {
+				processLoad(inFile, word, LeftJoystickRight, checkL_, checkR_);
+			}
+			else if (word == "leftJoystick_up") {
+				processLoad(inFile, word, LeftJoystickUp, checkL_, checkR_);
+			}
+			else if (word == "leftJoystick_down") {
+				processLoad(inFile, word, LeftJoystickDown, checkL_, checkR_);
+			}
+			else if (word == "rightJoystick_left") {
+				processLoad(inFile, word, RightJoystickLeft, checkL_, checkR_);
+			}
+			else if (word == "rightJoystick_right") {
+				processLoad(inFile, word, RightJoystickRight, checkL_, checkR_);
+			}
+			else if (word == "rightJoystick_up") {
+				processLoad(inFile, word, RightJoystickUp, checkL_, checkR_);
+			}
+			else if (word == "rightJoystick_down") {
+				processLoad(inFile, word, RightJoystickDown, checkL_, checkR_);
+			}
+			else if (word == "leftJoystickButton") {
+				processLoad(inFile, word, LeftJoystickButton, checkL_, checkR_);
+			}
+			else if (word == "rightJoystickButton") {
+				processLoad(inFile, word, RightJoystickButton, checkL_, checkR_);
+			}
+			else if (word == "LB") {
+				processLoad(inFile, word, LB, checkL_, checkR_);
+			}
+			else if (word == "RB") {
+				processLoad(inFile, word, RB, checkL_, checkR_);
+			}
+			else if (word == "LT") {
+				processLoad(inFile, word, LT, checkL_, checkR_);
+			}
+			else if (word == "RT") {
+				processLoad(inFile, word, RT, checkL_, checkR_);
+			}
+			else if (word == "viewButton") {
+				processLoad(inFile, word, ViewButton,checkL_, checkR_);
+			}
+			else if (word == "menuButton") {
+				processLoad(inFile, word, MenuButton,checkL_,checkR_);
+			}
+			else if (word == "checkL") {
+				processLoad(inFile, word, MenuButton, checkL_, checkR_);
+			}
+			else if (word == "checkR") {
+				processLoad(inFile, word, MenuButton, checkL_, checkR_);
+			}
+		}
+		inFile.close();
+	}
+}
+
 void InputMapper::checkKeyIsFree(KeyboardKey key)
 {
 	int it = 0;
@@ -292,5 +435,24 @@ void InputMapper::checkKeyIsFree(KeyboardKey key)
 			return;
 		}
 		it++;
+	}
+}
+
+void InputMapper::processLoad(std::ifstream& inFile,std::string word, ControllerLayout button,bool& checkL_,bool& checkR_)
+{
+	if (word == "checkL") {
+		inFile >> word;
+		inFile >> word;
+		checkL_ = std::stoi(word);
+	}
+	else if (word == "checkR") {
+		inFile >> word;
+		inFile >> word;
+		checkR_ = std::stoi(word);
+	}
+	else {
+		inFile >> word;
+		inFile >> word;
+		setButton(button, (KeyboardKey)std::stoi(word));
 	}
 }

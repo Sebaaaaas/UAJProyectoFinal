@@ -2,7 +2,10 @@
 
 #include "DefInput.h"
 #include <vector>
+#include <iostream>
+#include <fstream>
 
+//using namespace std;
 enum ControllerLayout {
 	ButtonA, ButtonB, ButtonX, ButtonY,
 	DpadUp, DpadDown, DpadRight, DpadLeft,
@@ -80,9 +83,12 @@ public:
 	void setButton(ControllerLayout button, KeyboardKey key);
 	void resetButton(ControllerLayout button);
 	KeyboardKey getKey(ControllerLayout button);
+	void saveControls(bool checkL,bool checkR);
+	void loadControls(bool& checkL_, bool& checkR_);
 private:
 	ControllerSettings* contrSettings;
 	std::vector<std::pair<KeyboardKey, ControllerLayout>>usedKeys;
 	void checkKeyIsFree(KeyboardKey key);
+	void processLoad(std::ifstream& inFile,std::string word,ControllerLayout button, bool& checkL_, bool& checkR_);
 };
 

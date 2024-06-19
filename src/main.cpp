@@ -272,10 +272,17 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	buttons.push_back(new Button("B: RSL", (windowWidth) * 0.537f, (windowHeight) * 0.82f, RightJoystickLeft)); //Left direction right joystick
 	buttons.push_back(new Button("B: RSR", (windowWidth) * 0.615f, (windowHeight) * 0.82f, RightJoystickRight)); //Right direction right joystick
 
+	buttons.push_back(new Button("SAVE", (windowWidth) * 0.05f, (windowHeight) * 0.9f, LT)); //save
+	buttons.push_back(new Button("LOAD", (windowWidth) * 0.15f, (windowHeight) * 0.9f, LT)); //load
+
+
 	//Checkbox
 	std::vector<CheckBox*> joycheckboxes;
 	joycheckboxes.push_back(new CheckBox((windowWidth) * 0.23f, (windowHeight) * 0.88f)); //checkbox izquierdo
 	joycheckboxes.push_back(new CheckBox((windowWidth) * 0.46f, (windowHeight) * 0.88f)); //checkbox derecho
+	
+
+
 
 	bool checkL = false;
 	bool checkR = false;
@@ -338,10 +345,22 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 			// boton input >>>>>>>>>>>>>>>>>
 			if (ImGui::Button(buttons[i]->GetName().c_str())) {
-				// Activar la espera del siguiente input
-				buttons[i]->SetWaiting(true);
-				detectedKey = ImGuiKey_None;
-				buttons[i]->SetName("Press any key...");
+				if (buttons[i]->GetName() != "SAVE" && buttons[i]->GetName() != "LOAD") {
+					// Activar la espera del siguiente input
+					buttons[i]->SetWaiting(true);
+					detectedKey = ImGuiKey_None;
+					buttons[i]->SetName("Press any key...");
+				}
+				else if(buttons[i]->GetName() == "SAVE") {
+					mapper->saveControls(checkL,checkR);
+					
+				}
+				else {
+					mapper->loadControls(checkL,checkR);
+					simulator->setRightMovement(checkR);
+					simulator->setLeftMovement(checkL);
+					
+				}
 			}
 
 			// Mostrar el texto y detectar el siguiente input si est  esperando
@@ -353,7 +372,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 						buttons[i]->SetWaiting(false);
 						buttons[i]->SetName(std::string(ImGui::GetKeyName(detectedKey)));
 						mapper->setButton(buttons[i]->GetKey(), conv->convertInput(key));
-						break;
+						
 					}
 				}
 			}
