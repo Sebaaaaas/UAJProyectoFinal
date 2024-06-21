@@ -1,6 +1,6 @@
-ButtonA : 70
+ButtonA : 0
 ButtonB : 0
-ButtonX : 75
+ButtonX : 0
 ButtonY : 0
 dPadUp : 38
 dPadDown : 40
@@ -13,14 +13,14 @@ leftJoystick_down : 0
 rightJoystick_left : 0
 rightJoystick_right : 0
 rightJoystick_up : 0
-rightJoystick_down : 80
+rightJoystick_down : 0
 leftJoystickButton : 0
 rightJoystickButton : 0
 LB : 0
 RB : 0
 LT : 0
 RT : 0
-viewButton : 65
+viewButton : 0
 menuButton : 0
-checkL : 1
-checkR : 1
+checkL : 0
+checkR : 0

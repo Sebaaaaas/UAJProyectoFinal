@@ -364,11 +364,9 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					{
 						if((*b)[i].first!=NONE)
 							buttons[i]->SetName(std::string(ImGui::GetKeyName(conv->convertToImGUiKey((*b)[i].first))));
-						/*else
-							buttons[i]->SetName(std::string("Usassigned"+std::to_string(i)));*/
-						else if ((*b)[i].first == NONE && buttons[i]->GetName().size() == 1) {
-							buttons[i]->SetName(std::string("Usassigned" + std::to_string(i)));
-						}
+						else
+							buttons[i]->SetName(std::string(buttons[i]->GetInitialName()));
+						
 							 
 					}
 					

@@ -12,6 +12,7 @@ public:
 	float GetY();
 	std::string GetName();
 	void SetName(std::string txt);
+	std::string GetInitialName();
 
 	ControllerLayout GetKey();
 private:
@@ -20,5 +21,6 @@ private:
 	float _posX;
 	float _posY;
 	bool waitForInput = false;
+	std::string _initialName;
 	ControllerLayout keyButton = MenuButton;
 };
