@@ -8,5 +8,6 @@ public:
 	Converter(){}
 	~Converter(){}
 	KeyboardKey convertInput(ImGuiKey key);
+	ImGuiKey convertToImGUiKey(KeyboardKey key);
 };
 

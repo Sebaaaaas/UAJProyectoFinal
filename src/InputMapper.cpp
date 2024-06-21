@@ -286,6 +286,7 @@ KeyboardKey InputMapper::getKey(ControllerLayout button)
 
 void InputMapper::saveControls(bool checkL,bool checkR)
 {
+	
 	std:: ofstream outFile("controles.txt");
 	if (!outFile.is_open()) {
 		std::cout << "Error al abrir el archivo para escribir" << std::endl;
@@ -334,6 +335,7 @@ void InputMapper::saveControls(bool checkL,bool checkR)
 
 void InputMapper::loadControls(bool& checkL_, bool& checkR_)
 {
+	usedKeys.clear();
 	std::ifstream inFile("controles.txt");
 	if (!inFile.is_open()) {
 		std::cout << "Error al abrir el archivo para leer" << std::endl;
@@ -425,6 +427,11 @@ void InputMapper::loadControls(bool& checkL_, bool& checkR_)
 	}
 }
 
+std::vector<std::pair<KeyboardKey, ControllerLayout>>* InputMapper::getButtons()
+{
+	return &usedKeys;
+}
+
 void InputMapper::checkKeyIsFree(KeyboardKey key)
 {
 	int it = 0;
@@ -453,6 +460,11 @@ void InputMapper::processLoad(std::ifstream& inFile,std::string word, Controller
 	else {
 		inFile >> word;
 		inFile >> word;
-		setButton(button, (KeyboardKey)std::stoi(word));
+		if (word == "0") {
+			usedKeys.push_back({ NONE,button });
+		}
+		else {
+			setButton(button, (KeyboardKey)std::stoi(word));
+		}
 	}
 }

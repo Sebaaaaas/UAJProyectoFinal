@@ -245,32 +245,32 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 
 	std::vector<Button*> buttons;
-	buttons.push_back(new Button("B: LT", (windowWidth) * 0.1f, (windowHeight) * 0.15f, LT)); //LT
-	buttons.push_back(new Button("B: LB", (windowWidth) * 0.1f, (windowHeight) * 0.26f, LB)); //LB
-	buttons.push_back(new Button("B: RT", (windowWidth) * 0.89f, (windowHeight) * 0.15f, RT)); //RT
-	buttons.push_back(new Button("B: RB", (windowWidth) * 0.89f, (windowHeight) * 0.26f, RB)); //RB
-	buttons.push_back(new Button("B: Y", (windowWidth) * 0.88f, (windowHeight) * 0.42f, ButtonY)); //Y
-	buttons.push_back(new Button("B: X", (windowWidth) * 0.88f, (windowHeight) * 0.50f, ButtonX)); //X
 	buttons.push_back(new Button("B: A", (windowWidth) * 0.88f, (windowHeight) * 0.58f, ButtonA)); //A
 	buttons.push_back(new Button("B: B", (windowWidth) * 0.88f, (windowHeight) * 0.66f, ButtonB)); //B
-	buttons.push_back(new Button("B: LS", (windowWidth) * 0.42f, (windowHeight) * 0.88f, LeftJoystickButton)); //Left joystick button
-	buttons.push_back(new Button("B: RS", (windowWidth) * 0.66f, (windowHeight) * 0.88f, RightJoystickButton)); //Right joystick button
+	buttons.push_back(new Button("B: X", (windowWidth) * 0.88f, (windowHeight) * 0.50f, ButtonX)); //X
+	buttons.push_back(new Button("B: Y", (windowWidth) * 0.88f, (windowHeight) * 0.42f, ButtonY)); //Y
 	buttons.push_back(new Button("B: UP", (windowWidth) * 0.1f, (windowHeight) * 0.55f,DpadUp)); //UP
 	buttons.push_back(new Button("B: DOWN", (windowWidth) * 0.1f, (windowHeight) * 0.65f, DpadDown)); //DOWN
-	buttons.push_back(new Button("B: LEFT", (windowWidth) * 0.1f, (windowHeight) * 0.60f, DpadLeft)); //LEFT
 	buttons.push_back(new Button("B: RIGHT", (windowWidth) * 0.1f, (windowHeight) * 0.70f, DpadRight)); //RIGHT
-	buttons.push_back(new Button("B: START", (windowWidth) * 0.58f, (windowHeight) * 0.1f,MenuButton)); //Start
-	buttons.push_back(new Button("B: SELECT", (windowWidth) * 0.4f, (windowHeight) * 0.1f,ViewButton)); //Select
-
-	buttons.push_back(new Button("B: LSU", (windowWidth) * 0.345f, (windowHeight) * 0.77f, LeftJoystickUp)); //Up direction left joystick
-	buttons.push_back(new Button("B: LSD", (windowWidth) * 0.345f, (windowHeight) * 0.88f, LeftJoystickDown)); //Down direction left joystick
+	buttons.push_back(new Button("B: LEFT", (windowWidth) * 0.1f, (windowHeight) * 0.60f, DpadLeft)); //LEFT
 	buttons.push_back(new Button("B: LSL", (windowWidth) * 0.305f, (windowHeight) * 0.82f, LeftJoystickLeft)); //Left direction left joystick
 	buttons.push_back(new Button("B: LSR", (windowWidth) * 0.38f, (windowHeight) * 0.82f, LeftJoystickRight)); //Right direction left joystick
-
-	buttons.push_back(new Button("B: RSU", (windowWidth) * 0.577f, (windowHeight) * 0.77f, RightJoystickUp)); //Up direction right joystick
-	buttons.push_back(new Button("B: RSD", (windowWidth) * 0.577f, (windowHeight) * 0.88f, RightJoystickDown)); //Down direction right joystick
+	buttons.push_back(new Button("B: LSU", (windowWidth) * 0.345f, (windowHeight) * 0.77f, LeftJoystickUp)); //Up direction left joystick
+	buttons.push_back(new Button("B: LSD", (windowWidth) * 0.345f, (windowHeight) * 0.88f, LeftJoystickDown)); //Down direction left joystick
 	buttons.push_back(new Button("B: RSL", (windowWidth) * 0.537f, (windowHeight) * 0.82f, RightJoystickLeft)); //Left direction right joystick
 	buttons.push_back(new Button("B: RSR", (windowWidth) * 0.615f, (windowHeight) * 0.82f, RightJoystickRight)); //Right direction right joystick
+	buttons.push_back(new Button("B: RSU", (windowWidth) * 0.577f, (windowHeight) * 0.77f, RightJoystickUp)); //Up direction right joystick
+	buttons.push_back(new Button("B: RSD", (windowWidth) * 0.577f, (windowHeight) * 0.88f, RightJoystickDown)); //Down direction right joystick
+	buttons.push_back(new Button("B: LS", (windowWidth) * 0.42f, (windowHeight) * 0.88f, LeftJoystickButton)); //Left joystick button
+	buttons.push_back(new Button("B: RS", (windowWidth) * 0.66f, (windowHeight) * 0.88f, RightJoystickButton)); //Right joystick button
+	buttons.push_back(new Button("B: LB", (windowWidth) * 0.1f, (windowHeight) * 0.26f, LB)); //LB
+	buttons.push_back(new Button("B: RB", (windowWidth) * 0.89f, (windowHeight) * 0.26f, RB)); //RB
+	buttons.push_back(new Button("B: LT", (windowWidth) * 0.1f, (windowHeight) * 0.15f, LT)); //LT
+	buttons.push_back(new Button("B: RT", (windowWidth) * 0.89f, (windowHeight) * 0.15f, RT)); //RT
+	buttons.push_back(new Button("B: SELECT", (windowWidth) * 0.4f, (windowHeight) * 0.1f,ViewButton)); //Select
+	buttons.push_back(new Button("B: START", (windowWidth) * 0.58f, (windowHeight) * 0.1f,MenuButton)); //Start
+
+
 
 	buttons.push_back(new Button("SAVE", (windowWidth) * 0.05f, (windowHeight) * 0.9f, LT)); //save
 	buttons.push_back(new Button("LOAD", (windowWidth) * 0.15f, (windowHeight) * 0.9f, LT)); //load
@@ -359,10 +359,22 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					mapper->loadControls(checkL,checkR);
 					simulator->setRightMovement(checkR);
 					simulator->setLeftMovement(checkL);
+					std::vector<std::pair<KeyboardKey, ControllerLayout>>* b = mapper->getButtons();
+					for (int i = 0; i < b->size(); i++)
+					{
+						if((*b)[i].first!=NONE)
+							buttons[i]->SetName(std::string(ImGui::GetKeyName(conv->convertToImGUiKey((*b)[i].first))));
+						/*else
+							buttons[i]->SetName(std::string("Usassigned"+std::to_string(i)));*/
+						else if ((*b)[i].first == NONE && buttons[i]->GetName().size() == 1) {
+							buttons[i]->SetName(std::string("Usassigned" + std::to_string(i)));
+						}
+							 
+					}
 					
 				}
 			}
-
+			
 			// Mostrar el texto y detectar el siguiente input si est  esperando
 			if (buttons[i]->GetWaiting()) {
 				// Detectar el input del teclado

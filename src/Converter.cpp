@@ -280,3 +280,285 @@ KeyboardKey Converter::convertInput(ImGuiKey key)
 	}
 
 }
+
+ImGuiKey Converter::convertToImGUiKey(KeyboardKey key)
+{
+	switch (key) {
+	case KEY_SPACE:
+		return ImGuiKey_Space;
+		break;
+
+	case KEY_LEFTARROW:
+		return ImGuiKey_LeftArrow;
+		break;
+
+	case KEY_UPARROW:
+		return ImGuiKey_UpArrow;
+		break;
+
+	case KEY_RIGHTARROW:
+		return ImGuiKey_RightArrow;
+		break;
+
+	case KEY_DOWNARROW:
+		return ImGuiKey_DownArrow;
+		break;
+
+	case KEY_0:
+		return ImGuiKey_0;
+		break;
+
+	case KEY_1:
+		return ImGuiKey_1;
+		break;
+
+	case KEY_2:
+		return ImGuiKey_2;
+		break;
+
+	case KEY_3:
+		return ImGuiKey_3;
+		break;
+
+	case KEY_4:
+		return ImGuiKey_4;
+		break;
+
+	case KEY_5:
+		return ImGuiKey_5;
+		break;
+
+	case KEY_6:
+		return ImGuiKey_6;
+		break;
+
+	case KEY_7:
+		return ImGuiKey_7;
+		break;
+
+	case KEY_8:
+		return ImGuiKey_8;
+		break;
+
+	case KEY_9:
+		return ImGuiKey_9;
+		break;
+
+	case KEY_A:
+		return ImGuiKey_A;
+		break;
+
+	case KEY_B:
+		return ImGuiKey_B;
+		break;
+
+	case KEY_C:
+		return ImGuiKey_C;
+		break;
+
+	case KEY_D:
+		return ImGuiKey_D;
+		break;
+
+	case KEY_E:
+		return ImGuiKey_E;
+		break;
+
+	case KEY_F:
+		return ImGuiKey_F;
+		break;
+
+	case KEY_G:
+		return ImGuiKey_G;
+		break;
+
+	case KEY_H:
+		return ImGuiKey_H;
+		break;
+
+	case KEY_I:
+		return ImGuiKey_I;
+		break;
+
+	case KEY_J:
+		return ImGuiKey_J;
+		break;
+
+	case KEY_K:
+		return ImGuiKey_K;
+		break;
+
+	case KEY_L:
+		return ImGuiKey_L;
+		break;
+
+	case KEY_M:
+		return ImGuiKey_M;
+		break;
+
+	case KEY_N:
+		return ImGuiKey_N;
+		break;
+
+	case KEY_O:
+		return ImGuiKey_O;
+		break;
+
+	case KEY_P:
+		return ImGuiKey_P;
+		break;
+
+	case KEY_Q:
+		return ImGuiKey_Q;
+		break;
+
+	case KEY_R:
+		return ImGuiKey_R;
+		break;
+
+	case KEY_S:
+		return ImGuiKey_S;
+		break;
+
+	case KEY_T:
+		return ImGuiKey_T;
+		break;
+
+	case KEY_U:
+		return ImGuiKey_U;
+		break;
+
+	case KEY_V:
+		return ImGuiKey_V;
+		break;
+
+	case KEY_W:
+		return ImGuiKey_W;
+		break;
+
+	case KEY_X:
+		return ImGuiKey_X;
+		break;
+
+	case KEY_Y:
+		return ImGuiKey_Y;
+		break;
+
+	case KEY_Z:
+		return ImGuiKey_Z;
+		break;
+
+	case KEY_F1:
+		return ImGuiKey_F1;
+		break;
+
+	case KEY_F2:
+		return ImGuiKey_F2;
+		break;
+
+	case KEY_F3:
+		return ImGuiKey_F3;
+		break;
+
+	case KEY_F4:
+		return ImGuiKey_F4;
+		break;
+
+	case KEY_F5:
+		return ImGuiKey_F5;
+		break;
+
+	case KEY_F6:
+		return ImGuiKey_F6;
+		break;
+
+	case KEY_F7:
+		return ImGuiKey_F7;
+		break;
+
+	case KEY_F8:
+		return ImGuiKey_F8;
+		break;
+
+	case KEY_F9:
+		return ImGuiKey_F9;
+		break;
+
+	case KEY_F10:
+		return ImGuiKey_F10;
+		break;
+
+	case KEY_F11:
+		return ImGuiKey_F11;
+		break;
+
+	case KEY_F12:
+		return ImGuiKey_F12;
+		break;
+
+	case KEY_SHIFT:
+		return ImGuiKey_LeftShift;
+		break;
+
+	case KEY_RSHIFT:
+		return ImGuiKey_RightShift;
+		break;
+
+	case KEY_CONTROL:
+		return ImGuiKey_LeftCtrl;
+		break;
+
+	case KEY_RCONTROL:
+		return ImGuiKey_RightCtrl;
+		break;
+
+	case KEY_ALT:
+		return ImGuiKey_LeftAlt;
+		break;
+
+	case KEY_TAB:
+		return ImGuiKey_Tab;
+		break;
+
+	case KEY_ENTER:
+		return ImGuiKey_Enter;
+		break;
+
+	case KEY_BACKSPACE:
+		return ImGuiKey_Backspace;
+		break;
+
+	case KEY_MLCLICK:
+		return ImGuiKey_MouseLeft;
+		break;
+
+	case KEY_MRCLICK:
+		return ImGuiKey_MouseRight;
+		break;
+
+	case KEY_MMIDDLEBUTTON:
+		return ImGuiKey_MouseMiddle;
+		break;
+
+	case KEY_PLUS:  //es el +
+		return ImGuiKey_Equal;
+		break;
+
+	case KEY_MINUS:
+		return ImGuiKey_Minus;
+		break;
+
+	case KEY_PERIOD:
+		return ImGuiKey_Period;
+		break;
+
+	case KEY_COMMA:
+		return ImGuiKey_Comma;
+		break;
+	case NONE:
+		return ImGuiKey_None;
+		break;
+
+	
+	}
+}

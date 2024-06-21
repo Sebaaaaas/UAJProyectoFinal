@@ -85,6 +85,8 @@ public:
 	KeyboardKey getKey(ControllerLayout button);
 	void saveControls(bool checkL,bool checkR);
 	void loadControls(bool& checkL_, bool& checkR_);
+	std::vector<std::pair<KeyboardKey, ControllerLayout>>* getButtons();
+	
 private:
 	ControllerSettings* contrSettings;
 	std::vector<std::pair<KeyboardKey, ControllerLayout>>usedKeys;
