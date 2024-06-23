@@ -83,8 +83,8 @@ public:
 	void setButton(ControllerLayout button, KeyboardKey key);
 	void resetButton(ControllerLayout button);
 	KeyboardKey getKey(ControllerLayout button);
-	void saveControls(bool checkL,bool checkR);
-	void loadControls(bool& checkL_, bool& checkR_);
+	void saveControls(bool checkL,bool checkR, const char * file);
+	void loadControls(bool& checkL_, bool& checkR_, const char * file);
 	std::vector<std::pair<KeyboardKey, ControllerLayout>>* getButtons();
 	
 private:

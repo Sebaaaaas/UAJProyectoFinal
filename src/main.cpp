@@ -352,11 +352,13 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					buttons[i]->SetName("Press any key...");
 				}
 				else if(buttons[i]->GetName() == "SAVE") {
-					mapper->saveControls(checkL,checkR);
+					//mapper->saveControls(checkL,checkR);
+					ImGui::OpenPopup("SavePop");
+					
 					
 				}
 				else {
-					mapper->loadControls(checkL,checkR);
+					/*mapper->loadControls(checkL,checkR);
 					simulator->setRightMovement(checkR);
 					simulator->setLeftMovement(checkL);
 					std::vector<std::pair<KeyboardKey, ControllerLayout>>* b = mapper->getButtons();
@@ -367,8 +369,8 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 						else
 							buttons[i]->SetName(std::string(buttons[i]->GetInitialName()));
 						
-							 
-					}
+					}*/
+					ImGui::OpenPopup("LoadPop");
 					
 				}
 			}
@@ -386,6 +388,63 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					}
 				}
 			}
+		}
+
+		//popup para guardar el preset
+		if (ImGui::BeginPopup("SavePop"))
+		{
+			ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 1.0f), "Choose which slot you want to save");
+			if (ImGui::Button("Slot 1")) {
+				mapper->saveControls(checkL, checkR, "controles.txt");
+				ImGui::CloseCurrentPopup();
+			}
+			else if (ImGui::Button("Slot 2")) {
+				mapper->saveControls(checkL, checkR, "controles2.txt");
+				ImGui::CloseCurrentPopup();
+			}
+			else if (ImGui::Button("Slot 3")) {
+				mapper->saveControls(checkL, checkR, "controles3.txt");
+				ImGui::CloseCurrentPopup();
+			}
+			ImGui::EndPopup();
+		}
+
+		//popup para cargar el preset
+		if (ImGui::BeginPopup("LoadPop")) {
+			ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 1.0f), "What preset do you want to load?");
+			bool isbuttonpressed = false;
+
+			if (ImGui::Button("Slot 1")) {
+				mapper->loadControls(checkL, checkR, "controles.txt");
+				isbuttonpressed = true;
+			}
+			else if (ImGui::Button("Slot 2")) {
+				mapper->loadControls(checkL, checkR, "controles2.txt");
+				isbuttonpressed = true;
+			}
+			else if (ImGui::Button("Slot 3")) {
+				mapper->loadControls(checkL, checkR, "controles3.txt");
+				isbuttonpressed = true;
+			}
+
+			// Se utiliza el booleano para que se actualizen en la ui los controles al cargar el preset
+			if (isbuttonpressed == true) {
+				simulator->setRightMovement(checkR);
+				simulator->setLeftMovement(checkL);
+				std::vector<std::pair<KeyboardKey, ControllerLayout>>* b = mapper->getButtons();
+				for (int i = 0; i < b->size(); i++)
+				{
+					if ((*b)[i].first != NONE)
+						buttons[i]->SetName(std::string(ImGui::GetKeyName(conv->convertToImGUiKey((*b)[i].first))));
+					else
+						buttons[i]->SetName(std::string(buttons[i]->GetInitialName()));
+
+
+				}
+				ImGui::CloseCurrentPopup();
+			}
+
+			ImGui::EndPopup();
 		}
 
 		//checkbox de los joysticks

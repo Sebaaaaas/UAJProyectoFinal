@@ -284,10 +284,11 @@ KeyboardKey InputMapper::getKey(ControllerLayout button)
 	return NONE;
 }
 
-void InputMapper::saveControls(bool checkL,bool checkR)
+void InputMapper::saveControls(bool checkL,bool checkR, const char * file)
 {
 	
-	std:: ofstream outFile("controles.txt");
+	//std:: ofstream outFile("controles.txt");
+	std::ofstream outFile(file);
 	if (!outFile.is_open()) {
 		std::cout << "Error al abrir el archivo para escribir" << std::endl;
 		return;
@@ -333,10 +334,11 @@ void InputMapper::saveControls(bool checkL,bool checkR)
 	outFile.close();
 }
 
-void InputMapper::loadControls(bool& checkL_, bool& checkR_)
+void InputMapper::loadControls(bool& checkL_, bool& checkR_, const char * file)
 {
 	usedKeys.clear();
-	std::ifstream inFile("controles.txt");
+	//std::ifstream inFile("controles.txt");
+	std::ifstream inFile(file);
 	if (!inFile.is_open()) {
 		std::cout << "Error al abrir el archivo para leer" << std::endl;
 		
