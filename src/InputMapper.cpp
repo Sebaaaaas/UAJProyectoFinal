@@ -337,6 +337,7 @@ void InputMapper::saveControls(bool checkL,bool checkR, const char * file)
 void InputMapper::loadControls(bool& checkL_, bool& checkR_, const char * file)
 {
 	usedKeys.clear();
+	resetAll();
 	//std::ifstream inFile("controles.txt");
 	std::ifstream inFile(file);
 	if (!inFile.is_open()) {
@@ -432,6 +433,35 @@ void InputMapper::loadControls(bool& checkL_, bool& checkR_, const char * file)
 std::vector<std::pair<KeyboardKey, ControllerLayout>>* InputMapper::getButtons()
 {
 	return &usedKeys;
+}
+
+void InputMapper::resetAll()
+{
+	contrSettings->buttonA = NONE;
+	contrSettings->buttonB = NONE;
+	contrSettings->buttonX = NONE;
+	contrSettings->buttonY = NONE;
+	contrSettings->dpadUp = NONE;
+	contrSettings->dpadDown = NONE;
+	contrSettings->dpadRight = NONE;
+	contrSettings->dpadLeft = NONE;
+	contrSettings->leftJoystick_left = NONE;
+	contrSettings->leftJoystick_right = NONE;
+	contrSettings->leftJoystick_up = NONE;
+	contrSettings->leftJoystick_down = NONE;
+	contrSettings->rightJoystick_left = NONE;
+	contrSettings->rightJoystick_right = NONE;
+	contrSettings->rightJoystick_up = NONE;
+	contrSettings->rightJoystick_down = NONE;
+	contrSettings->leftJoystickButton = NONE;
+	contrSettings->rightJoystickButton = NONE;
+	contrSettings->LB = NONE;
+	contrSettings->RB = NONE;
+    contrSettings->LT = NONE;
+    contrSettings->RT = NONE;
+	contrSettings->viewButton = NONE;
+    contrSettings->menuButton = NONE;
+		
 }
 
 void InputMapper::checkKeyIsFree(KeyboardKey key)

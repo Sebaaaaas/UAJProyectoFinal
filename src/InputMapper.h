@@ -93,5 +93,7 @@ private:
 	std::vector<std::pair<KeyboardKey, ControllerLayout>>usedKeys;
 	void checkKeyIsFree(KeyboardKey key);
 	void processLoad(std::ifstream& inFile,std::string word,ControllerLayout button, bool& checkL_, bool& checkR_);
+	void resetAll();
+
 };
 
