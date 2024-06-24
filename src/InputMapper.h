@@ -32,7 +32,8 @@ enum ControllerLayout {
 	RightJoystickButton,
 
 	LB, RB, LT, RT,
-	ViewButton, MenuButton
+	ViewButton, MenuButton,
+	NotAKey
 
 };
 struct ControllerSettings

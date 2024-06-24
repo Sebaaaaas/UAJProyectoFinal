@@ -1,7 +1,5 @@
 #include "CheckBox.h"
 
-
-
 CheckBox::CheckBox( float x, float y) {
 	_posX = x;
 	_posY = y;

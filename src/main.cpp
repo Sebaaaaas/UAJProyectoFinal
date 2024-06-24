@@ -17,6 +17,7 @@
 #include "Converter.h"
 #include "Button.h"
 #include "CheckBox.h"
+#include "Slots.h"
 
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -270,10 +271,9 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	buttons.push_back(new Button("B: SELECT", (windowWidth) * 0.4f, (windowHeight) * 0.1f,ViewButton)); //Select
 	buttons.push_back(new Button("B: START", (windowWidth) * 0.58f, (windowHeight) * 0.1f,MenuButton)); //Start
 
-
-
-	buttons.push_back(new Button("SAVE", (windowWidth) * 0.05f, (windowHeight) * 0.9f, LT)); //save
-	buttons.push_back(new Button("LOAD", (windowWidth) * 0.15f, (windowHeight) * 0.9f, LT)); //load
+	//Botones de cargar y guardar
+	buttons.push_back(new Button("SAVE", (windowWidth) * 0.05f, (windowHeight) * 0.9f, NotAKey)); //save
+	buttons.push_back(new Button("LOAD", (windowWidth) * 0.15f, (windowHeight) * 0.9f, NotAKey)); //load
 
 
 	//Checkbox
@@ -281,8 +281,12 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	joycheckboxes.push_back(new CheckBox((windowWidth) * 0.23f, (windowHeight) * 0.88f)); //checkbox izquierdo
 	joycheckboxes.push_back(new CheckBox((windowWidth) * 0.46f, (windowHeight) * 0.88f)); //checkbox derecho
 	
-
-
+	//SaveSlots
+	std::vector<Slots*> saveSlots;
+	saveSlots.push_back(new Slots("Slot 1", "controles.txt"));
+	saveSlots.push_back(new Slots("Slot 2", "controles2.txt"));
+	saveSlots.push_back(new Slots("Slot 3", "controles3.txt"));
+	
 
 	bool checkL = false;
 	bool checkR = false;
@@ -378,6 +382,8 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 			// Mostrar el texto y detectar el siguiente input si est  esperando
 			if (buttons[i]->GetWaiting()) {
 				// Detectar el input del teclado
+				
+				
 				for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
 					if (ImGui::IsKeyDown(key)) {
 						detectedKey = key;
@@ -388,23 +394,22 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 					}
 				}
 			}
+			
 		}
 
 		//popup para guardar el preset
 		if (ImGui::BeginPopup("SavePop"))
 		{
 			ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 1.0f), "Choose which slot you want to save");
-			if (ImGui::Button("Slot 1")) {
-				mapper->saveControls(checkL, checkR, "controles.txt");
-				ImGui::CloseCurrentPopup();
-			}
-			else if (ImGui::Button("Slot 2")) {
-				mapper->saveControls(checkL, checkR, "controles2.txt");
-				ImGui::CloseCurrentPopup();
-			}
-			else if (ImGui::Button("Slot 3")) {
-				mapper->saveControls(checkL, checkR, "controles3.txt");
-				ImGui::CloseCurrentPopup();
+			bool selected = false;
+			int k = 0;
+			while (!selected && k<saveSlots.size()) {
+				if (ImGui::Button(saveSlots[k]->GetName().c_str())) {
+					mapper->saveControls(checkL, checkR, saveSlots[k]->GetFile().c_str());
+					ImGui::CloseCurrentPopup();
+					selected = true;
+				}
+				k++;
 			}
 			ImGui::EndPopup();
 		}
@@ -493,7 +498,6 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		ImGui::PopStyleColor(7); //esto es para quitar los push que se han hecho con PushStyleColor
 
 		ImGui::End();
-
 
 		//ImGui::ShowDemoWindow();
 
