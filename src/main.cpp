@@ -179,7 +179,7 @@ void ImGuiWindow(const HWND& window) {
 
 }
 
-void RenderBotones(int windowWidth, int windowHeight, std::vector<Button*>& buttons, std::vector<CheckBox*>& joycheckboxes, std::vector<Slots*>& saveSlots, InputMapper* mapper, InputSimulator* simulator, Converter* conv, ImGuiKey detectedKey, bool checkL, bool checkR) {
+void RenderBotones(int windowWidth, int windowHeight, std::vector<Button*>& buttons, std::vector<CheckBox*>& joycheckboxes, std::vector<Slots*>& saveSlots, InputMapper* mapper, InputSimulator* simulator, Converter* conv, ImGuiKey detectedKey, bool& checkL, bool& checkR) {
 	
 	// Color de los botones
 	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.6f, 0.6f, 0.6f, 1.0f));
@@ -499,6 +499,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 
 				}
 				ImGui::CloseCurrentPopup();
+				
 			}
 
 			ImGui::EndPopup();
