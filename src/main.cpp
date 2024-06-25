@@ -153,8 +153,8 @@ void InitButtons(int windowWidth, int windowHeight, std::vector<Button*>& button
 	buttons.push_back(new Button("LOAD", (windowWidth) * 0.15f, (windowHeight) * 0.9f, NotAKey)); //load
 
 	//checkBoxs
-	joycheckboxes.push_back(new CheckBox((windowWidth) * 0.23f, (windowHeight) * 0.88f)); //checkbox izquierdo
-	joycheckboxes.push_back(new CheckBox((windowWidth) * 0.46f, (windowHeight) * 0.88f)); //checkbox derecho
+	joycheckboxes.push_back(new CheckBox((windowWidth) * 0.23f, (windowHeight) * 0.88f, "LeftCheckbox")); //checkbox izquierdo
+	joycheckboxes.push_back(new CheckBox((windowWidth) * 0.46f, (windowHeight) * 0.88f,"RightCheckbox")); //checkbox derecho
 
 	//saveSlots
 	saveSlots.push_back(new Slots("Slot 1", "controles.txt"));
@@ -251,10 +251,11 @@ void RenderBotones(int windowWidth, int windowHeight, std::vector<Button*>& butt
 	for (int c = 0; c < joycheckboxes.size(); c++) {
 		ImGui::SetCursorPosX(joycheckboxes[c]->GetX()); // Centrar horizontalmente
 		ImGui::SetCursorPosY(joycheckboxes[c]->GetY()); // Centrar verticalmente 
+	
+		ImGui::Text(joycheckboxes[c]->GetName().c_str());
+		ImGui::SameLine();
+		//Dado que vamos a tener controles izquierdo y derecho debemos comprobar si cualquiera de los 2 esta activo
 		if (c == 0) {
-			ImGui::Text("LeftCheckbox");
-			ImGui::SameLine();
-
 			if (ImGui::Checkbox("##LeftCheckbox", &checkL)) {
 
 				simulator->setLeftMovement(checkL);
@@ -262,10 +263,7 @@ void RenderBotones(int windowWidth, int windowHeight, std::vector<Button*>& butt
 			}
 		}
 		if (c == 1) {
-			ImGui::Text("RightCheckbox");
-			ImGui::SameLine();
-
-
+			
 			if (ImGui::Checkbox("##RightCheckbox", &checkR)) {
 
 				simulator->setRightMovement(checkR);
@@ -470,18 +468,13 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		if (ImGui::BeginPopup("LoadPop")) {
 			ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 1.0f), "What preset do you want to load?");
 			bool isbuttonpressed = false;
-
-			if (ImGui::Button("Slot 1")) {
-				mapper->loadControls(checkL, checkR, "controles.txt");
-				isbuttonpressed = true;
-			}
-			else if (ImGui::Button("Slot 2")) {
-				mapper->loadControls(checkL, checkR, "controles2.txt");
-				isbuttonpressed = true;
-			}
-			else if (ImGui::Button("Slot 3")) {
-				mapper->loadControls(checkL, checkR, "controles3.txt");
-				isbuttonpressed = true;
+			int l = 0;
+			while (!isbuttonpressed && l < saveSlots.size()) {
+				if (ImGui::Button(saveSlots[l]->GetName().c_str())) {
+					mapper->loadControls(checkL, checkR, saveSlots[l]->GetFile().c_str());
+					isbuttonpressed = true;
+				}
+				l++;
 			}
 
 			// Se utiliza el booleano para que se actualizen en la ui los controles al cargar el preset
