@@ -39,23 +39,8 @@ LRESULT CALLBACK WindowProc(HWND window, UINT message, WPARAM w_param, LPARAM l_
 		UIManager::GetInstance()->shutdownManager();
 		return 0L;
 	}
-	if (ImGui_ImplWin32_WndProcHandler(window, message, w_param, l_param)) {
+	ImGui_ImplWin32_WndProcHandler(window, message, w_param, l_param);
 
-		/*if (message == WM_DESTROY) {
-			return 0L;
-
-			PostQuitMessage(0);
-			return 0L;
-		}*/
-
-		//switch (message) {
-		//	case WM_CLOSE: //si cerramos ventana salimos de la aplicacion
-		//		PostQuitMessage(0);
-		//		return 0L;
-		//	break;
-		//}
-
-	}
 
 	return DefWindowProc(window, message, w_param, l_param);
 }
@@ -84,27 +69,6 @@ bool UIManager::initImGui(HINSTANCE hInstance, INT cmd_show)
 
 
 	SetLayeredWindowAttributes(window, RGB(0, 0, 0), BYTE(255), LWA_ALPHA); //queremos poder ver contenidos de ventana
-
-	/*{
-		RECT client_area{};
-		GetClientRect(window, &client_area);
-
-		RECT window_area{};
-		GetClientRect(window, &window_area);
-
-		POINT diff{};
-		ClientToScreen(window, &diff);
-
-		const MARGINS margins{
-			window_area.left + (diff.x - window_area.left),
-			window_area.top + (diff.y - window_area.top),
-			client_area.right,
-			client_area.bottom
-		};
-
-		DwmExtendFrameIntoClientArea(window, &margins);
-
-	}*/
 
 	DXGI_SWAP_CHAIN_DESC sd{};
 	sd.BufferDesc.RefreshRate.Numerator = 60U;
@@ -345,18 +309,7 @@ void UIManager::renderButtons(int windowWidth, int windowHeight, std::vector<But
 
 			}
 			else {
-				/*mapper->loadControls(checkL,checkR);
-				simulator->setRightMovement(checkR);
-				simulator->setLeftMovement(checkL);
-				std::vector<std::pair<KeyboardKey, ControllerLayout>>* b = mapper->getButtons();
-				for (int i = 0; i < b->size(); i++)
-				{
-					if((*b)[i].first!=NONE)
-						buttons[i]->SetName(std::string(ImGui::GetKeyName(conv->convertToImGUiKey((*b)[i].first))));
-					else
-						buttons[i]->SetName(std::string(buttons[i]->GetInitialName()));
-
-				}*/
+				
 				ImGui::OpenPopup("LoadPop");
 
 			}
@@ -518,10 +471,6 @@ void UIManager::update()
 	ImGui::PopStyleColor(7); //esto es para quitar los push que se han hecho con PushStyleColor
 
 	ImGui::End();
-
-	//ImGui::ShowDemoWindow();
-
-	//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 	//renderizado
 
