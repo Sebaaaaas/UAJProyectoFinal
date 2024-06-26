@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
-#include "InputMapper.h"
 
+enum ControllerLayout;
 class Button {
 public:
-	Button(std::string name,float x,float y,ControllerLayout button);
+	Button(std::string name, float x, float y, ControllerLayout button);
 	~Button();
 	bool GetWaiting();
 	void SetWaiting(bool wait);
@@ -17,10 +17,10 @@ public:
 	ControllerLayout GetKey();
 private:
 
-	std::string _buttonName;
-	float _posX;
-	float _posY;
+	std::string buttonName;
+	float posX;
+	float posY;
 	bool waitForInput = false;
-	std::string _initialName;
-	ControllerLayout keyButton = MenuButton;
+	std::string initialName;
+	ControllerLayout keyButton;
 };

@@ -2,10 +2,8 @@
 
 #include "DefInput.h"
 #include <vector>
-#include <iostream>
 #include <fstream>
 
-//using namespace std;
 enum ControllerLayout {
 	ButtonA, ButtonB, ButtonX, ButtonY,
 	DpadUp, DpadDown, DpadRight, DpadLeft,

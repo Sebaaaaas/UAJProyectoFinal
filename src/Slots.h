@@ -11,6 +11,6 @@ public:
 
 private:
 
-	std::string _name;
-	std::string _saveFile;
+	std::string name;
+	std::string saveFile;
 };
