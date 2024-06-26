@@ -8,6 +8,7 @@ Button::Button(std::string name, float x, float y,ControllerLayout button) {
 	_posY = y;
 	keyButton = button;
 	_initialName = name;
+	_backupname = name;
 }
 
 Button::~Button() {
@@ -40,4 +41,11 @@ std::string Button::GetInitialName()
 }
 ControllerLayout Button::GetKey() {
 	return keyButton;
+}
+
+void Button::SetBackupName(std::string txt) {
+	_backupname = txt;
+}
+std::string Button::GetBackupName() {
+	return _backupname;
 }

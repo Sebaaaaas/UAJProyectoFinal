@@ -15,6 +15,9 @@ public:
 	std::string GetInitialName();
 
 	ControllerLayout GetKey();
+
+	void SetBackupName(std::string txt);
+	std::string GetBackupName();
 private:
 
 	std::string _buttonName;
@@ -23,4 +26,6 @@ private:
 	bool waitForInput = false;
 	std::string _initialName;
 	ControllerLayout keyButton = MenuButton;
+
+	std::string _backupname;
 };

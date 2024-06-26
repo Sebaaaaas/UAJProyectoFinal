@@ -365,3 +365,10 @@ void InputSimulator::setLeftMovement(bool leftMov) {
 void InputSimulator::setRightMovement(bool rightMov) {
 	movRight = rightMov;
 }
+
+bool InputSimulator::getPressed(int cb) {
+	if (cb > numButtons)
+		return false;
+	else 
+		return pressedButtons[cb];
+}

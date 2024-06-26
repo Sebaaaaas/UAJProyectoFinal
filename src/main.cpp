@@ -197,6 +197,7 @@ void RenderBotones(int windowWidth, int windowHeight, std::vector<Button*>& butt
 				buttons[i]->SetWaiting(true);
 				detectedKey = ImGuiKey_None;
 				buttons[i]->SetName("Press any key...");
+				buttons[i]->SetBackupName(buttons[i]->GetName());
 			}
 			else if (buttons[i]->GetName() == "SAVE") {
 				//mapper->saveControls(checkL,checkR);
@@ -233,11 +234,20 @@ void RenderBotones(int windowWidth, int windowHeight, std::vector<Button*>& butt
 					buttons[i]->SetWaiting(false);
 					buttons[i]->SetName(std::string(ImGui::GetKeyName(detectedKey)));
 					mapper->setButton(buttons[i]->GetKey(), conv->convertInput(key));
-
+					buttons[i]->SetBackupName(buttons[i]->GetName());
 				}
 			}
 		}
-
+		
+		//si un boton del mando esta siendo pulsado se podra ver cual es en la UI
+		if (i < simulator->numButtons) {
+			if (simulator->getPressed(i)) {
+				buttons[i]->SetName("Pressed");
+			}
+			else if (buttons[i]->GetName() != buttons[i]->GetBackupName() && buttons[i]->GetName() != buttons[i]->GetInitialName()) {
+				buttons[i]->SetName(buttons[i]->GetBackupName());
+			}
+		}
 	}
 
 	//checkbox de los joysticks
@@ -259,7 +269,7 @@ void RenderBotones(int windowWidth, int windowHeight, std::vector<Button*>& butt
 			if (ImGui::Checkbox("##LeftCheckbox", &checkL)) {
 
 				simulator->setLeftMovement(checkL);
-
+				
 			}
 		}
 		if (c == 1) {
@@ -484,11 +494,14 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 				std::vector<std::pair<KeyboardKey, ControllerLayout>>* b = mapper->getButtons();
 				for (int i = 0; i < b->size(); i++)
 				{
-					if ((*b)[i].first != NONE)
+					if ((*b)[i].first != NONE) {
 						buttons[i]->SetName(std::string(ImGui::GetKeyName(conv->convertToImGUiKey((*b)[i].first))));
-					else
+						buttons[i]->SetBackupName(buttons[i]->GetName());
+					}
+					else {
 						buttons[i]->SetName(std::string(buttons[i]->GetInitialName()));
-
+						buttons[i]->SetBackupName(buttons[i]->GetName());
+					}
 
 				}
 				ImGui::CloseCurrentPopup();

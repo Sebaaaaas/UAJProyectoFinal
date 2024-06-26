@@ -13,6 +13,9 @@ public:
 	void setMapper(InputMapper* mapper);
 	void setLeftMovement(bool leftMov);
 	void setRightMovement(bool rightMov);
+	bool getPressed(int cb);
+	// Numero de botones del mando que se pueden simular
+	const int numButtons = 24;
 private:
 	void simulateKeyPressed(KeyboardKey key);
 	void simulateKeyReleased(KeyboardKey key);
@@ -26,8 +29,8 @@ private:
 	bool movLeft = false;
 	const short joystickThreshold = 10000;
 
-	// Numero de botones del mando que se pueden simular
-	const int numButtons = 24;
+	
+	
 	std::vector<bool>pressedButtons;
 };
 
