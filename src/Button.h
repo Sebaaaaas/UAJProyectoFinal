@@ -28,5 +28,5 @@ private:
 	std::string initialName;
 	ControllerLayout keyButton;
 
-	std::string _backupname;
+	std::string backupname;
 };
