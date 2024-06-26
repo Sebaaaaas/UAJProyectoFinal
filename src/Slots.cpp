@@ -2,17 +2,21 @@
 
 Slots::Slots(std::string name, std::string file)
 {
-	_name = name;
-	_saveFile = file;
+	this->name = name;
+	this->saveFile = file;
 
+}
+
+Slots::~Slots()
+{
 }
 
 std::string Slots::GetName()
 {
-	return _name;
+	return name;
 }
 
 std::string Slots::GetFile()
 {
-	return _saveFile;
+	return saveFile;
 }

@@ -1,5 +1,6 @@
 #include "InputMapper.h"
 #include <string>
+#include <iostream>
 
 
 InputMapper::InputMapper()
@@ -290,7 +291,7 @@ void InputMapper::saveControls(bool checkL,bool checkR, const char * file)
 	//std:: ofstream outFile("controles.txt");
 	std::ofstream outFile(file);
 	if (!outFile.is_open()) {
-		std::cout << "Error al abrir el archivo para escribir" << std::endl;
+		std::cerr << "Error al abrir el archivo para escribir" << std::endl;
 		return;
 	}
 	// Botones
@@ -341,7 +342,7 @@ void InputMapper::loadControls(bool& checkL_, bool& checkR_, const char * file)
 	//std::ifstream inFile("controles.txt");
 	std::ifstream inFile(file);
 	if (!inFile.is_open()) {
-		std::cout << "Error al abrir el archivo para leer" << std::endl;
+		std::cerr << "Error al abrir el archivo para leer" << std::endl;
 		
 	}
 	else {

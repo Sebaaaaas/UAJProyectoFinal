@@ -13,7 +13,7 @@ public:
 
 private:
 
-	float _posX;
-	float _posY;
-	std::string _name;
+	float posX;
+	float posY;
+	std::string name;
 };

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "DefInput.h"
-#include <imgui.h>
 
+enum ImGuiKey;
 class Converter {
 public:
 	Converter(){}

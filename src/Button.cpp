@@ -1,13 +1,12 @@
 #include "Button.h"
+#include "InputMapper.h"
 
-
-
-Button::Button(std::string name, float x, float y,ControllerLayout button) {
-	_buttonName = name;
-	_posX = x;
-	_posY = y;
+Button::Button(std::string name, float x, float y, ControllerLayout button) {
+	buttonName = name;
+	posX = x;
+	posY = y;
 	keyButton = button;
-	_initialName = name;
+	initialName = name;
 	_backupname = name;
 }
 
@@ -23,21 +22,21 @@ void Button::SetWaiting(bool wait) {
 }
 
 float Button::GetX() {
-	return _posX;
+	return posX;
 }
 float Button::GetY() {
-	return _posY;
+	return posY;
 }
 std::string Button::GetName() {
-	return _buttonName;
+	return buttonName;
 }
 
 void Button::SetName(std::string txt) {
-	_buttonName = txt;
+	buttonName = txt;
 }
 std::string Button::GetInitialName()
 {
-	return _initialName;
+	return initialName;
 }
 ControllerLayout Button::GetKey() {
 	return keyButton;
