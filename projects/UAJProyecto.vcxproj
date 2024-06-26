@@ -26,6 +26,7 @@
     <ClInclude Include="..\src\InputMapper.h" />
     <ClInclude Include="..\src\InputSimulator.h" />
     <ClInclude Include="..\src\Slots.h" />
+    <ClInclude Include="..\src\UIManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\dependencies\imgui\imgui.cpp" />
@@ -42,6 +43,7 @@
     <ClCompile Include="..\src\InputSimulator.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Slots.cpp" />
+    <ClCompile Include="..\src\UIManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

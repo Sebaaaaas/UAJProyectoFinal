@@ -2,7 +2,6 @@
 #include <string>
 #include <iostream>
 
-
 InputMapper::InputMapper()
 {
 	contrSettings = new ControllerSettings();

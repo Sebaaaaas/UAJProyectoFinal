@@ -369,6 +369,5 @@ void InputSimulator::setRightMovement(bool rightMov) {
 bool InputSimulator::getPressed(int cb) {
 	if (cb > numButtons)
 		return false;
-	else 
-		return pressedButtons[cb];
+	return pressedButtons[cb];
 }
