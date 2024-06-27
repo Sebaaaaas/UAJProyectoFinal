@@ -11,6 +11,7 @@ InputSimulator::InputSimulator()
 
 InputSimulator::~InputSimulator()
 {
+	mapper = nullptr;
 }
 
 void InputSimulator::update()

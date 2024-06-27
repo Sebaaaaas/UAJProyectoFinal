@@ -3,7 +3,6 @@
 #include "InputSimulator.h"
 #include "UIManager.h"
 
-
 INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	
 	if (!UIManager::Init(instance, cmd_show)) {
@@ -40,13 +39,13 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 		Sleep(20);
 	}
 	
-	UIManager::GetInstance()->Release();
-
 	delete simulator;
 	simulator = nullptr;
 
 	delete mapper;
 	mapper = nullptr;
+
+	UIManager::GetInstance()->Release();
 
 	return 0;
 }

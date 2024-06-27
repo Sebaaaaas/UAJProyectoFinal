@@ -28,6 +28,18 @@ UIManager::UIManager()
 
 UIManager::~UIManager()
 {
+	for (auto e : buttons) {
+		delete e;
+		e = nullptr;
+	}
+	for (auto e : joycheckboxes) {
+		delete e;
+		e = nullptr;
+	}
+	for (auto e : saveSlots) {
+		delete e;
+		e = nullptr;
+	}
 }
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);

@@ -9,6 +9,8 @@ InputMapper::InputMapper()
 
 InputMapper::~InputMapper()
 {
+	delete contrSettings;
+	contrSettings = nullptr;
 }
 
 void InputMapper::setButton(ControllerLayout button, KeyboardKey key)
