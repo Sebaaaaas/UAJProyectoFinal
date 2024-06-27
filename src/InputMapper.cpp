@@ -340,7 +340,7 @@ void InputMapper::loadControls(bool& checkL_, bool& checkR_, const char * file)
 {
 	usedKeys.clear();
 	resetAll();
-	//std::ifstream inFile("controles.txt");
+	
 	std::ifstream inFile(file);
 	if (!inFile.is_open()) {
 		std::cerr << "Error al abrir el archivo para leer" << std::endl;

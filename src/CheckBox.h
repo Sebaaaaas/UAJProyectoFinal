@@ -6,10 +6,10 @@ public:
 
 	CheckBox( float x, float y,std::string name);
 	~CheckBox();
-	float GetX();
-	float GetY();
+	float getX();
+	float getY();
 
-	std::string GetName();
+	std::string getName();
 
 private:
 

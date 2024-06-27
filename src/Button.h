@@ -6,18 +6,18 @@ class Button {
 public:
 	Button(std::string name, float x, float y, ControllerLayout button);
 	~Button();
-	bool GetWaiting();
-	void SetWaiting(bool wait);
-	float GetX();
-	float GetY();
-	std::string GetName();
-	void SetName(std::string txt);
-	std::string GetInitialName();
+	bool getWaiting();
+	void setWaiting(bool wait);
+	float getX();
+	float getY();
+	std::string getName();
+	void setName(std::string txt);
+	std::string getInitialName();
 
-	ControllerLayout GetKey();
+	ControllerLayout getKey();
 
-	void SetBackupName(std::string txt);
-	std::string GetBackupName();
+	void setBackupName(std::string txt);
+	std::string getBackupName();
 private:
 
 	std::string buttonName;

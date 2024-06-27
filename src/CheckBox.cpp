@@ -10,14 +10,14 @@ CheckBox::~CheckBox() {
 
 }
 
-float CheckBox::GetX() {
+float CheckBox::getX() {
 	return posX;
 }
 
-float CheckBox::GetY() {
+float CheckBox::getY() {
 	return posY;
 }
 
-std::string CheckBox::GetName() {
+std::string CheckBox::getName() {
 	return name;
 }

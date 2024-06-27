@@ -11,12 +11,12 @@ Slots::~Slots()
 {
 }
 
-std::string Slots::GetName()
+std::string Slots::getName()
 {
 	return name;
 }
 
-std::string Slots::GetFile()
+std::string Slots::getFile()
 {
 	return saveFile;
 }

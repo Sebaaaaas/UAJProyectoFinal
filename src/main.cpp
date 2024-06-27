@@ -16,6 +16,7 @@ INT APIENTRY WinMain(HINSTANCE instance, HINSTANCE, PSTR, INT cmd_show) {
 	simulator->setMapper(mapper);
 
 	UIManager::GetInstance()->setTools(mapper, simulator);
+	UIManager::GetInstance()->setInitialConfiguration();
 
 	bool running = true;
 	while (running) {

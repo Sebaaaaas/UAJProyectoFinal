@@ -302,19 +302,19 @@ void UIManager::renderButtons(int windowWidth, int windowHeight, std::vector<But
 
 	for (int i = 0; i < buttons.size(); i++) {
 		// Posicion del boton
-		ImGui::SetCursorPosX(buttons[i]->GetX()); // Centrar horizontalmente
-		ImGui::SetCursorPosY(buttons[i]->GetY()); // Centrar verticalmente 
+		ImGui::SetCursorPosX(buttons[i]->getX()); // Centrar horizontalmente
+		ImGui::SetCursorPosY(buttons[i]->getY()); // Centrar verticalmente 
 
 		// boton input >>>>>>>>>>>>>>>>>
-		if (ImGui::Button(buttons[i]->GetName().c_str())) {
-			if (buttons[i]->GetName() != "SAVE" && buttons[i]->GetName() != "LOAD") {
+		if (ImGui::Button(buttons[i]->getName().c_str())) {
+			if (buttons[i]->getName() != "SAVE" && buttons[i]->getName() != "LOAD") {
 				// Activar la espera del siguiente input
-				buttons[i]->SetWaiting(true);
+				buttons[i]->setWaiting(true);
 				detectedKey = ImGuiKey_None;
-				buttons[i]->SetName("Press any key...");
-				buttons[i]->SetBackupName(buttons[i]->GetName());
+				buttons[i]->setName("Press any key...");
+				buttons[i]->setBackupName(buttons[i]->getName());
 			}
-			else if (buttons[i]->GetName() == "SAVE") {
+			else if (buttons[i]->getName() == "SAVE") {
 				//mapper->saveControls(checkL,checkR);
 				ImGui::OpenPopup("SavePop");
 
@@ -328,17 +328,17 @@ void UIManager::renderButtons(int windowWidth, int windowHeight, std::vector<But
 		}
 
 		// Mostrar el texto y detectar el siguiente input si est  esperando
-		if (buttons[i]->GetWaiting()) {
+		if (buttons[i]->getWaiting()) {
 			// Detectar el input del teclado
 
 
 			for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
 				if (ImGui::IsKeyDown(key)) {
 					detectedKey = key;
-					buttons[i]->SetWaiting(false);
-					buttons[i]->SetName(std::string(ImGui::GetKeyName(detectedKey)));
-					mapper->setButton(buttons[i]->GetKey(), conv->convertInput(key));
-					buttons[i]->SetBackupName(buttons[i]->GetName());
+					buttons[i]->setWaiting(false);
+					buttons[i]->setName(std::string(ImGui::GetKeyName(detectedKey)));
+					mapper->setButton(buttons[i]->getKey(), conv->convertInput(key));
+					buttons[i]->setBackupName(buttons[i]->getName());
 				}
 			}
 		}
@@ -346,10 +346,10 @@ void UIManager::renderButtons(int windowWidth, int windowHeight, std::vector<But
 		//si un boton del mando esta siendo pulsado se podra ver cual es en la UI
 		if (i < simulator->numButtons) {
 			if (simulator->getPressed(i)) {
-				buttons[i]->SetName("Pressed");
+				buttons[i]->setName("Pressed");
 			}
-			else if (buttons[i]->GetName() != buttons[i]->GetBackupName() && buttons[i]->GetName() != buttons[i]->GetInitialName()) {
-				buttons[i]->SetName(buttons[i]->GetBackupName());
+			else if (buttons[i]->getName() != buttons[i]->getBackupName() && buttons[i]->getName() != buttons[i]->getInitialName()) {
+				buttons[i]->setName(buttons[i]->getBackupName());
 			}
 		}
 	}
@@ -363,10 +363,10 @@ void UIManager::renderButtons(int windowWidth, int windowHeight, std::vector<But
 	ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
 
 	for (int c = 0; c < joycheckboxes.size(); c++) {
-		ImGui::SetCursorPosX(joycheckboxes[c]->GetX()); // Centrar horizontalmente
-		ImGui::SetCursorPosY(joycheckboxes[c]->GetY()); // Centrar verticalmente 
+		ImGui::SetCursorPosX(joycheckboxes[c]->getX()); // Centrar horizontalmente
+		ImGui::SetCursorPosY(joycheckboxes[c]->getY()); // Centrar verticalmente 
 
-		ImGui::Text(joycheckboxes[c]->GetName().c_str());
+		ImGui::Text(joycheckboxes[c]->getName().c_str());
 		ImGui::SameLine();
 		//Dado que vamos a tener controles izquierdo y derecho debemos comprobar si cualquiera de los 2 esta activo
 		if (c == 0) {
@@ -390,7 +390,7 @@ void UIManager::renderButtons(int windowWidth, int windowHeight, std::vector<But
 	//comentario de explicacion
 	ImGui::SetCursorPosX((windowWidth) * 0.3f); // Centrar horizontalmente
 	ImGui::SetCursorPosY((windowHeight) * 0.95f); // Centrar verticalmente 
-	ImGui::Text("click one ckeckbox to capture mouse movement with joystick");
+	ImGui::Text("Click one ckeckbox to capture mouse movement with joystick");
 }
 
 void UIManager::shutdownManager()
@@ -431,8 +431,8 @@ void UIManager::update()
 		bool selected = false;
 		int k = 0;
 		while (!selected && k < saveSlots.size()) {
-			if (ImGui::Button(saveSlots[k]->GetName().c_str())) {
-				mapper->saveControls(checkL, checkR, saveSlots[k]->GetFile().c_str());
+			if (ImGui::Button(saveSlots[k]->getName().c_str())) {
+				mapper->saveControls(checkL, checkR, saveSlots[k]->getFile().c_str());
 				ImGui::CloseCurrentPopup();
 				selected = true;
 			}
@@ -447,8 +447,8 @@ void UIManager::update()
 		bool isbuttonpressed = false;
 		int l = 0;
 		while (!isbuttonpressed && l < saveSlots.size()) {
-			if (ImGui::Button(saveSlots[l]->GetName().c_str())) {
-				mapper->loadControls(checkL, checkR, saveSlots[l]->GetFile().c_str());
+			if (ImGui::Button(saveSlots[l]->getName().c_str())) {
+				mapper->loadControls(checkL, checkR, saveSlots[l]->getFile().c_str());
 				isbuttonpressed = true;
 			}
 			l++;
@@ -462,12 +462,12 @@ void UIManager::update()
 			for (int i = 0; i < b->size(); i++)
 			{
 				if ((*b)[i].first != NONE) {
-					buttons[i]->SetName(std::string(ImGui::GetKeyName(conv->convertToImGUiKey((*b)[i].first))));
-					buttons[i]->SetBackupName(buttons[i]->GetName());
+					buttons[i]->setName(std::string(ImGui::GetKeyName(conv->convertToImGUiKey((*b)[i].first))));
+					buttons[i]->setBackupName(buttons[i]->getName());
 				}
 				else {
-					buttons[i]->SetName(std::string(buttons[i]->GetInitialName()));
-					buttons[i]->SetBackupName(buttons[i]->GetName());
+					buttons[i]->setName(std::string(buttons[i]->getInitialName()));
+					buttons[i]->setBackupName(buttons[i]->getName());
 				}
 
 			}
@@ -506,6 +506,26 @@ void UIManager::setTools(InputMapper* mapper, InputSimulator* simulator)
 {
 	this->mapper = mapper;
 	this->simulator = simulator;
+}
+
+void UIManager::setInitialConfiguration()
+{
+	mapper->loadControls(checkL, checkR, saveSlots[0]->getFile().c_str());
+	simulator->setRightMovement(checkR);
+	simulator->setLeftMovement(checkL);
+	std::vector<std::pair<KeyboardKey, ControllerLayout>>* b = mapper->getButtons();
+	for (int i = 0; i < b->size(); i++)
+	{
+		if ((*b)[i].first != NONE) {
+			buttons[i]->setName(std::string(ImGui::GetKeyName(conv->convertToImGUiKey((*b)[i].first))));
+			buttons[i]->setBackupName(buttons[i]->getName());
+		}
+		else {
+			buttons[i]->setName(std::string(buttons[i]->getInitialName()));
+			buttons[i]->setBackupName(buttons[i]->getName());
+		}
+
+	}
 }
 
 bool UIManager::Init(HINSTANCE hInstance, INT cmd_show)

@@ -14,37 +14,37 @@ Button::~Button() {
 
 }
 
-bool Button::GetWaiting() {
+bool Button::getWaiting() {
 	return waitForInput;
 }
-void Button::SetWaiting(bool wait) {
+void Button::setWaiting(bool wait) {
 	waitForInput = wait;
 }
 
-float Button::GetX() {
+float Button::getX() {
 	return posX;
 }
-float Button::GetY() {
+float Button::getY() {
 	return posY;
 }
-std::string Button::GetName() {
+std::string Button::getName() {
 	return buttonName;
 }
 
-void Button::SetName(std::string txt) {
+void Button::setName(std::string txt) {
 	buttonName = txt;
 }
-std::string Button::GetInitialName()
+std::string Button::getInitialName()
 {
 	return initialName;
 }
-ControllerLayout Button::GetKey() {
+ControllerLayout Button::getKey() {
 	return keyButton;
 }
 
-void Button::SetBackupName(std::string txt) {
+void Button::setBackupName(std::string txt) {
 	backupname = txt;
 }
-std::string Button::GetBackupName() {
+std::string Button::getBackupName() {
 	return backupname;
 }

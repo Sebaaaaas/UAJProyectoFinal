@@ -54,4 +54,5 @@ public:
 	bool getShutdown();
 	void shutdownManager();
 	void setTools(InputMapper* mapper, InputSimulator* simulator);
+	void setInitialConfiguration();
 };

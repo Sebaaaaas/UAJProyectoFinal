@@ -6,8 +6,8 @@ public:
 
 	Slots(std::string name, std::string file);
 	~Slots();
-	std::string GetName();
-	std::string GetFile();
+	std::string getName();
+	std::string getFile();
 
 private:
 
