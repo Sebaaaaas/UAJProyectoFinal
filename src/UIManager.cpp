@@ -145,7 +145,7 @@ bool UIManager::initImGui(HINSTANCE hInstance, INT cmd_show)
 	windowWidth = windowRect.right - windowRect.left;
 	windowHeight = windowRect.bottom - windowRect.top;
 
-	initButtons(windowWidth, windowHeight, buttons, joycheckboxes, saveSlots);
+	initButtons();
 
 	return true;
 }
@@ -246,7 +246,7 @@ bool UIManager::loadTextureFromFile(const wchar_t* filename, ID3D11Device* devic
 	return true;
 }
 
-void UIManager::initButtons(int windowWidth, int windowHeight, std::vector<Button*>& buttons, std::vector<CheckBox*>& joycheckboxes, std::vector<Slots*>& saveSlots)
+void UIManager::initButtons()
 {
 	buttons.push_back(new Button("B: A", (windowWidth) * 0.88f, (windowHeight) * 0.58f, ButtonA)); //A
 	buttons.push_back(new Button("B: B", (windowWidth) * 0.88f, (windowHeight) * 0.66f, ButtonB)); //B
@@ -287,7 +287,7 @@ void UIManager::initButtons(int windowWidth, int windowHeight, std::vector<Butto
 	saveSlots.push_back(new Slots("Slot 3", "controles3.txt"));
 }
 
-void UIManager::renderButtons(int windowWidth, int windowHeight, std::vector<Button*>& buttons, std::vector<CheckBox*>& joycheckboxes, std::vector<Slots*>& saveSlots, bool& checkL, bool& checkR)
+void UIManager::renderButtons()
 {
 	if (mapper == nullptr || simulator == nullptr || conv == nullptr) {
 		shutdown = true;
@@ -305,7 +305,6 @@ void UIManager::renderButtons(int windowWidth, int windowHeight, std::vector<But
 		ImGui::SetCursorPosX(buttons[i]->getX()); // Centrar horizontalmente
 		ImGui::SetCursorPosY(buttons[i]->getY()); // Centrar verticalmente 
 
-		// boton input >>>>>>>>>>>>>>>>>
 		if (ImGui::Button(buttons[i]->getName().c_str())) {
 			if (buttons[i]->getName() != "SAVE" && buttons[i]->getName() != "LOAD") {
 				// Activar la espera del siguiente input
@@ -315,23 +314,17 @@ void UIManager::renderButtons(int windowWidth, int windowHeight, std::vector<But
 				buttons[i]->setBackupName(buttons[i]->getName());
 			}
 			else if (buttons[i]->getName() == "SAVE") {
-				//mapper->saveControls(checkL,checkR);
 				ImGui::OpenPopup("SavePop");
-
-
 			}
 			else {
 				
 				ImGui::OpenPopup("LoadPop");
-
 			}
 		}
 
-		// Mostrar el texto y detectar el siguiente input si est  esperando
+		// Mostrar el texto y detectar el siguiente input si esta esperando
 		if (buttons[i]->getWaiting()) {
 			// Detectar el input del teclado
-
-
 			for (ImGuiKey key = ImGuiKey_NamedKey_BEGIN; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1)) {
 				if (ImGui::IsKeyDown(key)) {
 					detectedKey = key;
@@ -387,7 +380,6 @@ void UIManager::renderButtons(int windowWidth, int windowHeight, std::vector<But
 
 	}
 
-	//comentario de explicacion
 	ImGui::SetCursorPosX((windowWidth) * 0.3f); // Centrar horizontalmente
 	ImGui::SetCursorPosY((windowHeight) * 0.95f); // Centrar verticalmente 
 	ImGui::Text("Click one ckeckbox to capture mouse movement with joystick");
@@ -422,7 +414,7 @@ void UIManager::update()
 	ImGui::GetBackgroundDrawList()->AddImage((void*)myTexture.Get(), ImVec2(0, 0), ImVec2(windowWidth, windowHeight));
 
 	//Render de los botones y las checkboxes
-	renderButtons(windowWidth, windowHeight, buttons, joycheckboxes, saveSlots, checkL, checkR);
+	renderButtons();
 
 	//popup para guardar el preset
 	if (ImGui::BeginPopup("SavePop"))

@@ -25,9 +25,8 @@ private:
 	bool initImGui(HINSTANCE hInstance, INT cmd_show);
 	void closeImGui();
 	bool loadTextureFromFile(const wchar_t* filename, ID3D11Device* device, ID3D11DeviceContext* device_context, ID3D11ShaderResourceView** texture);
-	void initButtons(int windowWidth, int windowHeight, std::vector<Button*>& buttons, std::vector<CheckBox*>& joycheckboxes, std::vector<Slots*>& saveSlots);
-	void renderButtons(int windowWidth, int windowHeight, std::vector<Button*>& buttons, std::vector<CheckBox*>& joycheckboxes,
-		std::vector<Slots*>& saveSlots, bool& checkL, bool& checkR);
+	void initButtons();
+	void renderButtons();
 
 	int windowWidth;
 	int windowHeight;
